@@ -1,0 +1,22 @@
+{
+  "name": "subzero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StaniPetrosyan/SubZero.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StaniPetrosyan/SubZero/issues"
+  },
+  "homepage": "https://github.com/StaniPetrosyan/SubZero#readme",
+  "devDependencies": {
+    "electron": "^4.1.0"
+  }
+}
