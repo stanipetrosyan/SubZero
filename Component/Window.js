@@ -9,11 +9,10 @@ const defaultProps = {
 }
 
 class Window extends BrowserWindow{
-    constructor({file, ...windowSettings }){
+    constructor({file, ...windowSettings}){
         super({...defaultProps, ...windowSettings})
 
         this.loadFile(file);
-        this.webContents.openDevTools();
         
         this.once('ready-to-show', () =>{
             this.show()
