@@ -2,11 +2,11 @@
 
 body, html{
   font-family: 'Lato', sans-serif;
+  background-color: #222222;
 }
 
-
-.theme{
-    background-color: #222222;
+.subzero-theme{
+    background-color: #1C39BB;
 }
 
 .item{
@@ -47,6 +47,7 @@ body, html{
 .group-item:hover{
     background-color: #222222;
 }
+
 .clear-button{
     background-color: rgb(41, 40, 40);
     border: none;
@@ -69,11 +70,15 @@ body, html{
 .footer{
     display: grid;
     grid-template-columns: 150px 1fr 150px;
-}
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:10%;
+    width:100%;
+ }
 .add-project{
     grid-row: 1;
     grid-column: 3;
-    z-index: 1;
 }
 
 .sidenav {
@@ -113,7 +118,7 @@ body, html{
     cursor: pointer;
 }
 
-.button-subzero:hover {
+.button:hover {
     background-color: #1C39BB;
     color: white;
     padding: 8px 42px;
