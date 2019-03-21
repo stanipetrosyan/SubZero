@@ -1,21 +1,21 @@
-class BuilderHTML{
+module.exports= {
 
-    createElement(tagName, className, innerText){
+     createElement(tagName, className, innerText){
         let elem =  document.createElement(tagName);
         elem = this.setClassName(elem, className);
         elem = this.setInner(elem, innerText);
         return elem;
-    }
+    },
 
     setClassName(elem, className){
         elem.className = className;
         return elem;
-    }
+    },
 
     setInner(elem, text){
         elem.innerHTML = text;
         return elem;
-    }
+    },
 
     appendAllChild(parent, childs){
         for(var x in childs){
@@ -24,5 +24,3 @@ class BuilderHTML{
     }
 
 }
-
-module.exports = BuilderHTML

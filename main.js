@@ -12,23 +12,21 @@ function main(){
     })
 }
 
-function close_modal(){
-    if(!modal){
-        modal.close();
-    }
-}
-
 ipcMain.on('open-modal', (event, arg) => {
     if(!modal){
         modal = new Window({
             file: arg,
             width: 400,
-            height: 400
+            height: 400,
+            frame: false
         })
+    }
+})
 
-        modal.on('closed', () =>{
-            modal = null;
-        })
+ipcMain.on('close-modal', () => {
+    if(modal){
+        modal.close();
+        modal = null;
     }
 })
 
