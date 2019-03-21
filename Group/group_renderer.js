@@ -32,7 +32,22 @@ select.addEventListener('click', () =>{
     active = !active;
 })
 
+function setGroup(){
+    let group = {
+        name: document.getElementById('group-name').value,
+        color : selected,
+        projects : []
+    }
+    return group;
+}
+
 document.getElementById('cancel').addEventListener('click', () => {
     ipcRenderer.send('close-modal');
 })
+
+document.getElementById('add-update').addEventListener('click', () =>{
+    group = setGroup();
+    ipcRenderer.send('add-group', group);
+})
+
 

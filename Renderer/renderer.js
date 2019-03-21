@@ -2,7 +2,10 @@ const { ipcRenderer } = require('electron');
 const path = require('path');
 
 const DataStore = require('../Component/DataStore');
-const groupData = new DataStore({name: 'Groups Main'})
+const initializer = require('../Component/Initializer');
+
+const group_list = document.getElementById('group-list');
+
 
 document.getElementById('newGroup').addEventListener('click', () =>{
     let file = path.join('./Group', 'group_modal.html')
@@ -14,15 +17,8 @@ document.getElementById('newProject').addEventListener('click', () =>{
     ipcRenderer.send('open-modal', file);
 })
 
+ipcRenderer.on('added-group', (event, arg) =>{
+    let group = initializer.initializeGroupElement(arg);
+    group_list.append(group);
 
-
-
-// cose per ora :)
- /*let group = {
-        name: "desktop2",
-        color: "red",
-        projects : []
-    }
-    groupData.deleteGroup("desktop");
-
-    console.log(groupData.getData().data);*/
+})

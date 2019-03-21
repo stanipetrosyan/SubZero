@@ -21,6 +21,9 @@ module.exports= {
         for(var x in childs){
             parent.appendChild(childs[x]);
         }
+    },
+    setAttribute(elem, name_attribute, value){
+        return elem.setAttribute(name_attribute, value);
     }
 
 }

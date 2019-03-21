@@ -4,12 +4,22 @@ const { app, ipcMain } = require('electron');
 const Window = require('./Component/Window');
 const DataStore = require('./Component/DataStore');
 
+const groupData = new DataStore({name: 'Groups Main'})
+
 let modal = null;
+let mainWindow = null;
 
 function main(){
-    let mainWindow = new Window({
+    mainWindow = new Window({
         file: path.join('./Renderer', 'index.html'),
     })
+}
+
+function close_modal(){
+    if(modal){
+        modal.close();
+        modal = null;
+    }
 }
 
 ipcMain.on('open-modal', (event, arg) => {
@@ -24,10 +34,13 @@ ipcMain.on('open-modal', (event, arg) => {
 })
 
 ipcMain.on('close-modal', () => {
-    if(modal){
-        modal.close();
-        modal = null;
-    }
+    close_modal();
+})
+
+ipcMain.on('add-group', (event, arg) =>{
+    groupData.addGroup(arg);
+    mainWindow.webContents.send('added-group', arg);
+    close_modal();
 })
 
 

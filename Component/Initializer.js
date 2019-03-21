@@ -9,10 +9,20 @@ module.exports = {
         let el; 
         for(let i = 0; i < color_list.length; i++){
             el = builder.createElement('li', 'color-' + color_list[i], '');
-            el.setAttribute("data-option", "");
-            el.setAttribute("data-value", '#'+ color_list[i]);
+            builder.setAttribute(el, "data-option", "");
+            builder.setAttribute(el, "data-value", '#'+ color_list[i]);
             array.push(el);
         }
         return array;
+    },
+
+    initializeGroupElement(group){
+        let div = builder.createElement('div','group-item', '');
+        let g_type = builder.createElement('div', 'group-type', '')
+        let g_color = builder.createElement('span', 'group-color', '');
+        g_color.style.backgroundColor = group.color;
+        g_type.appendChild(builder.createElement('p', 'group-label', group.name));
+        builder.appendAllChild(div, [g_color, g_type]);
+        return div;
     }
 }
