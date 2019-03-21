@@ -22,8 +22,8 @@ ipcMain.on('open-modal', (event, arg) => {
     if(!modal){
         modal = new Window({
             file: arg,
-            width: 500,
-            height: 500,
+            width: 400,
+            height: 400
         })
 
         modal.on('closed', () =>{

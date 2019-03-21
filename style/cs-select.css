@@ -16,7 +16,7 @@ div.cs-select {
 }
 
 div.cs-select:focus {
-	outline: none; /* For better accessibility add a style for this in your skin */
+	outline: none;
 }
 
 .cs-select select {
@@ -33,14 +33,12 @@ div.cs-select:focus {
 	text-overflow: ellipsis;
 }
 
-/* Placeholder and selected option */
 .cs-select > span {
 	padding-right: 3em;
 }
 
 .cs-select > span::after,
 .cs-select .cs-selected span::after {
-	speak: none;
 	position: absolute;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
@@ -64,7 +62,6 @@ div.cs-select:focus {
 	transform: translateY(-50%) rotate(180deg);
 }
 
-/* Options */
 .cs-select .cs-options {
 	position: absolute;
 	overflow: hidden;
@@ -93,7 +90,6 @@ div.cs-select:focus {
 	background-color: #ddd;
 }
 
-/* Optgroup and optgroup label */
 .cs-select li.cs-optgroup ul {
 	padding-left: 1em;
 }

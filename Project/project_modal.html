@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../style/index.css" />
+        <link rel="stylesheet" type="text/css" href="../style/modal.css" />
+    </head>
+    <body>
+        <div class="top">
+            <div class="group">      
+                <input id="project-name" type="text" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Name</label>
+            </div>
+            <div class="group">      
+              <input id="project-type" type="text" required>
+              <span class="highlight"></span>
+              <span class="bar"></span>
+              <label>Language</label>
+            </div>
+            <div class="group">
+                <div style="display: inline-block">
+                    <input id="project-path" type="text" readonly placeholder="path">
+                    <span class="highlight"></span>
+                    <span class="bar-path"></span>
+                </div>    
+                <div class="open-icon"></div>
+            </div>
+            <div id="group-list">
+                
+            </div>
+            <div>
+                <select id="editors-list">
+                    <option value="VSCode">Visual Studio Code</option>
+                    <option value="Atom">Atom</option>
+                </select>
+            </div>
+        <div class="bottom">
+            <button class="button" id="close">ADD</button>
+            <button class="button" id="cancel">CANCEL</button>
+            <button class="button" id="open">OPEN</button>
+        </div>
+    </body>
+    <script src="./project_renderer.js"></script>
+</html>
