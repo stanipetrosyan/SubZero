@@ -1,5 +1,7 @@
+const electron = require('electron');
 const path = require('path');
-const { app, ipcMain } = require('electron');
+const { app, ipcMain} = require('electron');
+const dialog = electron.dialog;
 
 const Window = require('./Component/Window');
 const DataStore = require('./Component/DataStore');
@@ -21,13 +23,20 @@ function close_modal(){
         modal = null;
     }
 }
+// TODO: 
+function selectDirectory(){
+    return dialog.showOpenDialog(modal ,{
+        properties: ["openDirectory"]
+    });
+}
+
 
 ipcMain.on('open-modal', (event, arg) => {
     if(!modal){
         modal = new Window({
             file: arg,
-            width: 400,
-            height: 400,
+            width: 500,
+            height: 500,
             frame: false
         })
     }
@@ -47,6 +56,17 @@ ipcMain.on('add-group', (event, arg) =>{
     close_modal();
 })
 
+// TODO:
+ipcMain.on('add-project', (event, arg) =>{
+    groupData.addProject(arg);
+    mainWindow.webContents.send('added-project', groupData.getData().data);
+    close_modal();
+})
+
+ipcMain.on('open-folder-dialog', (event, arg) =>{
+    let dir = selectDirectory();
+    event.returnValue = dir;
+})
 
 app.on('ready', main)
 

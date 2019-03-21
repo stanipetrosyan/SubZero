@@ -27,6 +27,17 @@ class DataStore extends Store{
 
         return this.saveData()
     }
+
+    getGroup(group){
+        return this.data.findIndex(x => x.name == group);
+    }
+
+    addProject(project){
+        let index = this.getGroup(project.group);
+        this.data[index].projects.push(project);
+
+        return this.saveData();
+    }
 }
 
 module.exports = DataStore;

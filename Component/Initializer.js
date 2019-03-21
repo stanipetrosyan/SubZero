@@ -33,8 +33,18 @@ module.exports = {
         }
         return array;
     },
+
     set_groupList(data, elem){
         builder.setInner(elem, '');
         builder.appendAllChild(elem, this.set_groups(data));
+    },
+
+    createGroupListWithSelect(data, elem){
+        let select = builder.createElement('select', '' , '');
+        select.id = 'project-group';
+        for(var x in data){
+            select.innerHTML += '<option value="' + data[x].name + '">' + data[x].name + '</option>';
+        }
+        elem.appendChild(select);
     }
 }
