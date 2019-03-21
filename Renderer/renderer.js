@@ -9,6 +9,13 @@ document.getElementById('newGroup').addEventListener('click', () =>{
     ipcRenderer.send('open-modal', file);
 })
 
+document.getElementById('newProject').addEventListener('click', () =>{
+    let file = path.join('./Project', 'project_modal.html')
+    ipcRenderer.send('open-modal', file);
+})
+
+
+
 
 // cose per ora :)
  /*let group = {

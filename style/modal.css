@@ -1,0 +1,111 @@
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+html, body, .container {
+	height: 100%;
+}
+
+body {
+	color: #fff;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+	overflow: hidden;
+}
+
+
+
+
+input{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:70%;
+    border:none;
+    border-bottom:1px solid #757575;
+    background-color: transparent;
+    color: white;
+}
+input:focus{ 
+    outline:none; 
+}
+label{
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+}
+
+input:focus ~ label, input:valid ~ label{
+    top:-20px;
+    font-size:14px;
+    color: #1C39BB;
+}
+.bar{ 
+    position:relative;
+    display:block;
+    width:95%;
+}
+.path-bar{
+    position:relative;
+    display:block;
+    width:70%;
+}
+.bar:before, .bar:after{
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background: #1C39BB; 
+    transition:0.2s ease all; 
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+.highlight {
+    position:absolute;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+  
+input:focus ~ .highlight {
+    animation:inputHighlighter 0.3s ease;
+}
+  
+@keyframes inputHighlighter {
+    from  { background: #1C39BB }
+    to    { width:0; background:transparent; }
+}
+
+.open-icon{
+    display: inline-block;
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url('../Resource/Icon/open_folder.png');
+    background-size: 100%;
+    cursor: pointer;
+}
+
+/* TODO */
+.disabled {
+    pointer-events:none;
+    opacity:0.6;         
+}
