@@ -37,6 +37,10 @@ ipcMain.on('close-modal', () => {
     close_modal();
 })
 
+ipcMain.on('data-request', (event, arg)=>{
+    event.returnValue = groupData.getData().data;
+})
+
 ipcMain.on('add-group', (event, arg) =>{
     groupData.addGroup(arg);
     mainWindow.webContents.send('added-group', arg);

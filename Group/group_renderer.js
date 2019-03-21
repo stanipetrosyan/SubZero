@@ -7,8 +7,6 @@ const ul_element = document.getElementById('color-list');
 const shower_color_selected = document.getElementById('cs-placeholder');
 let active = false;
 
-
-
 initializeColorPickerElementsWithClickEvent();
 let selected;
 

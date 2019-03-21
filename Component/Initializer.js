@@ -24,5 +24,17 @@ module.exports = {
         g_type.appendChild(builder.createElement('p', 'group-label', group.name));
         builder.appendAllChild(div, [g_color, g_type]);
         return div;
+    },
+
+    set_groups(data){
+        let array = [];
+        for(let i = 0; i < data.length; i++){
+            array.push(this.initializeGroupElement(data[i]));
+        }
+        return array;
+    },
+    set_groupList(data, elem){
+        builder.setInner(elem, '');
+        builder.appendAllChild(elem, this.set_groups(data));
     }
 }
