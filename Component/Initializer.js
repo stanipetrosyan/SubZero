@@ -46,5 +46,28 @@ module.exports = {
             select.innerHTML += '<option value="' + data[x].name + '">' + data[x].name + '</option>';
         }
         elem.appendChild(select);
+    },
+
+    createProjectElement(project){
+        let div = builder.createElement('div', 'item', '');
+        builder.appendAllChild(div, [
+            builder.createElement('p', 'title-project', project.name),
+            builder.createElement('p', 'title-project', project.language),
+            builder.createElement('button', 'button button-subzero', 'OPEN'),
+            builder.createElement('div', 'project-delete-icon', ''),
+            builder.createElement('div', 'project-modify-icon', '')   
+        ]);
+        return div;
+    },
+
+    createProjectArrayToAppend(group){
+        let array = [];
+        group.projects.forEach((project) => {
+            array.push(this.createProjectElement(project));
+        })
+        return array;
+    },
+    appendToProjectList(projects, elem){
+        builder.appendAllChild(elem, projects);
     }
 }
