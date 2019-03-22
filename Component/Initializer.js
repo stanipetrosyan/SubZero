@@ -53,7 +53,6 @@ module.exports = {
         ]);
         return div;
     },
-
     createProjectArrayToAppend(group){
         let array = [];
         group.projects.forEach((project) => {
