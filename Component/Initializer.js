@@ -26,19 +26,13 @@ module.exports = {
         return div;
     },
 
-    set_groups(data){
+    createGroupArrayToAppend(data){
         let array = [];
         for(let i = 0; i < data.length; i++){
             array.push(this.initializeGroupElement(data[i]));
         }
         return array;
     },
-
-    set_groupList(data, elem){
-        builder.setInner(elem, '');
-        builder.appendAllChild(elem, this.set_groups(data));
-    },
-
     createGroupListWithSelect(data, elem){
         let select = builder.createElement('select', '' , '');
         select.id = 'project-group';
@@ -69,5 +63,9 @@ module.exports = {
     },
     appendToProjectList(projects, elem){
         builder.appendAllChild(elem, projects);
+    }, 
+    appendToGroupList(groups, elem){
+        builder.setInner(elem, '');
+        builder.appendAllChild(elem, groups);
     }
 }

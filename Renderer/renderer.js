@@ -6,9 +6,6 @@ const initializer = require('../Component/Initializer');
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
-
-let data = data_request();
-
 refresh();
 
 function data_request(){
@@ -16,6 +13,7 @@ function data_request(){
 }
 
 function printProjectList(data){
+    project_list.innerHTML = '';
     data.forEach(element => {
         let projects = initializer.createProjectArrayToAppend(element);
         // qui vanno gli event listener per ogni progetto
@@ -25,11 +23,20 @@ function printProjectList(data){
         initializer.appendToProjectList(projects, project_list);
     });
 }
+function printGroupList(data){
+    let groups = initializer.createGroupArrayToAppend(data);
+    groups.forEach((element) =>{
+        // qui vanno gli event listener per ogni progetto
+
+        //###############################################
+    })
+    initializer.appendToGroupList(groups, group_list);
+}
 
 function refresh(){
     data = data_request();
-    initializer.set_groupList(data, group_list);
     printProjectList(data);
+    printGroupList(data);
 }
 
 document.getElementById('newGroup').addEventListener('click', () =>{

@@ -56,7 +56,6 @@ ipcMain.on('add-group', (event, arg) =>{
     close_modal();
 })
 
-// TODO:
 ipcMain.on('add-project', (event, arg) =>{
     groupData.addProject(arg);
     mainWindow.webContents.send('added-project', groupData.getData().data);
