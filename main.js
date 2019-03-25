@@ -6,6 +6,7 @@ const dialog = electron.dialog;
 const Window = require('./Component/Window');
 const DataStore = require('./Component/DataStore');
 const Terminal = require('./Component/Terminal');
+const config = require('./config')
 
 const groupData = new DataStore({name: 'Groups Main'})
 
@@ -68,8 +69,13 @@ ipcMain.on('open-project', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    groupData.removeProject(arg);
-    event.returnValue = 'finish'; // random return value to block the renderer request
+    let options = config('question');
+    let response = dialog.showMessageBox(null, options);
+    if(response === 1){
+        groupData.removeProject(arg);
+    }
+    // random return value to block the renderer request
+    event.returnValue = 'finish'; 
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) =>{

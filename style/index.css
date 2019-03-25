@@ -2,7 +2,7 @@
 
 body, html{
   font-family: 'Lato', sans-serif;
-  background-color: #222222;
+  background-color: #1e1e1e;
 }
 
 .subzero-theme{
@@ -49,7 +49,7 @@ body, html{
 }
 
 .clear-button{
-    background-color: rgb(41, 40, 40);
+    background-color: #131313;
     border: none;
     color: white;
     margin-left: 20px;
@@ -58,7 +58,7 @@ body, html{
 }
 
 .clear-button:hover{
-    color: #4169e1;
+    color: #1C39BB;
 }
 
 .content{
@@ -88,7 +88,7 @@ body, html{
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(41, 40, 40);
+    background-color: #131313;
     border-right: 1px solid;
     border-right-color: #1C39BB;
     overflow-x: hidden;

@@ -20,9 +20,10 @@ module.exports = {
         let div = builder.createElement('div','group-item', '');
         let g_type = builder.createElement('div', 'group-type', '')
         let g_color = builder.createElement('span', 'group-color', '');
+        let modify = builder.createElement('div', 'group-modify-icon', '');
         g_color.style.backgroundColor = group.color;
         g_type.appendChild(builder.createElement('p', 'group-label', group.name));
-        builder.appendAllChild(div, [g_color, g_type]);
+        builder.appendAllChild(div, [g_color, g_type, modify]);
         return div;
     },
 

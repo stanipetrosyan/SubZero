@@ -26,6 +26,7 @@ function printProjectForGroup(group){
             ipcRenderer.sendSync('delete-project', group.projects[i])
             refresh();
         })
+        // TODO :
         element.childNodes[4].addEventListener('click', () => {
             console.log("hello :)");
         })
@@ -43,6 +44,7 @@ function printProjectList(){
 function printGroupList(){
     let groups = initializer.createGroupArrayToAppend(data);
     for(let i = 0; i < data.length; i++){
+         // TODO : 
         groups[i].addEventListener('click', () => {
             project_list.innerHTML = '';
             printProjectForGroup(data[i]);
