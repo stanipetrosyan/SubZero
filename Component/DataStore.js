@@ -38,6 +38,13 @@ class DataStore extends Store{
 
         return this.saveData();
     }
+
+    removeProject(project){
+        let index = this.getGroup(project.group);
+        this.data[index].projects = this.data[index].projects.filter(elem => elem.name !== project.name)
+        
+        return this.saveData();
+    }
 }
 
 module.exports = DataStore;

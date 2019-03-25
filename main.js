@@ -5,6 +5,7 @@ const dialog = electron.dialog;
 
 const Window = require('./Component/Window');
 const DataStore = require('./Component/DataStore');
+const Terminal = require('./Component/Terminal');
 
 const groupData = new DataStore({name: 'Groups Main'})
 
@@ -58,14 +59,25 @@ ipcMain.on('add-group', (event, arg) =>{
 
 ipcMain.on('add-project', (event, arg) =>{
     groupData.addProject(arg);
-    mainWindow.webContents.send('added-project', groupData.getData().data);
+    mainWindow.webContents.send('added-project');
     close_modal();
+})
+
+ipcMain.on('open-project', (event, arg) => {
+    Terminal.openProjectUsingEditor(arg.path, arg.editor);
+})
+
+ipcMain.on('delete-project', (event, arg) => {
+    groupData.removeProject(arg);
+    event.returnValue = 'finish'; // random return value to block the renderer request
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) =>{
     let dir = selectDirectory();
     event.returnValue = dir;
 })
+
+
 
 app.on('ready', main)
 

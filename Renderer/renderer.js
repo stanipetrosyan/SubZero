@@ -16,12 +16,20 @@ function data_request(){
 
 function printProjectForGroup(group){
     let projects = initializer.createProjectArrayToAppend(group);
-    projects.forEach((element) => {
-        // qui vanno gli event listener per ogni progetto
-
-        //###############################################
-    })
-
+    let i = 0;
+    for(let i = 0; i < group.projects.length; i++){
+        var element = projects[i];
+        element.childNodes[2].addEventListener('click', () => {
+            ipcRenderer.send('open-project', group.projects[i])
+        })
+        element.childNodes[3].addEventListener('click', () => {
+            ipcRenderer.sendSync('delete-project', group.projects[i])
+            refresh();
+        })
+        element.childNodes[4].addEventListener('click', () => {
+            console.log("hello :)");
+        })
+    }
     initializer.appendToProjectList(projects, project_list);
 }
 
@@ -69,5 +77,5 @@ ipcRenderer.on('added-group', (event, arg) =>{
 })
 
 ipcRenderer.on('added-project', (event, arg) =>{
-    printProjectList(arg);  
+    refresh();
 })

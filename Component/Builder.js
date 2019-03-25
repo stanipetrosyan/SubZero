@@ -1,9 +1,10 @@
 module.exports= {
 
-     createElement(tagName, className, innerText){
+     createElement(tagName, className, innerText, id){
         let elem =  document.createElement(tagName);
         elem = this.setClassName(elem, className);
         elem = this.setInner(elem, innerText);
+        elem.id = id;
         return elem;
     },
 
