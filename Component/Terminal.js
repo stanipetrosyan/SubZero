@@ -15,5 +15,9 @@ module.exports = {
             case "Atom" : cmd.run('atom.cmd ' + path);
                 break;
         }
+    },
+    // TODO :
+    openTerminalInsidePath(path){
+
     }
 }

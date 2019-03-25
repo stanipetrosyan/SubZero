@@ -6,11 +6,18 @@ const groupList = document.getElementById('group-list');
 const data = ipcRenderer.sendSync('data-request');
 
 let project_folder = null;
+let projectToUpdate = null;
+
+projectToUpdate = ipcRenderer.sendSync('project-request');
 
 createGroupListWithSelect(data, groupList);
 
+if(projectToUpdate){
+    document.getElementById('add').innerText = 'UPDATE'
+    setProject(projectToUpdate);
+}
 
-function setProject(){
+function getProject(){
     return {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
@@ -18,6 +25,14 @@ function setProject(){
         path: project_folder,
         editor: document.getElementById('editors-list').value
     }
+}
+
+function setProject(project){
+    document.getElementById('project-name').value = project.name;
+    document.getElementById('project-type').value = project.language;
+    document.getElementById('project-group').value = project.group;
+    document.getElementById('project-path').value = project.path;
+    document.getElementById('editors-list').value = project.editor;
 }
 
 document.getElementById('cancel').addEventListener('click', () =>{
@@ -30,6 +45,12 @@ document.getElementById('open').addEventListener('click', () =>{
 })
 
 document.getElementById('add').addEventListener('click', () =>{
-    let project = setProject();
-    ipcRenderer.send('add-project', project);
+    let project = getProject();
+    if(projectToUpdate){
+        ipcRenderer.send('updated-project', project);
+    }else{
+        ipcRenderer.send('add-project', project);
+    }
+    
+    
 })

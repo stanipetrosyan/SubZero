@@ -45,6 +45,11 @@ class DataStore extends Store{
         
         return this.saveData();
     }
+
+    updateProject(old, update){
+        this.removeProject(old);
+        this.addProject(update);
+    }
 }
 
 module.exports = DataStore;
