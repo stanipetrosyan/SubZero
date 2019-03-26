@@ -9,11 +9,10 @@ html, body, .container {
 body {
 	color: #fff;
 	font-weight: 400;
-	font-size: 1em;
-	font-family: 'Raleway', Arial, sans-serif;
+	font-size: 2em;
     overflow: hidden;
-
 }
+
 
 .top{
     width: 100%;

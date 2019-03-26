@@ -13,6 +13,7 @@ const groupData = new DataStore({name: 'Groups Main'})
 let modal = null;
 let mainWindow = null;
 let tmp_project = null;
+let tmp_group = null;
 
 function main(){
     mainWindow = new Window({
@@ -37,15 +38,16 @@ function closeModal(){
         modal.close();
         modal = null;
         tmp_project = null;
+        tmp_group = null;
     }
 }
-// TODO: 
+
+// ISSUE : 'openDirectory not working'
 function selectDirectory(){
     return dialog.showOpenDialog(mainWindow ,{
-        properties: ['openDirectory']
+        properties: ['openFile','openDirectory']
     });
 }
-
 
 ipcMain.on('open-modal', (event, arg) => {
     openModal(arg);
@@ -81,8 +83,7 @@ ipcMain.on('delete-project', (event, arg) => {
     if(response === 1){
         groupData.removeProject(arg);
     }
-    // random return value to block the renderer request
-    event.returnValue = 'finish'; 
+    mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('update-project', (event, arg) =>{
@@ -105,6 +106,31 @@ ipcMain.on('open-folder-dialog', (event, arg) =>{
     event.returnValue = dir;
 })
 
+ipcMain.on('update-group', (event, arg) => {
+    openModal('./Group/group_modal.html'); 
+    tmp_group = arg;
+})
+
+ipcMain.on('group-request', (event, arg) => {
+    event.returnValue = tmp_group;
+})
+
+ipcMain.on('updated-group', (event, arg) => {
+    groupData.updateGroup(tmp_group, arg);
+    closeModal();
+    mainWindow.webContents.send('refresh');
+})
+
+ipcMain.on('delete-group', (event, arg) => {
+    let options = config('question');
+    let response = dialog.showMessageBox(null, options);
+    if(response === 1){
+        groupData.deleteGroup(tmp_group.name);
+        mainWindow.webContents.send('refresh');
+    }
+    closeModal();
+})
+
 app.on('ready', main)
 
 app.on('window-all-closed', () => {
@@ -112,16 +138,12 @@ app.on('window-all-closed', () => {
 })
 
 app.on('window-all-closed', () => {
-    // Su macOS è comune che l'applicazione e la barra menù
-    // restano attive finchè l'utente non esce espressamente tramite i tasti Cmd + Q
     if(process.platform !== 'darwin'){
         app.quit();
     }
 })
 
 app.on('activate', () => {
-    // Su macOS è comune ricreare la finestra dell'app quando
-    // viene cliccara l'icona sul dock e non ci sono altre finestre aperte
     if(mainWindow === null){
         main();
     }

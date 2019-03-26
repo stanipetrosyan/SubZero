@@ -5,10 +5,23 @@ const { initializeColorPickerElement } = require('../Component/Initializer')
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');
 const shower_color_selected = document.getElementById('cs-placeholder');
+let addBtn = document.getElementById('add-update');
 let active = false;
+let groupToUpdate = null;
+let selected = null;
+
+groupToUpdate = ipcRenderer.sendSync('group-request');
+
+if(groupToUpdate){
+    setGroup();
+    addBtn.innerHTML = 'UPDATE';
+    document.getElementById('delete').style.visibility = 'visible';
+}else{
+    addBtn.innerHTML = 'ADD';
+}
 
 initializeColorPickerElementsWithClickEvent();
-let selected;
+
 
 function initializeColorPickerElementsWithClickEvent(){
     let colors = initializeColorPickerElement();
@@ -30,13 +43,18 @@ select.addEventListener('click', () =>{
     active = !active;
 })
 
-function setGroup(){
-    let group = {
+function getGroup(){
+    return {
         name: document.getElementById('group-name').value,
         color : selected,
         projects : []
     }
-    return group;
+}
+
+function setGroup(){
+    document.getElementById('group-name').value = groupToUpdate.name;
+    shower_color_selected.style.backgroundColor = groupToUpdate.color;
+    selected = groupToUpdate.color;
 }
 
 document.getElementById('cancel').addEventListener('click', () => {
@@ -44,8 +62,19 @@ document.getElementById('cancel').addEventListener('click', () => {
 })
 
 document.getElementById('add-update').addEventListener('click', () =>{
-    group = setGroup();
-    ipcRenderer.send('add-group', group);
+    let group = getGroup();
+    if(groupToUpdate){
+        group.projects = groupToUpdate.projects;
+        ipcRenderer.send('updated-group', group);
+    }else{
+        ipcRenderer.send('add-group', group);
+    }
 })
+
+document.getElementById('delete').addEventListener('click', () =>{
+    ipcRenderer.send('delete-group');
+})
+
+
 
 

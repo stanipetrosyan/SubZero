@@ -3,10 +3,15 @@ const { createGroupListWithSelect } = require('../Component/Initializer');
 
 
 const groupList = document.getElementById('group-list');
+const vscodeIcon = document.getElementById('vscode');
+const atomIcon = document.getElementById('atom');
+
+
 const data = ipcRenderer.sendSync('data-request');
 
 let project_folder = null;
 let projectToUpdate = null;
+let editorSelected = null;
 
 projectToUpdate = ipcRenderer.sendSync('project-request');
 
@@ -23,7 +28,7 @@ function getProject(){
         language: document.getElementById('project-type').value,
         group: document.getElementById('project-group').value, 
         path: project_folder,
-        editor: document.getElementById('editors-list').value
+        editor: editorSelected
     }
 }
 
@@ -32,7 +37,6 @@ function setProject(project){
     document.getElementById('project-type').value = project.language;
     document.getElementById('project-group').value = project.group;
     document.getElementById('project-path').value = project.path;
-    document.getElementById('editors-list').value = project.editor;
 }
 
 document.getElementById('cancel').addEventListener('click', () =>{
@@ -51,6 +55,16 @@ document.getElementById('add').addEventListener('click', () =>{
     }else{
         ipcRenderer.send('add-project', project);
     }
-    
-    
+})
+
+// TODO : refactoring
+vscodeIcon.addEventListener('click', () =>{
+    editorSelected = 'vscode';
+    vscodeIcon.style.opacity = '1';
+    atomIcon.style.opacity = '0.3';
+})
+atomIcon.addEventListener('click', () =>{
+    editorSelected = 'atom';
+    atomIcon.style.opacity = '1';
+    vscodeIcon.style.opacity = '0.3';
 })
