@@ -42,7 +42,7 @@ module.exports = {
         let array = [];
         let container;
         for(var x in data){
-            container = builder.createElement('div', 'group-container' , String(data[x].name[0]).toUpperCase());
+            container = builder.createElement('div', 'group-container' , String(data[x].name[0]).toUpperCase(), data[x].name);
             container.style.backgroundColor = data[x].color;
             array.push(container);
         }
