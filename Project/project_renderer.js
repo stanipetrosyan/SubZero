@@ -1,10 +1,9 @@
 const { ipcRenderer } = require('electron');
-const { createGroupListWithSelect } = require('../Component/Initializer');
+const { createArrayGroupContainer } = require('../Component/Initializer');
 
 
 const groupList = document.getElementById('group-list');
-const vscodeIcon = document.getElementById('vscode');
-const atomIcon = document.getElementById('atom');
+const editors = document.getElementsByClassName('editor-icon');
 
 
 const data = ipcRenderer.sendSync('data-request');
@@ -12,21 +11,49 @@ const data = ipcRenderer.sendSync('data-request');
 let project_folder = null;
 let projectToUpdate = null;
 let editorSelected = null;
+let groupSelected = null;
 
 projectToUpdate = ipcRenderer.sendSync('project-request');
 
-createGroupListWithSelect(data, groupList);
+setGroupListSelection();
 
 if(projectToUpdate){
     document.getElementById('add').innerText = 'UPDATE'
     setProject(projectToUpdate);
 }
 
+/**
+ * 
+ * @param { array } array 
+ * @param { number } index element to do not set
+ * @returns { array } opacity setted
+ */
+function setOpacityRight(array, index){
+    for(var x in array){
+        if(x != index){
+            array[x].style.opacity = 0.4;
+        }
+    }
+    return array
+}
+
+function setGroupListSelection(){
+    let containers = createArrayGroupContainer(data);
+    for(let x in containers){
+        containers[x].addEventListener('click', () =>{
+            groupSelected = data[x].name;
+            containers[x].style.opacity = 0.8;
+            containers = setOpacityRight(containers, x);
+        })
+        groupList.appendChild(containers[x]);
+    }
+}
+
 function getProject(){
     return {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
-        group: document.getElementById('project-group').value, 
+        group: groupSelected,
         path: project_folder,
         editor: editorSelected
     }
@@ -35,7 +62,6 @@ function getProject(){
 function setProject(project){
     document.getElementById('project-name').value = project.name;
     document.getElementById('project-type').value = project.language;
-    document.getElementById('project-group').value = project.group;
     document.getElementById('project-path').value = project.path;
 }
 
@@ -57,14 +83,15 @@ document.getElementById('add').addEventListener('click', () =>{
     }
 })
 
-// TODO : refactoring
-vscodeIcon.addEventListener('click', () =>{
+editors[0].addEventListener('click', () =>{
     editorSelected = 'vscode';
-    vscodeIcon.style.opacity = '1';
-    atomIcon.style.opacity = '0.3';
+    editors[0].style.opacity = '1';
+    editors = setOpacityRight(editors, 0);
 })
-atomIcon.addEventListener('click', () =>{
+
+editors[1].addEventListener('click', () =>{
     editorSelected = 'atom';
-    atomIcon.style.opacity = '1';
-    vscodeIcon.style.opacity = '0.3';
+    editors[1].style.opacity = '1';
+    editors = setOpacityRight(editors, 1);
+
 })

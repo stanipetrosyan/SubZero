@@ -93,6 +93,7 @@ body, html{
     border-right-color: #1C39BB;
     overflow-x: hidden;
     padding-top: 20px;
+    overflow-y: auto;
 }
 
 .wrapper{
@@ -147,8 +148,8 @@ body, html{
 }
 .editor-icon{
     display: inline-block;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-size: cover;
     opacity: 0.4;
     margin-left: 30px;

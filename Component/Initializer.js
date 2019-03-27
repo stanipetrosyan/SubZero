@@ -34,13 +34,20 @@ module.exports = {
         }
         return array;
     },
-    createGroupListWithSelect(data, elem){
-        let select = builder.createElement('select', '' , '');
-        select.id = 'project-group';
+    /**
+     *  @param { Array } data
+     *  @returns { HTMLCollection } array of containers
+     */
+    createArrayGroupContainer(data){
+        let array = [];
+        let container;
         for(var x in data){
-            select.innerHTML += '<option value="' + data[x].name + '">' + data[x].name + '</option>';
+            container = builder.createElement('div', 'group-container' , String(data[x].name[0]).toUpperCase());
+            container.style.backgroundColor = data[x].color;
+            array.push(container);
         }
-        elem.appendChild(select);
+        return array;
+        
     },
 
     createProjectElement(project){

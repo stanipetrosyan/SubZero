@@ -26,7 +26,7 @@ function openModal(arg){
         modal = new Window({
             file: arg,
             width: 500,
-            height: 500,
+            height: 600,
             frame: false,
             resizable: false
         })

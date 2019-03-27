@@ -32,6 +32,7 @@ class DataStore extends Store{
      * 
      * @param {string} group_name 
      * @returns {number} index of group
+     * 
      */
     getGroup(group_name){
         return this.data.findIndex(x => x.name == group_name);
@@ -51,11 +52,23 @@ class DataStore extends Store{
         return this.saveData();
     }
 
+    /**
+     * 
+     * @param { Object } old 
+     * @param { Object } update 
+     * 
+     */
     updateProject(old, update){
         this.removeProject(old);
         this.addProject(update);
     }
 
+    /**
+     * 
+     * @param { Object } old 
+     * @param { Object } update 
+     * 
+     */
     updateGroup(old, update){
         let index = this.getGroup(old.name);
         this.data[index] = update;

@@ -44,7 +44,6 @@ function printProjectList(){
 function printGroupList(){
     let groups = initializer.createGroupArrayToAppend(data);
     for(let i = 0; i < data.length; i++){
-         // TODO : update group
         groups[i].childNodes[1].addEventListener('click', () => {
             project_list.innerHTML = '';
             printProjectForGroup(data[i]);

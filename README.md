@@ -1,14 +1,14 @@
-# SubZero
+# SubZero - A simple way to origanize your projects
 
-```javascript
+```java
 
 // clone repo
 git clone https://github.com/StaniPetrosyan/SubZero.git
 
-// install package
+// install packages
 npm install
 
-// start
+// start application
 npm start
 
 ```
