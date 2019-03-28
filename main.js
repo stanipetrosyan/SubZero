@@ -42,10 +42,9 @@ function closeModal(){
     }
 }
 
-// ISSUE : 'openDirectory not working'
 function selectDirectory(){
     return dialog.showOpenDialog(mainWindow ,{
-        properties: ['openFile','openDirectory']
+        properties: ['openFile','multiSelections']
     });
 }
 
