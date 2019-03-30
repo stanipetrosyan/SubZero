@@ -1,10 +1,11 @@
 module.exports= {
+
     /**
-     * 
      * @param {string} tagName
      * @param {string} className 
      * @param {string} innerText 
      * @param {string} id 
+     * @returns {HTMLElement}
      */
      createElement(tagName, className, innerText, id){
         let elem =  document.createElement(tagName);
@@ -28,7 +29,6 @@ module.exports= {
     },
     
     /**
-     * 
      * @param { HTMLElement } parent 
      * @param { HTMLCollection } childs 
      */
@@ -37,6 +37,14 @@ module.exports= {
             parent.appendChild(childs[x]);
         }
     },
+    
+    /**
+     * 
+     * @param {HTMLElement} elem 
+     * @param {String} name_attribute 
+     * @param {any} value
+     * @returns {HTMLElement}  
+     */
     setAttribute(elem, name_attribute, value){
         return elem.setAttribute(name_attribute, value);
     }

@@ -9,5 +9,10 @@
     },
 
     "error": {
+        "type": "error",
+        "buttons": ["Ok"],
+        "defaultId": 2,
+        "title": "Missing",
+        "message": "Missing value, please compile each input"
     }
 }

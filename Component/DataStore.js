@@ -7,37 +7,45 @@ class DataStore extends Store{
         
         this.data = this.get('groups') || []
     }
+    
     saveData(){
         this.set('groups', this.data);
 
         return this;
     }
+
     getData(){
         this.data = this.get('groups') || []
 
         return this;
     }
+
     addGroup(group){
         this.data = [...this.data, group];
 
         return this.saveData();
     }
-    deleteGroup(group){
-        this.data = this.data.filter(elem => elem.name !== group)
+
+    /**
+     * @param {String} group_name
+     */
+    deleteGroup(group_name){
+        this.data = this.data.filter(elem => elem.name !== group_name)
 
         return this.saveData()
     }
 
     /**
-     * 
      * @param {string} group_name 
      * @returns {number} index of group
-     * 
      */
     getGroup(group_name){
         return this.data.findIndex(x => x.name == group_name);
     }
 
+    /**
+     * @param {Object} project 
+     */
     addProject(project){
         let index = this.getGroup(project.group);
         this.data[index].projects.push(project);
@@ -45,6 +53,9 @@ class DataStore extends Store{
         return this.saveData();
     }
 
+    /**
+     * @param {Object} project 
+     */
     removeProject(project){
         let index = this.getGroup(project.group);
         this.data[index].projects = this.data[index].projects.filter(elem => elem.name !== project.name)
@@ -53,10 +64,8 @@ class DataStore extends Store{
     }
 
     /**
-     * 
      * @param { Object } old 
      * @param { Object } update 
-     * 
      */
     updateProject(old, update){
         this.removeProject(old);
@@ -64,10 +73,8 @@ class DataStore extends Store{
     }
 
     /**
-     * 
      * @param { Object } old 
      * @param { Object } update 
-     * 
      */
     updateGroup(old, update){
         let index = this.getGroup(old.name);

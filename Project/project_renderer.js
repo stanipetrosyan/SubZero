@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
-const { createArrayGroupContainer } = require('../Component/Initializer');
+const { createArrayGroupContainer, setOpacityRight } = require('../Component/Initializer');
+const { showErrorMessageBox } = require('../Component/message');
 
 
 const groupList = document.getElementById('group-list');
@@ -20,21 +21,6 @@ setGroupListSelection();
 if(projectToUpdate){
     document.getElementById('add').innerText = 'UPDATE'
     setProject(projectToUpdate);
-}
-
-/**
- * 
- * @param { array } array 
- * @param { number } index element to do not set
- * @returns { array } opacity setted
- */
-function setOpacityRight(array, index){
-    for(var x in array){
-        if(x != index){
-            array[x].style.opacity = 0.4;
-        }
-    }
-    return array
 }
 
 function setGroupListSelection(){
@@ -67,6 +53,10 @@ function setProject(project){
     document.getElementById(project.editor).style.opacity = 1;
 }
 
+function checkValue(project){
+    return (project.name && project.path && project.group && project.editor);
+}
+
 document.getElementById('cancel').addEventListener('click', () =>{
     ipcRenderer.send('close-modal');
 })
@@ -81,7 +71,10 @@ document.getElementById('add').addEventListener('click', () =>{
     if(projectToUpdate){
         ipcRenderer.send('updated-project', project);
     }else{
-        ipcRenderer.send('add-project', project);
+        if(checkValue(project))
+            ipcRenderer.send('add-project', project);
+        else
+            showErrorMessageBox();
     }
 })
 

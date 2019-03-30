@@ -4,6 +4,10 @@ const color_list = ["F44336", "E91E63", "9C27B0", "673AB7", "3F51B5","2196F3", "
 
 
 module.exports = {
+
+    /**
+     * @returns {HTMLCollection}
+     */
     initializeColorPickerElement(){
         let array = [];
         let el; 
@@ -16,6 +20,10 @@ module.exports = {
         return array;
     },
 
+    /**
+     * @param { Object } group 
+     * @returns { HTMLElement }
+     */
     initializeGroupElement(group){
         let div = builder.createElement('div','group-item', '');
         let g_type = builder.createElement('div', 'group-type', '')
@@ -27,6 +35,11 @@ module.exports = {
         return div;
     },
 
+    /**
+     * @param { Object } data 
+     * @returns { HTMLCollection } array about div of group
+     * @see initializeGroupElement
+     */
     createGroupArrayToAppend(data){
         let array = [];
         for(let i = 0; i < data.length; i++){
@@ -34,6 +47,7 @@ module.exports = {
         }
         return array;
     },
+    
     /**
      *  @param { Array } data
      *  @returns { HTMLCollection } array of containers
@@ -50,6 +64,10 @@ module.exports = {
         
     },
 
+    /**
+     * @param {Object} project 
+     * @returns {HTMLElement}
+     */
     createProjectElement(project){
         let div = builder.createElement('div', 'item', '');
         builder.appendAllChild(div, [
@@ -61,6 +79,12 @@ module.exports = {
         ]);
         return div;
     },
+
+    /**
+     * @param {Object} group 
+     * @returns {Array}
+     * @see createProjectElement
+     */
     createProjectArrayToAppend(group){
         let array = [];
         group.projects.forEach((project) => {
@@ -68,11 +92,35 @@ module.exports = {
         })
         return array;
     },
+    
+    /**
+     * @param {Array} projects 
+     * @param {HTMLDivElement} elem 
+     */
     appendToProjectList(projects, elem){
         builder.appendAllChild(elem, projects);
     }, 
+
+    /**
+     * @param {Array} groups 
+     * @param {HTMLDivElement} elem 
+     */
     appendToGroupList(groups, elem){
         builder.setInner(elem, '');
         builder.appendAllChild(elem, groups);
+    }, 
+
+    /**
+     * @param { array } array 
+     * @param { number } index element to do not set
+     * @returns { array } opacity setted
+     */
+    setOpacityRight(array, index){
+        for(var x in array){
+            if(x != index){
+                array[x].style.opacity = 0.4;
+            }
+        }
+        return array
     }
 }

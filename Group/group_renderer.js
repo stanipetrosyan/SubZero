@@ -1,6 +1,8 @@
 const { ipcRenderer } = require('electron');
 const { appendAllChild } = require('../Component/Builder');
 const { initializeColorPickerElement } = require('../Component/Initializer')
+const { showErrorMessageBox } = require('../Component/message');
+
 
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');
@@ -21,7 +23,6 @@ if(groupToUpdate){
 }
 
 initializeColorPickerElementsWithClickEvent();
-
 
 function initializeColorPickerElementsWithClickEvent(){
     let colors = initializeColorPickerElement();
@@ -57,6 +58,10 @@ function setGroup(){
     selected = groupToUpdate.color;
 }
 
+function checkValue(group){
+    return (group.name && group.color);
+}
+
 document.getElementById('cancel').addEventListener('click', () => {
     ipcRenderer.send('close-modal');
 })
@@ -67,7 +72,11 @@ document.getElementById('add-update').addEventListener('click', () =>{
         group.projects = groupToUpdate.projects;
         ipcRenderer.send('updated-group', group);
     }else{
-        ipcRenderer.send('add-group', group);
+        if(checkValue(group)){
+            ipcRenderer.send('add-group', group);
+        }else{
+            showErrorMessageBox();
+        }
     }
 })
 
