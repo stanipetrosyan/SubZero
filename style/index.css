@@ -69,7 +69,7 @@ body, html{
 
 .footer{
     display: grid;
-    grid-template-columns: 150px 1fr 150px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position:fixed;
     left:0px;
     bottom:0px;
@@ -77,8 +77,7 @@ body, html{
     width:100%;
  }
 .add-project{
-    grid-row: 1;
-    grid-column: 3;
+    grid-column: 4;
 }
 
 .sidenav {
@@ -125,6 +124,26 @@ body, html{
     padding: 8px 42px;
 }
 
+.button-cancel{
+    background-color: #222222;
+    border: 2px solid;
+    border-color: #ff0000;
+    color: white;
+    padding: 6px 40px;
+    text-align: center;
+    border-radius: 2em;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button-cancel:hover{
+    color: white;
+    padding: 8px 42px;
+    background-color: #ff0000;
+}
 .title-project{
     color:white;
     font-size: 16px;
