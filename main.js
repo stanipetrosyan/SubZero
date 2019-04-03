@@ -27,8 +27,8 @@ function openModal(arg){
             file: arg,
             width: 500,
             height: 600,
-            frame: false,
-            resizable: false
+            frame: false
+            //resizable: false
         })
     }
 }
@@ -61,9 +61,12 @@ ipcMain.on('data-request', (event, arg)=>{
 })
 
 ipcMain.on('add-group', (event, arg) =>{
-    groupData.addGroup(arg);
-    mainWindow.webContents.send('added-group', arg);
-    closeModal();
+    if(groupData.addGroup(arg) == false){
+        dialog.showMessageBox(null, config('equals'));
+    }else{
+        mainWindow.webContents.send('added-group', arg);
+        closeModal();
+    }   
 })
 
 ipcMain.on('add-project', (event, arg) =>{
@@ -77,8 +80,7 @@ ipcMain.on('open-project', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let options = config('question');
-    let response = dialog.showMessageBox(null, options);
+    let response = dialog.showMessageBox(null, config('request'));
     if(response === 1){
         groupData.removeProject(arg);
     }
@@ -121,8 +123,7 @@ ipcMain.on('updated-group', (event, arg) => {
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let options = config('question');
-    let response = dialog.showMessageBox(null, options);
+    let response = dialog.showMessageBox(null, config('request'));
     if(response === 1){
         groupData.deleteGroup(tmp_group.name);
         mainWindow.webContents.send('refresh');

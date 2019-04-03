@@ -20,10 +20,17 @@ class DataStore extends Store{
         return this;
     }
 
+    /**
+     * @param {Object} group 
+     */
     addGroup(group){
-        this.data = [...this.data, group];
-
-        return this.saveData();
+        if(this.getGroup(group.name) < 0){
+            this.data = [...this.data, group];
+            return this.saveData();
+        }else{
+            return false;
+        }
+        
     }
 
     /**

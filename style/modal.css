@@ -71,7 +71,7 @@ input:focus ~ label, input:valid ~ label{
 .path-bar{
     position:relative;
     display:block;
-    width:70%;
+    width:80%;
 }
 .bar:before, .bar:after{
     content:'';
@@ -113,11 +113,11 @@ input:focus ~ .highlight {
 
 .open-icon{
     display: inline-block;
-    margin-top: 10px;
-    width: 20px;
-    height: 20px;
+    padding-top: 10px;
+    width: 40px;
+    height: 40px;
     background-image: url('../Resource/Icon/open_folder.png');
-    background-size: 100%;
+    background-size: cover;
     cursor: pointer;
 }
 

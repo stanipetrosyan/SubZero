@@ -14,5 +14,12 @@
         "defaultId": 2,
         "title": "Missing",
         "message": "Missing value, please compile each input"
+    },
+    "equals":{
+        "type":"error",
+        "buttons": ["Ok, I will change it"],
+        "defaultId": 3,
+        "title": "Find",
+        "message": "Find same group name, please change it"
     }
 }
