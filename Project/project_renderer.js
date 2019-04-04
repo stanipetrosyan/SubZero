@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const { createArrayGroupContainer, setOpacityRight } = require('../Component/Initializer');
 const { showErrorMessageBox } = require('../Component/message');
+const { isRepo }  = require('../Component/git-cli');
 
 
 const groupList = document.getElementById('group-list');
@@ -41,14 +42,15 @@ function getProject(){
         language: document.getElementById('project-type').value,
         group: groupSelected,
         path: project_folder,
-        editor: editorSelected
+        editor: editorSelected,
+        repo: ''
     }
 }
 
 function setProject(project){
-    document.getElementById('project-name').value = project.name;
-    document.getElementById('project-type').value = project.language;
-    document.getElementById('project-path').value = project.path;
+    document.getElementById('project-name').value = project['path'];
+    document.getElementById('project-type').value = project['language'];
+    document.getElementById('project-path').value = project['path'];
     document.getElementById(project.group).style.opacity = 0.8;
     document.getElementById(project.editor).style.opacity = 1;
 }
@@ -68,14 +70,22 @@ document.getElementById('open').addEventListener('click', () =>{
 
 document.getElementById('add').addEventListener('click', () =>{
     let project = getProject();
-    if(projectToUpdate){
-        ipcRenderer.send('updated-project', project);
-    }else{
-        if(checkValue(project))
-            ipcRenderer.send('add-project', project);
-        else
-            showErrorMessageBox();
-    }
+    isRepo(String(project['path'])).then(result => {
+        if(result){
+            project['repo'] = true;
+        }else{
+            project['repo'] = false;
+        }
+        if(projectToUpdate){
+            ipcRenderer.send('updated-project', project);
+        }else{
+            if(checkValue(project))
+                ipcRenderer.send('add-project', project);
+            else
+                showErrorMessageBox();
+        }
+    });
+    
 })
 
 editors[0].addEventListener('click', () =>{
