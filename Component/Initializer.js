@@ -29,8 +29,8 @@ module.exports = {
         let g_type = builder.createElement('div', 'group-type', '')
         let g_color = builder.createElement('span', 'group-color', '');
         let modify = builder.createElement('div', 'group-modify-icon', '');
-        g_color.style.backgroundColor = group.color;
-        g_type.appendChild(builder.createElement('p', 'group-label', group.name));
+        g_color.style.backgroundColor = group['color'];
+        g_type.appendChild(builder.createElement('p', 'group-label', group['name']));
         builder.appendAllChild(div, [g_color, g_type, modify]);
         return div;
     },
@@ -71,8 +71,8 @@ module.exports = {
     createProjectElement(project){
         let div = builder.createElement('div', 'item', '');
         builder.appendAllChild(div, [
-            builder.createElement('p', 'title-project', project.name),
-            builder.createElement('p', 'title-project', project.language),
+            builder.createElement('p', 'title-project', project['name']),
+            builder.createElement('p', 'title-project', project['language']),
             builder.createElement('button', 'button button-subzero', 'OPEN'),
             builder.createElement('div', 'project-delete-icon', '', 'del'),
             builder.createElement('div', 'project-modify-icon', '', 'up')   

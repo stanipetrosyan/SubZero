@@ -80,7 +80,7 @@ ipcMain.on('open-project', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('request'));
+    let response = dialog.showMessageBox(null, config('question'));
     if(response === 1){
         groupData.removeProject(arg);
     }
@@ -123,7 +123,7 @@ ipcMain.on('updated-group', (event, arg) => {
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('request'));
+    let response = dialog.showMessageBox(null, config('question'));
     if(response === 1){
         groupData.deleteGroup(tmp_group.name);
         mainWindow.webContents.send('refresh');

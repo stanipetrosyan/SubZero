@@ -53,13 +53,13 @@ function getGroup(){
 }
 
 function setGroup(){
-    document.getElementById('group-name').value = groupToUpdate.name;
-    shower_color_selected.style.backgroundColor = groupToUpdate.color;
-    selected = groupToUpdate.color;
+    document.getElementById('group-name').value = groupToUpdate['name'];
+    shower_color_selected.style.backgroundColor = groupToUpdate['color'];
+    selected = groupToUpdate['color'];
 }
 
 function checkValue(group){
-    return (group.name && group.color);
+    return (group['name'] && group['color']);
 }
 
 document.getElementById('cancel').addEventListener('click', () => {
@@ -69,7 +69,7 @@ document.getElementById('cancel').addEventListener('click', () => {
 document.getElementById('add-update').addEventListener('click', () =>{
     let group = getGroup();
     if(groupToUpdate){
-        group.projects = groupToUpdate.projects;
+        group['projects'] = groupToUpdate['projects'];
         ipcRenderer.send('updated-group', group);
     }else{
         if(checkValue(group)){

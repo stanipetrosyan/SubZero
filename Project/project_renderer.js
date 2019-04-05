@@ -51,12 +51,12 @@ function setProject(project){
     document.getElementById('project-name').value = project['path'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').value = project['path'];
-    document.getElementById(project.group).style.opacity = 0.8;
-    document.getElementById(project.editor).style.opacity = 1;
+    document.getElementById(project['group']).style.opacity = 0.8;
+    document.getElementById(project['editor']).style.opacity = 1;
 }
 
 function checkValue(project){
-    return (project.name && project.path && project.group && project.editor);
+    return (project['name'] && project['path'] && project['group'] && project['editor']);
 }
 
 document.getElementById('cancel').addEventListener('click', () =>{

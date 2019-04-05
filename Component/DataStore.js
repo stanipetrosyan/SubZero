@@ -30,14 +30,13 @@ class DataStore extends Store{
         }else{
             return false;
         }
-        
     }
 
     /**
      * @param {String} group_name
      */
     deleteGroup(group_name){
-        this.data = this.data.filter(elem => elem.name !== group_name)
+        this.data = this.data.filter(elem => elem['name'] !== group_name)
 
         return this.saveData()
     }
@@ -47,14 +46,14 @@ class DataStore extends Store{
      * @returns {number} index of group
      */
     getGroup(group_name){
-        return this.data.findIndex(x => x.name == group_name);
+        return this.data.findIndex(elem => elem['name'] == group_name);
     }
 
     /**
      * @param {Object} project 
      */
     addProject(project){
-        let index = this.getGroup(project.group);
+        let index = this.getGroup(project['group']);
         this.data[index].projects.push(project);
 
         return this.saveData();
@@ -64,8 +63,8 @@ class DataStore extends Store{
      * @param {Object} project 
      */
     removeProject(project){
-        let index = this.getGroup(project.group);
-        this.data[index].projects = this.data[index].projects.filter(elem => elem.name !== project.name)
+        let index = this.getGroup(project['group']);
+        this.data[index].projects = this.data[index].projects.filter(elem => elem['name'] !== project['name'])
         
         return this.saveData();
     }
