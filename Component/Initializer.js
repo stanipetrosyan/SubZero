@@ -14,14 +14,14 @@ module.exports = {
         for(let i = 0; i < color_list.length; i++){
             el = builder.createElement('li', 'color-' + color_list[i], '');
             builder.setAttribute(el, "data-option", "");
-            builder.setAttribute(el, "data-value", '#'+ color_list[i]);
+            builder.setAttribute(el, "data-value", '#' + color_list[i]);
             array.push(el);
         }
         return array;
     },
 
     /**
-     * @param { Object } group 
+     * @param { object } group 
      * @returns { HTMLElement }
      */
     initializeGroupElement(group){
@@ -36,7 +36,7 @@ module.exports = {
     },
 
     /**
-     * @param { Object } data 
+     * @param { object } data 
      * @returns { HTMLCollection } array about div of group
      * @see initializeGroupElement
      */
@@ -49,7 +49,7 @@ module.exports = {
     },
     
     /**
-     *  @param { Array } data
+     *  @param { array } data
      *  @returns { HTMLCollection } array of containers
      */
     createArrayGroupContainer(data){
@@ -65,7 +65,7 @@ module.exports = {
     },
 
     /**
-     * @param {Object} project 
+     * @param {object} project 
      * @returns {HTMLElement}
      */
     createProjectElement(project){
@@ -81,8 +81,8 @@ module.exports = {
     },
 
     /**
-     * @param {Object} group 
-     * @returns {Array}
+     * @param {object} group 
+     * @returns {array}
      * @see createProjectElement
      */
     createProjectArrayToAppend(group){
@@ -94,7 +94,7 @@ module.exports = {
     },
     
     /**
-     * @param {Array} projects 
+     * @param {array} projects 
      * @param {HTMLDivElement} elem 
      */
     appendToProjectList(projects, elem){
@@ -102,7 +102,7 @@ module.exports = {
     }, 
 
     /**
-     * @param {Array} groups 
+     * @param {array} groups 
      * @param {HTMLDivElement} elem 
      */
     appendToGroupList(groups, elem){

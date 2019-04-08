@@ -4,7 +4,7 @@ const config = require('../config')
 module.exports = {
 
     /**
-     * @returns { Boolean }
+     * @returns { boolean }
      */
     showQuestionMessageBox(){
         let options = config('question');

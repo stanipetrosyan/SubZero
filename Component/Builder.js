@@ -41,7 +41,7 @@ module.exports= {
     /**
      * 
      * @param {HTMLElement} elem 
-     * @param {String} name_attribute 
+     * @param {string} name_attribute 
      * @param {any} value
      * @returns {HTMLElement}  
      */

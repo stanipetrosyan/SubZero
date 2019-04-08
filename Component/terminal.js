@@ -4,8 +4,8 @@ const platform = process.platform;
 module.exports = {
 
     /**
-     * @param {String} path project['path']
-     * @param {String} editor project['editor']
+     * @param {string} path project['path']
+     * @param {string} editor project['editor']
      */
     openProjectUsingEditor(path, editor){
         path = normalizePathWithSpace(path);
@@ -23,15 +23,15 @@ module.exports = {
 
 /**
  * Replace space with \\
- * @param {String} path 
- * @returns {String}
+ * @param {string} path 
+ * @returns {string}
  */
 function normalizePathWithSpace(path){
     return (String(path).replace(/\s/g, "\\ "));
 }
 
 /**
- * @param {String} path 
+ * @param {string} path 
  */
 function openTerminalInsidePath(path){
     switch(platform){

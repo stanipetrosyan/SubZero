@@ -5,7 +5,7 @@ const dialog = electron.dialog;
 
 const Window = require('./Component/Window');
 const DataStore = require('./Component/DataStore');
-const Terminal = require('./Component/Terminal');
+const { openProjectUsingEditor } = require('./Component/terminal');
 const config = require('./config')
 
 const groupData = new DataStore({name: 'Groups Main'})
@@ -27,8 +27,8 @@ function openModal(arg){
             file: arg,
             width: 500,
             height: 600,
-            frame: false
-            //resizable: false
+            frame: false,
+            resizable: false
         })
     }
 }
@@ -76,7 +76,7 @@ ipcMain.on('add-project', (event, arg) =>{
 })
 
 ipcMain.on('open-project', (event, arg) => {
-    Terminal.openProjectUsingEditor(arg.path, arg.editor);
+    openProjectUsingEditor(arg['path'], arg['editor']);
 })
 
 ipcMain.on('delete-project', (event, arg) => {
