@@ -33,12 +33,14 @@ module.exports = {
      * @param {string} workingDir 
      * @returns {string}
      */
-    getRemoteRepoURL(workingDir){
-        git(workingDir).listRemote(['--get-url'], (err, data) =>{
-            if(!err){
-                return data;
-            }
-        })
+    async getRemoteRepoURL(workingDir){
+        let url = null;
+        try{
+            url = await gitP(workingDir).listRemote(['--get-url']);
+        }catch(e){
+            console.log(e);
+        }
+        return url;
     },
 
     /**
@@ -50,7 +52,7 @@ module.exports = {
         .log((err, log) => {
             return log;
         })
-    }, 
+    }
     
 } 
 
