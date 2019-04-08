@@ -44,7 +44,7 @@ function closeModal(){
 
 function selectDirectory(){
     return dialog.showOpenDialog(mainWindow ,{
-        properties: ['openFile','multiSelections']
+        properties: ['openDirectory']
     });
 }
 

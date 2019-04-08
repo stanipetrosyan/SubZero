@@ -4,7 +4,8 @@ const git = require('simple-git');
 module.exports = {
 
     /**
-     * @param {string} workingDir 
+     * @param {string} workingDir
+     * @returns {Promise} 
      */
     async isRepo(workingDir){
         let repo = null;
@@ -18,6 +19,7 @@ module.exports = {
     
     /**
      * @param {string} workingDir 
+     * @returns {Promise}
      */
     async status (workingDir) {
         let statusSummary = null;
@@ -31,7 +33,7 @@ module.exports = {
 
     /**
      * @param {string} workingDir 
-     * @returns {string}
+     * @returns {Promise}
      */
     async getRemoteRepoURL(workingDir){
         let url = null;
