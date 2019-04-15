@@ -116,7 +116,7 @@ input:focus ~ .highlight {
     padding-top: 10px;
     width: 40px;
     height: 40px;
-    background-image: url('../Resource/Icon/open_folder.png');
+    background-image: url('../resource/Icon/open_folder.png');
     background-size: cover;
     cursor: pointer;
 }
@@ -143,7 +143,7 @@ input:focus ~ .highlight {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background-image: url('../Resource/Icon/remove.png');
+    background-image: url('../resource/Icon/remove.png');
     background-size: cover;
     margin-left: 10%;
 }

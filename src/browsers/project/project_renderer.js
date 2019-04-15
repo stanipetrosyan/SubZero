@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
-const { createArrayGroupContainer, setOpacityRight } = require('../Component/Initializer');
-const { showErrorMessageBox } = require('../Component/message');
-const git  = require('../Component/git-cli');
+const { createArrayGroupContainer, setOpacityRight } = require('../../lib/Initializer');
+const { showErrorMessageBox } = require('../../lib/message');
+const git  = require('../../lib/git-cli');
 
 
 const groupList = document.getElementById('group-list');
@@ -49,7 +49,7 @@ function getProject(){
 }
 
 function setProject(project){
-    document.getElementById('project-name').value = project['path'];
+    document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').value = project['path'];
     document.getElementById(project['group']).style.opacity = 0.8;
@@ -83,19 +83,8 @@ document.getElementById('open').addEventListener('click', () =>{
 
 document.getElementById('add').addEventListener('click', () =>{
     let project = getProject();
-    git.isRepo(String(project['path'])).then(result => {
-        if(result){
-            project['repo'] = true;
-            git.getRemoteRepoURL(String(project['path'])).then( res => {
-                project['remote_url'] = res;
-            });
-        }else{
-            project['repo'] = false;
-        }
-        sender(project);
-        
-    });
-    
+    console.log(project.group);
+    //sender(project);
 })
 
 editors[0].addEventListener('click', () =>{

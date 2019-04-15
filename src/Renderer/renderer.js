@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 const path = require('path');
 
-const initializer = require('../Component/Initializer');
+const initializer = require('../lib/Initializer');
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
@@ -56,12 +56,12 @@ function printGroupList(){
 }
 
 document.getElementById('newGroup').addEventListener('click', () =>{
-    let file = path.join('./Group', 'group_modal.html')
+    let file = path.join(__dirname, '../browsers/group/group_modal.html')
     ipcRenderer.send('open-modal', file);
 })
 
 document.getElementById('newProject').addEventListener('click', () =>{
-    let file = path.join('./Project', 'project_modal.html')
+    let file = path.join(__dirname, '../browsers/project/project_modal.html')
     ipcRenderer.send('open-modal', file);
 })
 

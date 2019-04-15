@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
-const { appendAllChild } = require('../Component/Builder');
-const { initializeColorPickerElement } = require('../Component/Initializer')
-const { showErrorMessageBox } = require('../Component/message');
+const { appendAllChild } = require('../../lib/Builder');
+const { initializeColorPickerElement } = require('../../lib/Initializer')
+const { showErrorMessageBox } = require('../../lib/message');
 
 
 const select = document.getElementById('select');

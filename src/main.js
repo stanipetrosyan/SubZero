@@ -3,12 +3,16 @@ const path = require('path');
 const { app, ipcMain} = require('electron');
 const dialog = electron.dialog;
 
-const Window = require('./Component/Window');
-const DataStore = require('./Component/DataStore');
-const { openProjectUsingEditor } = require('./Component/terminal');
-const config = require('./config')
+const Window = require('./lib/Window');
+const DataStore = require('./lib/DataStore');
+const { openProjectUsingEditor } = require('./lib/terminal');
+const config = require('../config')
 
 const groupData = new DataStore({name: 'Groups Main'})
+
+const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
+const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
+const index_path = path.join(__dirname, '../src/Renderer/index.html');
 
 let modal = null;
 let mainWindow = null;
@@ -17,7 +21,7 @@ let tmp_group = null;
 
 function main(){
     mainWindow = new Window({
-        file: path.join('./Renderer', 'index.html'),
+        file: index_path,
     })
 }
 
@@ -87,7 +91,7 @@ ipcMain.on('delete-project', (event, arg) => {
 })
 
 ipcMain.on('update-project', (event, arg) =>{
-    openModal('./Project/project_modal.html'); 
+    openModal(project_path); 
     tmp_project = arg;
 })
 
@@ -107,7 +111,7 @@ ipcMain.on('open-folder-dialog', (event, arg) =>{
 })
 
 ipcMain.on('update-group', (event, arg) => {
-    openModal('./Group/group_modal.html'); 
+    openModal(group_path); 
     tmp_group = arg;
 })
 
