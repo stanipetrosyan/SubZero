@@ -43,9 +43,8 @@ function closeModal(){
 }
 
 function selectDirectory(){
-    return dialog.showOpenDialog(mainWindow ,{
-        properties: ['openDirectory']
-    });
+    let options = { properties: ["openDirectory"]}
+    return dialog.showOpenDialog(options);
 }
 
 ipcMain.on('open-modal', (event, arg) => {

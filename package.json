@@ -19,7 +19,7 @@
   "devDependencies": {
     "electron": "^3.0.0",
     "electron-store": "^2.0.0"
-  }, 
+  },
   "dependencies": {
     "node-cmd": "^3.0.0",
     "simple-git": "^1.110.0"

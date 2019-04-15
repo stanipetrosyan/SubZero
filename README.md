@@ -1,4 +1,4 @@
-# SubZero - A simple way to origanize your projects
+# SubZero
 
 ```java
 
