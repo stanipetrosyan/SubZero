@@ -54,6 +54,9 @@ function setProject(project){
     document.getElementById('project-path').value = project['path'];
     document.getElementById(project['group']).style.opacity = 0.8;
     document.getElementById(project['editor']).style.opacity = 1;
+    groupSelected = document.getElementById(project['group']).id;
+    editorSelected = document.getElementById(project['editor']).id;
+    project_folder = project['path'];
 }
 
 function checkValue(project){
@@ -83,8 +86,7 @@ document.getElementById('open').addEventListener('click', () =>{
 
 document.getElementById('add').addEventListener('click', () =>{
     let project = getProject();
-    console.log(project.group);
-    //sender(project);
+    sender(project);
 })
 
 editors[0].addEventListener('click', () =>{
