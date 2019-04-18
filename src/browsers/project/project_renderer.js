@@ -86,7 +86,10 @@ document.getElementById('open').addEventListener('click', () =>{
 
 document.getElementById('add').addEventListener('click', () =>{
     let project = getProject();
-    sender(project);
+    git.isRepo(project['path'][0]).then(res => {
+        project['repo'] = res;
+        sender(project);
+    })
 })
 
 editors[0].addEventListener('click', () =>{
