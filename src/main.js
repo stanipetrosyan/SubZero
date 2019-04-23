@@ -13,6 +13,7 @@ const groupData = new DataStore({name: 'Groups Main'})
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
 const index_path = path.join(__dirname, '../src/renderer/index.html');
+const git_path = path.join(__dirname, '../src/browsers/git/git_modal.html');
 
 let modal = null;
 let mainWindow = null;
@@ -80,6 +81,10 @@ ipcMain.on('add-project', (event, arg) =>{
 
 ipcMain.on('open-project', (event, arg) => {
     openProjectUsingEditor(arg['path'], arg['editor']);
+})
+ipcMain.on('open-git', (event, arg) => {
+    tmp_project = arg;
+    openModal(git_path);
 })
 
 ipcMain.on('delete-project', (event, arg) => {

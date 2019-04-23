@@ -18,17 +18,19 @@ function refresh(){
 
 function printProjectForGroup(group){
     let projects = initializer.createProjectArrayToAppend(group);
-    let i = 0;
     for(let i = 0; i < group.projects.length; i++){
         var element = projects[i];
-        element.childNodes[2].addEventListener('click', () => {
+        element.childNodes[2].addEventListener('click', _=> {
             ipcRenderer.send('open-project', group.projects[i])
         })
-        element.childNodes[3].addEventListener('click', () => {
+        element.childNodes[3].addEventListener('click', _=> {
             ipcRenderer.send('delete-project', group.projects[i])
         })
-        element.childNodes[4].addEventListener('click', () => {
+        element.childNodes[4].addEventListener('click', _=> {
             ipcRenderer.send('update-project', group.projects[i])
+        })
+        element.lastChild.addEventListener('click', _=>{
+            ipcRenderer.send("open-git", group.projects[i]);
         })
     }
     initializer.appendToProjectList(projects, project_list);
@@ -44,28 +46,28 @@ function printProjectList(){
 function printGroupList(){
     let groups = initializer.createGroupArrayToAppend(data);
     for(let i = 0; i < data.length; i++){
-        groups[i].childNodes[1].addEventListener('click', () => {
+        groups[i].childNodes[1].addEventListener('click', _=> {
             project_list.innerHTML = '';
             printProjectForGroup(data[i]);
         })
-        groups[i].childNodes[2].addEventListener('click', () => {
+        groups[i].childNodes[2].addEventListener('click', _=> {
             ipcRenderer.send('update-group', data[i]);
         })
     }
     initializer.appendToGroupList(groups, group_list);
 }
 
-document.getElementById('newGroup').addEventListener('click', () =>{
+document.getElementById('newGroup').addEventListener('click', _=>{
     let file = path.join(__dirname, '../browsers/group/group_modal.html')
     ipcRenderer.send('open-modal', file);
 })
 
-document.getElementById('newProject').addEventListener('click', () =>{
+document.getElementById('newProject').addEventListener('click', _=>{
     let file = path.join(__dirname, '../browsers/project/project_modal.html')
     ipcRenderer.send('open-modal', file);
 })
 
-document.getElementById('group-all').addEventListener('click', () => {
+document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
 })
 
