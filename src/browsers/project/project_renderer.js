@@ -41,7 +41,7 @@ function getProject(){
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
         group: groupSelected,
-        path: project_folder,
+        path: project_folder[0],
         editor: editorSelected,
         repo: '',
         remote_url: ''
@@ -81,12 +81,12 @@ document.getElementById('cancel').addEventListener('click', () =>{
 
 document.getElementById('open').addEventListener('click', () =>{
     project_folder = ipcRenderer.sendSync('open-folder-dialog');
-    document.getElementById('project-path').value = project_folder;
+    document.getElementById('project-path').value = project_folder[0];
 })
 
 document.getElementById('add').addEventListener('click', () =>{
     let project = getProject();
-    git.isRepo(project['path'][0]).then(res => {
+    git.isRepo(project['path']).then(res => {
         project['repo'] = res;
         sender(project);
     })
