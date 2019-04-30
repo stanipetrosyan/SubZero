@@ -29,10 +29,10 @@ body {
     grid-row: 1;
     grid-column: 1;
 }
-.group{ 
+.input-position{ 
     position:relative; 
-      margin-bottom:45px; 
-      margin-top: 7%;
+    margin-bottom:45px; 
+    margin-top: 7%;
 }
 input{
     font-size:18px;
@@ -146,6 +146,14 @@ input:focus ~ .highlight {
     background-image: url('../resource/Icon/remove.png');
     background-size: cover;
     margin-left: 10%;
+}
+
+dialog{
+    background-color: #1e1e1e;
+    border: 0.2px solid #131313;
+    width: 400px;
+    height: 200px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 /* TODO */

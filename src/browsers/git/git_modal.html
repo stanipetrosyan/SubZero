@@ -5,12 +5,28 @@
         <link rel="stylesheet" type="text/css" href="../../style//modal.css" />
     </head>
     <body>
+        <dialog id="dialogWindow">
+            <form method="dialog">
+                <div class="input-position">
+                    <input id="val" type="text" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Username</label>
+                </div>
+               
+                <button class="button" id="submit" type="submit">OK</button>
+            </form>
+        </dialog>
+
         <div class="footer">
+            <div class="first-left">
+                <button class="button" id="openDialog">OPEN</button>
+            </div>
             <div class="second-left">
                 <button class="button-cancel" id="cancel">CANCEL</button>
             </div>
         </div> 
     </body>
 
-    <script src="git-renderer.js"></script>
+    <script src="git_renderer.js"></script>
 </html>
