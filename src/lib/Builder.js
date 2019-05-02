@@ -9,9 +9,10 @@ module.exports= {
      */
      createElement(tagName, className, innerText, id){
         let elem =  document.createElement(tagName);
-        elem = this.setClassName(elem, className);
-        elem = this.setInner(elem, innerText);
-
+        if(className)
+            elem = this.setClassName(elem, className);
+        if(innerText)
+            elem = this.setInner(elem, innerText);
         if(id)
             elem.id = id;
 
@@ -39,7 +40,6 @@ module.exports= {
     },
     
     /**
-     * 
      * @param {HTMLElement} elem 
      * @param {string} name_attribute 
      * @param {any} value
