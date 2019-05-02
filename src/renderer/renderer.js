@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const path = require('path');
 
 const initializer = require('../lib/Initializer');
+const { defineGroup } = require('../custom/sub_group');
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
@@ -9,6 +10,8 @@ const project_list = document.getElementById('project-list');
 let data = null;
 
 refresh();
+
+defineGroup();
 
 function refresh(){
     data = ipcRenderer.sendSync('data-request');

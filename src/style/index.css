@@ -48,6 +48,19 @@ body, html{
     background-color: #222222;
 }
 
+sub-group:hover{
+    background-color: #222222;
+}
+
+sub-group-color{
+    display:inline-block;
+    margin-left:10px;
+    margin-right: 10px;
+    width: 10px; 
+    height: 10px;
+    border-radius: 50%; 
+}   
+
 .clear-button{
     background-color: #131313;
     border: none;

@@ -19,7 +19,6 @@ module.exports = {
                     <button class="button" id="submit" type="submit">OK</button>\
                     </form>'
         let dialog = builder.createElement('dialog', '', str);
-        dialog.appendChild(input);
         return dialog;
     }
 }
