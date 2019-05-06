@@ -11,7 +11,7 @@ let data = null;
 
 refresh();
 
-defineGroup();
+//defineGroup();
 
 function refresh(){
     data = ipcRenderer.sendSync('data-request');

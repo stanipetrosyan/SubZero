@@ -7,30 +7,43 @@ const project = ipcRenderer.sendSync('project-request');
 let USERNAME = null;
 let PASSWORD = null;
 let setUsername = true;
+let submitBtn;
+let inputValue;
 
 
 let openDialog = document.getElementById('openDialog');
-let dialogWindow = createDialog('text', 'Username');
-document.getElementById('dialog-position').appendChild(dialogWindow);
-let submitBtn = document.getElementById('submit');
-let inputValue = document.getElementById('val');
+let dialogWindow;
 
 openDialog.addEventListener('click', _ => {
-    inputValue.value = '';
-    setUsername = true;
+    if(setUsername == true){
+        dialogWindow = createDialog('text', 'Username');
+    }else{
+        dialogWindow = createDialog('password', 'Password'); 
+    }
+
+    // TODO: replace first username dialog with password dialog
+    document.getElementById('dialog-position').append(dialogWindow);
+    //document.getElementById('dialog-position').removeChild(dialogWindow);
+    
+    submitBtn = document.getElementById('submit');
+    submitBtn.addEventListener('click', _=>{
+        setDialog();
+    })
     dialogWindow.showModal();
 })
 
 
-submitBtn.addEventListener('click', _=>{
+function setDialog(){
+    inputValue = document.getElementById('val');
     if(setUsername == true){
         USERNAME = inputValue.value;
         setUsername = false;
         openDialog.click();
     }else{
         PASSWORD = inputValue.value;
+        setUsername = true;    
     }
-})
+}
 
 git.getCommitList(project['path']).then(res => {
     console.log(res);
