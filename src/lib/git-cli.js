@@ -1,5 +1,5 @@
 const git = require('simple-git/promise');
-//const git = require('simple-git');
+//const git_sync = require('simple-git');
 
 module.exports = {
 
@@ -57,7 +57,24 @@ module.exports = {
             console.log(e);
         }
         return log;
+    },
+
+    /**
+     * 
+     * @param {string} remote "https://${USER}:${PASS}@${REPO}"
+     * @param {Array} options ['-u', 'origin', 'branch']
+     */
+    async Push(workingDir, commit, remote, options){
+        let log = null;
+        try{
+            await git(workingDir).add('.');
+            await git(workingDir).commit(commit);
+            log = await git(workingDir).push(remote, options);
+        }catch(e){
+            log = e;
+        }
+        return log;
     }
-    
+
 } 
 

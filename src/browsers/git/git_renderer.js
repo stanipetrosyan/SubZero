@@ -35,15 +35,35 @@ function setDialog(){
         openDialog.click();
     }else{
         PASSWORD = inputValue.value;
-        setUsername = true;    
+        setUsername = true; 
+        pushCommit();
     }
 }
 
-git.getCommitList(project['path']).then(res => {
-    console.log(res);
-});
+// TODO: set commit message
 
-git.status(project['path']).then(res => {
+function pushCommit(){  
+    git.getRemoteRepoURL(project['path']).then(res => {
+        let REPO = res;
+        let remote = `https://${USERNAME}:${PASSWORD}@${REPO}`;
+        let options = ['-u', 'origin', 'master'];
+        git.Push(project['path'], remote, options).then(res => {
+            console.log(res);
+        })
+    })
+}
+
+/*git.getCommitList(project['path']).then(res => {
+    res.all.forEach(element => {
+        console.log(element);
+    });
+});*/
+
+/*git.status(project['path']).then(res => {
+    console.log(res);
+})*/
+
+git.getRemoteRepoURL(project['path']).then(res =>{
     console.log(res);
 })
 
