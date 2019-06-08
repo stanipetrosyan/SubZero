@@ -4,6 +4,12 @@ const {createDialog} = require('../../lib/dialog')
 
 const project = ipcRenderer.sendSync('project-request');
 
+git.getAllBranches(project['path']).then(res => {
+    let branches = res['all'];
+    autocomplete(document.getElementById("branch-name"), branches);
+})
+
+
 let USERNAME = null;
 let PASSWORD = null;
 let setUsername = true;
