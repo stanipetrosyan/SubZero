@@ -44,28 +44,13 @@ function setDialog(){
 
 function pushCommit(){  
     git.getRemoteRepoURL(project['path']).then(res => {
-        let REPO = res;
-        let remote = `https://${USERNAME}:${PASSWORD}@${REPO}`;
+        let remote = `https://${USERNAME}:${PASSWORD}@${res}`;
         let options = ['-u', 'origin', 'master'];
-        git.Push(project['path'], remote, options).then(res => {
+        git.push(project['path'], "commit example", remote, options).then(res => {
             console.log(res);
         })
     })
 }
-
-/*git.getCommitList(project['path']).then(res => {
-    res.all.forEach(element => {
-        console.log(element);
-    });
-});*/
-
-/*git.status(project['path']).then(res => {
-    console.log(res);
-})*/
-
-git.getRemoteRepoURL(project['path']).then(res =>{
-    console.log(res);
-})
 
 document.getElementById("cancel").addEventListener('click', _=>{
     ipcRenderer.send("close-modal");
