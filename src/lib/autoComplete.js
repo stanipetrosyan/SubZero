@@ -1,92 +1,90 @@
-function autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
+const builder = require('./Builder'); 
+
+module.exports = {
+  /**
+   * set auto complete method to ad input field
+   * @param {HTMLInputElement} element 
+   * @param {Array} data
+   */
+  autocomplete(element, data) {
     var currentFocus;
-    /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function(e) {
-        var a, b, i, val = this.value;
-        /*close any already open lists of autocompleted values*/
+    element.addEventListener("input", function(e) {
+        var val = this.value;
         closeAllLists();
-        if (!val) { return false;}
+        if (!val) { 
+            return false;
+        }
         currentFocus = -1;
-        /*create a DIV element that will contain the items (values):*/
-        a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
-        /*append the DIV element as a child of the autocomplete container:*/
-        this.parentNode.appendChild(a);
-        /*for each item in the array...*/
-        for (i = 0; i < arr.length; i++) {
-          /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            /*create a DIV element for each matching element:*/
-            b = document.createElement("DIV");
-            /*make the matching letters bold:*/
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += arr[i].substr(val.length);
-            /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function(e) {
-                /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
-                /*close the list of autocompleted values,
-                (or any other open lists of autocompleted values:*/
+        let div_items = builder.createElement('div', 'autocomplete-items', '', this.id + 'autocomplete-list');
+        this.parentNode.appendChild(div_items);
+
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            let innerItem = '<strong>' + data[i].substr(0, val.length) + '</strong>' + data[i].substr(val.length) +"<input type='hidden' value='" + data[i] + "'>";
+            let item = builder.createElement('div', '', innerItem);
+            item.addEventListener("click", function(e) {
+                element.value = this.getElementsByTagName("input")[0].value;
                 closeAllLists();
             });
-            a.appendChild(b);
+            div_items.appendChild(item);
           }
         }
     });
-    /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function(e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
-          /*If the arrow DOWN key is pressed,
-          increase the currentFocus variable:*/
+    element.addEventListener("keydown", function(e) {
+        var item = document.getElementById(this.id + "autocomplete-list");
+        if (item)  
+            item = item.getElementsByTagName("div");
+        if (e.keyCode == 40) { // DOWN key
           currentFocus++;
-          /*and and make the current item more visible:*/
-          addActive(x);
-        } else if (e.keyCode == 38) { //up
-          /*If the arrow UP key is pressed,
-          decrease the currentFocus variable:*/
+          addActive(item, currentFocus);
+        } 
+        else if (e.keyCode == 38) { // UP key
           currentFocus--;
-          /*and and make the current item more visible:*/
-          addActive(x);
-        } else if (e.keyCode == 13) {
-          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          addActive(item, currentFocus);
+        } 
+        else if (e.keyCode == 13) { // ENTER key
           e.preventDefault();
           if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
-            if (x) x[currentFocus].click();
+              item[currentFocus].click();
           }
         }
     });
-    function addActive(x) {
-      /*a function to classify an item as "active":*/
-      if (!x) return false;
-      /*start by removing the "active" class on all items:*/
-      removeActive(x);
-      if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = (x.length - 1);
-      /*add class "autocomplete-active":*/
-      x[currentFocus].classList.add("autocomplete-active");
+  }
+}
+
+/**
+ * function to classify an item as "active"
+ * @param {HTMLInputElement} element
+ */
+function addActive(element, currentFocus) {
+    if (!element) return false;
+    removeActive(element);
+    if (currentFocus >= element.length)
+        currentFocus = 0;
+    if (currentFocus < 0) 
+        currentFocus = (element.length - 1);
+    element[currentFocus].classList.add("autocomplete-active");
+}
+
+/**
+ * function to remove the "active" class from all autocomplete items
+ * @param {HTMLInputElement} element
+ */
+function removeActive(element) {
+    for (let i = 0; i < element.length; i++) {
+        element[i].classList.remove("autocomplete-active");
     }
-    function removeActive(x) {
-      /*a function to remove the "active" class from all autocomplete items:*/
-      for (var i = 0; i < x.length; i++) {
-        x[i].classList.remove("autocomplete-active");
-      }
-    }
-    function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
-      var x = document.getElementsByClassName("autocomplete-items");
-      for (var i = 0; i < x.length; i++) {
-        if (elmnt != x[i] && elmnt != inp) {
-          x[i].parentNode.removeChild(x[i]);
+}
+
+/**
+ * close all autocomplete lists in the document, except the one passed as an argument
+ * @param {*} selected
+ */
+function closeAllLists(selected) {
+    var list = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < list.length; i++) {
+        if (selected != list[i]) {
+            list[i].parentNode.removeChild(list[i]);
         }
-      }
     }
 }

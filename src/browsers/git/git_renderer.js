@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const git = require('../../lib/git-cli');
 const {createDialog} = require('../../lib/dialog')
+const {autocomplete} = require('../../lib/autoComplete');
 
 const project = ipcRenderer.sendSync('project-request');
 
