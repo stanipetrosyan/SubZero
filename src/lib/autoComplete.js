@@ -2,7 +2,7 @@ const builder = require('./Builder');
 
 module.exports = {
   /**
-   * set auto complete method to ad input field
+   * set auto complete method to an input field
    * @param {HTMLInputElement} element 
    * @param {Array} data
    */

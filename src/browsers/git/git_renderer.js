@@ -10,22 +10,27 @@ git.getAllBranches(project['path']).then(res => {
     autocomplete(document.getElementById("branch-name"), branches);
 })
 
-
 let USERNAME = null;
 let PASSWORD = null;
+let COMMIT = null;
 let setUsername = true;
 let submitBtn;
 let inputValue;
+let changeDialog = 1;
 
 let openDialog = document.getElementById('openDialog');
 
 openDialog.addEventListener('click', _ => {
-    if(setUsername == true){
-        document.body.appendChild(createDialog('text', 'Username'));
-    }else{
-        var elem = document.getElementById('dialog-req');
-        elem.parentNode.removeChild(elem);
-        document.body.appendChild(createDialog('password', 'Password'));
+    switch(changeDialog){
+        case 1:
+                replaceDialog('Username', 'text');
+            break;
+        case 2:
+                replaceDialog('Password', 'password');
+            break;
+        case 3:
+                replaceDialog('Commit', 'text');
+            break;
     }
     submitBtn = document.getElementById('submit');
     submitBtn.addEventListener('click', _=>{
@@ -36,24 +41,40 @@ openDialog.addEventListener('click', _ => {
 
 function setDialog(){
     inputValue = document.getElementById('val');
-    if(setUsername == true){
-        USERNAME = inputValue.value;
-        setUsername = false;
-        openDialog.click();
-    }else{
-        PASSWORD = inputValue.value;
-        setUsername = true; 
-        pushCommit();
+    switch(changeDialog){
+        case 1:
+                USERNAME = inputValue.value;
+                changeDialog++;
+                openDialog.click();
+            break;
+        case 2:
+                PASSWORD = inputValue.value;
+                changeDialog++;
+                openDialog.click();
+            break;
+        case 3:
+                COMMIT = inputValue.value;
+                changeDialog = 1;
+                pushCommit();
+            break;
     }
 }
 
-// TODO: set commit message
+function replaceDialog(label, type){
+    var dialog = document.getElementById('dialog-req');
+    if(!dialog){
+        document.body.appendChild(createDialog(type, label));
+        return;
+    }
+    dialog.parentNode.removeChild(dialog);
+    document.body.appendChild(createDialog(type, label));
+}
 
-function pushCommit(){  
+function pushCommit(){ 
     git.getRemoteRepoURL(project['path']).then(res => {
         let remote = `https://${USERNAME}:${PASSWORD}@${res}`;
         let options = ['-u', 'origin', 'master'];
-        git.push(project['path'], "commit example", remote, options).then(res => {
+        git.push(project['path'], COMMIT, remote, options).then(res => {
             console.log(res);
         })
     })
