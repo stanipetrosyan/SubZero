@@ -73,6 +73,14 @@ module.exports = {
         }
         return log;
     },
+
+    syncPush(workingDir, user, commit, remote, options){
+        require('simple-git')(workingDir)
+        .add('.')
+        .addConfig('user.name', user)
+        .commit(commit)
+        .push(remote, options, () => console.log('done'));
+    },
     
     /**
      * @param {string} workingDir 

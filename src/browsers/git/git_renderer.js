@@ -71,12 +71,14 @@ function replaceDialog(label, type){
 
 // TODO: check push with subzero and addconfig function
 function pushCommit(){ 
+   
     git.getRemoteRepoURL(project['path']).then(res => {
         let remote = `https://${USERNAME}:${PASSWORD}@${res}`;
-        //let options = ['-u', 'origin', 'master'];
-        git.push(project['path'], COMMIT, remote).then(res => {
+        let options = ['-u', 'origin', 'master'];
+        /*git.push(project['path'], COMMIT, remote, options).then(res => {
             console.log(res);
-        })
+        })*/
+        git.syncPush(project['path'], USERNAME, COMMIT, remote, options);
     })
 }
 
