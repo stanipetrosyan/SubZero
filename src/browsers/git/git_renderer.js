@@ -13,7 +13,6 @@ git.getAllBranches(project['path']).then(res => {
 let USERNAME = null;
 let PASSWORD = null;
 let COMMIT = null;
-let setUsername = true;
 let submitBtn;
 let inputValue;
 let changeDialog = 1;
@@ -70,11 +69,12 @@ function replaceDialog(label, type){
     document.body.appendChild(createDialog(type, label));
 }
 
+// TODO: check push with subzero and addconfig function
 function pushCommit(){ 
     git.getRemoteRepoURL(project['path']).then(res => {
         let remote = `https://${USERNAME}:${PASSWORD}@${res}`;
-        let options = ['-u', 'origin', 'master'];
-        git.push(project['path'], COMMIT, remote, options).then(res => {
+        //let options = ['-u', 'origin', 'master'];
+        git.push(project['path'], COMMIT, remote).then(res => {
             console.log(res);
         })
     })
