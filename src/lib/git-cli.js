@@ -1,5 +1,8 @@
 const git = require('simple-git/promise');
 
+// test mail 
+const MAIL = 'subzerodeveloper07@gmail.com';
+
 module.exports = {
 
     /**
@@ -65,6 +68,7 @@ module.exports = {
     async push(workingDir, commit, remote, options){
         let log = null;
         try{
+            //await git(workingDir).remote(['set-url', 'origin', remote.replace(/\n/g, '')]);
             await git(workingDir).add('.');
             await git(workingDir).commit(commit);
             log = await git(workingDir).push(remote, options);
@@ -74,14 +78,10 @@ module.exports = {
         return log;
     },
 
-    syncPush(workingDir, user, commit, remote, options){
-        require('simple-git')(workingDir)
-        .add('.')
-        .addConfig('user.name', user)
-        .commit(commit)
-        .push(remote, options, () => console.log('done'));
+    setAuthRemote(workingDir, remote){
+        require('simple-git')(workingDir).remote(['set-url', 'origin', remote.replace(/\n/g, '')]);
     },
-    
+
     /**
      * @param {string} workingDir 
      */
