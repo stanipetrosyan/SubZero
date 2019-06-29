@@ -68,10 +68,10 @@ module.exports = {
     async push(workingDir, commit, remote, options){
         let log = null;
         try{
-            //await git(workingDir).remote(['set-url', 'origin', remote.replace(/\n/g, '')]);
             await git(workingDir).add('.');
             await git(workingDir).commit(commit);
-            log = await git(workingDir).push(remote, options);
+            await git(workingDir).push(remote, options);
+            log = 'Done!';
         }catch(e){
             log = e;
         }

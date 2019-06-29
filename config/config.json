@@ -21,5 +21,13 @@
         "defaultId": 3,
         "title": "Find",
         "message": "Find same group name, please change it"
+    },
+
+    "info":{
+        "type":"info",
+        "buttons": ["Ok"],
+        "defaultId": 4,
+        "title": "Push",
+        "message": "Done"
     }
 }

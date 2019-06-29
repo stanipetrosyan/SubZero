@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const git = require('../../lib/git-cli');
 const {createDialog} = require('../../lib/dialog')
 const {autocomplete} = require('../../lib/autoComplete');
+const userMessages = require('../../lib/message');
 
 const project = ipcRenderer.sendSync('project-request');
 
@@ -76,6 +77,7 @@ function pushCommit(){
         git.setAuthRemote(project['path'], remote.replace('https://www.', ''));
         git.push(project['path'], COMMIT, remote, options).then(res => {
             git.setAuthRemote(project['path'], URL);
+            userMessages.showInfoMessageBox();
         })
     })
 }
