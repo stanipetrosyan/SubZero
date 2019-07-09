@@ -79,6 +79,10 @@ module.exports = {
         require('simple-git')(workingDir).remote(['set-url', 'origin', remote.replace(/\n/g, '')]);
     },
 
+    async setAuthRemoteAsync(workingDir, remote){
+        await git(workingDir).remote(['set-url', 'origin', remote.replace(/\n/g, '')]);
+    },
+
     /**
      * @param {string} workingDir 
      */
@@ -100,7 +104,7 @@ module.exports = {
     async pull(workingDir, remote, branch){
         let log = null;
         try {
-            await git(workingDir).pull(remote, branch);
+            await git(workingDir).pull(remote, branch, {'--no-rebase': null});
             log = 'Done!';
         } catch (error) {
             log = error;

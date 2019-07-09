@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 const git = require('../../lib/git-cli');
-const {createDialog} = require('../../lib/dialog')
-const {autocomplete} = require('../../lib/autoComplete');
+const { createDialog } = require('../../lib/dialog')
+const { autocomplete } = require('../../lib/autoComplete');
 const userMessages = require('../../lib/message');
 
 const project = ipcRenderer.sendSync('project-request');
@@ -18,9 +18,15 @@ let submitBtn;
 let inputValue;
 let changeDialog = 1;
 
-let openDialog = document.getElementById('openDialog');
+document.getElementById('push_btn').addEventListener('click', _ => {
+    switchDialogForm(pushCommit);
+})
 
-openDialog.addEventListener('click', _ => {
+document.getElementById('pull_btn').addEventListener('click', _ =>{
+    switchDialogForm(pullRepo);
+})
+
+function switchDialogForm(callback){
     switch(changeDialog){
         case 1:
                 replaceDialog('Username', 'text');
@@ -34,28 +40,27 @@ openDialog.addEventListener('click', _ => {
     }
     submitBtn = document.getElementById('submit');
     submitBtn.addEventListener('click', _=>{
-        setDialog();
+        setDialog(callback);
     })
     document.getElementById('dialog-req').showModal();
-})
-
-function setDialog(){
+}
+function setDialog(callback){
     inputValue = document.getElementById('val');
     switch(changeDialog){
         case 1:
                 USERNAME = inputValue.value;
                 changeDialog++;
-                openDialog.click();
+                switchDialogForm(callback);
             break;
         case 2:
                 PASSWORD = inputValue.value;
                 changeDialog++;
-                openDialog.click();
+                switchDialogForm(callback);
             break;
         case 3:
                 COMMIT = inputValue.value;
                 changeDialog = 1;
-                pushCommit();
+                callback();
             break;
     }
 }
@@ -85,12 +90,13 @@ function pushCommit(){
 function pullRepo(){
     git.getRemoteRepoURL(project['path']).then(URL => {
         let remote = `https://${USERNAME}:${PASSWORD}@${URL}`;
-        git.setAuthRemote(project['path'], remote.replace('https://www.', ''));
-        // TODO: set branch val using label
-        git.pull(project['path'], remote, 'master').then(res => {
-            git.setAuthRemote(project['path'], URL);
-            userMessages.showInfoMessageBox();
-        })
+        console.log(remote.replace('https://www.', ''));
+       /* git.setAuthRemoteAsync(project['path'], remote.replace('https://www.', '')).then(res => {
+            git.pull(project['path'], remote, 'master').then(res => {
+                git.setAuthRemote(project['path'], URL);
+                userMessages.showInfoMessageBox();
+            })
+        }) */ 
     })
 }
 
