@@ -23,7 +23,7 @@ document.getElementById('push_btn').addEventListener('click', _ => {
 })
 
 document.getElementById('pull_btn').addEventListener('click', _ =>{
-    switchDialogForm(pullRepo);
+    pullRepo();
 })
 
 function switchDialogForm(callback){
@@ -87,16 +87,10 @@ function pushCommit(){
     })
 }
 
+
 function pullRepo(){
-    git.getRemoteRepoURL(project['path']).then(URL => {
-        let remote = `https://${USERNAME}:${PASSWORD}@${URL}`;
-        console.log(remote.replace('https://www.', ''));
-       /* git.setAuthRemoteAsync(project['path'], remote.replace('https://www.', '')).then(res => {
-            git.pull(project['path'], remote, 'master').then(res => {
-                git.setAuthRemote(project['path'], URL);
-                userMessages.showInfoMessageBox();
-            })
-        }) */ 
+    git.pull(project['path'], 'master').then(res => {
+        userMessages.showInfoMessageBox();
     })
 }
 

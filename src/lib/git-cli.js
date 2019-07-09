@@ -98,13 +98,12 @@ module.exports = {
     
     /**
      * @param {string} workingDir 
-     * @param {string} remote
      * @param {string} branch e.g 'master'
      */
-    async pull(workingDir, remote, branch){
+    async pull(workingDir, branch){
         let log = null;
         try {
-            await git(workingDir).pull(remote, branch, {'--no-rebase': null});
+            await git(workingDir).pull('origin', branch, {'--no-rebase': null});
             log = 'Done!';
         } catch (error) {
             log = error;
