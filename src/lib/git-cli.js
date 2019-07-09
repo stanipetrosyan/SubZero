@@ -1,8 +1,5 @@
 const git = require('simple-git/promise');
 
-// test mail 
-const MAIL = 'subzerodeveloper07@gmail.com';
-
 module.exports = {
 
     /**
@@ -13,8 +10,8 @@ module.exports = {
         let repo = null;
         try{
             repo = await git(workingDir).checkIsRepo();
-        }catch(e){
-            console.log(e);
+        } catch(error) {
+            repo = error;
         }
         return repo;
     },
@@ -27,8 +24,8 @@ module.exports = {
         let statusSummary = null;
         try {
            statusSummary = await git(workingDir).status();
-        }catch (e) {
-            console.log(e);
+        } catch (error) {
+            statusSummary = error;
         }
         return statusSummary;
     },
@@ -41,8 +38,8 @@ module.exports = {
         let url = null;
         try{
             url = await git(workingDir).listRemote(['--get-url']);
-        }catch(e){
-            console.log(e);
+        } catch(error) {
+            url = error;
         }
         return url;
     },
@@ -55,8 +52,8 @@ module.exports = {
         let log = null;
         try{
             log = await git(workingDir).log();
-        }catch(e){
-            console.log(e);
+        } catch(error) {
+            log = error;
         }
         return log;
     },
@@ -72,8 +69,8 @@ module.exports = {
             await git(workingDir).commit(commit);
             await git(workingDir).push(remote, options);
             log = 'Done!';
-        }catch(e){
-            log = e;
+        } catch(error) {
+            log = error;
         }
         return log;
     },
@@ -89,10 +86,26 @@ module.exports = {
         let list = null;
         try {
             list = await git(workingDir).branch(); 
-        } catch (e) {
-            list = e;
+        } catch (error) {
+            list = error;
         }
         return list;
+    },
+    
+    /**
+     * @param {string} workingDir 
+     * @param {string} remote
+     * @param {string} branch e.g 'master'
+     */
+    async pull(workingDir, remote, branch){
+        let log = null;
+        try {
+            await git(workingDir).pull(remote, branch);
+            log = 'Done!';
+        } catch (error) {
+            log = error;
+        }
+        return log;
     }
 
 } 

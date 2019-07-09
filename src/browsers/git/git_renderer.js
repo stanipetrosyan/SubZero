@@ -82,6 +82,18 @@ function pushCommit(){
     })
 }
 
+function pullRepo(){
+    git.getRemoteRepoURL(project['path']).then(URL => {
+        let remote = `https://${USERNAME}:${PASSWORD}@${URL}`;
+        git.setAuthRemote(project['path'], remote.replace('https://www.', ''));
+        // TODO: set branch val using label
+        git.pull(project['path'], remote, 'master').then(res => {
+            git.setAuthRemote(project['path'], URL);
+            userMessages.showInfoMessageBox();
+        })
+    })
+}
+
 document.getElementById("cancel").addEventListener('click', _=>{
     ipcRenderer.send("close-modal");
 });
