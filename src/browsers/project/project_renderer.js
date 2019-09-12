@@ -3,10 +3,8 @@ const { createArrayGroupContainer, setOpacityRight } = require('../../lib/Initia
 const { showErrorMessageBox } = require('../../lib/message');
 const git  = require('../../lib/git-cli');
 
-
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
-
 
 const data = ipcRenderer.sendSync('data-request');
 
@@ -91,6 +89,9 @@ document.getElementById('add').addEventListener('click', () =>{
         sender(project);
     })
 })
+document.getElementById('del').addEventListener('click', _ =>{
+    ipcRenderer.send('delete-project', projectToUpdate);
+}) 
 
 editors[0].addEventListener('click', () =>{
     editorSelected = 'vscode';

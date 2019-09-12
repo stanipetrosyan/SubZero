@@ -93,6 +93,7 @@ ipcMain.on('delete-project', (event, arg) => {
         groupData.removeProject(arg);
     }
     mainWindow.webContents.send('refresh');
+    closeModal();
 })
 
 ipcMain.on('update-project', (event, arg) =>{

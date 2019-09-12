@@ -74,7 +74,6 @@ module.exports = {
             builder.createElement('p', 'title-project', project['name']),
             builder.createElement('p', 'title-project', project['language']),
             builder.createElement('button', 'button button-subzero', 'OPEN'),
-            builder.createElement('div', 'project-delete-icon', '', 'del'),
             builder.createElement('div', 'project-modify-icon', '', 'up')
         ]);
         if(project['repo']){
