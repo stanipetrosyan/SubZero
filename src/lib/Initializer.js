@@ -1,6 +1,6 @@
 const builder = require('./Builder');
 
-const color_list = require('../../config')('color');
+const color_list = require('../../config')('colors');
 
 
 module.exports = {
