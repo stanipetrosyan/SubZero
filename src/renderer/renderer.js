@@ -67,6 +67,11 @@ document.getElementById('newProject').addEventListener('click', _=>{
     ipcRenderer.send('open-modal', file);
 })
 
+document.getElementById('themes').addEventListener('click', _=>{
+    let file = path.join(__dirname, '../browsers/themes/set_theme.html')
+    ipcRenderer.send('open-modal', file);
+})
+
 document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
 })
