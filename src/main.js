@@ -12,7 +12,7 @@ const groupData = new DataStore({name: 'Groups Main'})
 
 
 const Store = require('./lib/store');
-const groupModule = require('./lib/groupDataModule');
+const groupInterface = require('./lib/groupDataInterface');
 
 const store = new Store({
     configName: 'user-data',
