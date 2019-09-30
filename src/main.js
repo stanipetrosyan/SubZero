@@ -15,7 +15,7 @@ const Store = require('./lib/store');
 const groupInterface = require('./lib/groupDataInterface');
 
 const store = new Store({
-    configName: 'user-data',
+    configName: 'data-user',
     defaults: {
       groups: [],
       theme: { name: "Default"},
@@ -35,13 +35,13 @@ let mainWindow = null;
 let tmp_project = null;
 let tmp_group = null;
 
-function main(){
+function main() {
     mainWindow = new Window({
         file: index_path,
     })
 }
 
-function openModal(arg){
+function openModal(arg) {
     if(!modal){
         modal = new Window({
             file: arg,
@@ -53,8 +53,8 @@ function openModal(arg){
     }
 }
 
-function closeModal(){
-    if(modal){
+function closeModal() {
+    if(modal) {
         modal.close();
         modal = null;
         tmp_project = null;
@@ -62,7 +62,7 @@ function closeModal(){
     }
 }
 
-function selectDirectory(){
+function selectDirectory() {
     let options = { properties: ["openDirectory"]}
     return dialog.showOpenDialog(options);
 }
@@ -75,20 +75,20 @@ ipcMain.on('close-modal', () => {
     closeModal();
 })
 
-ipcMain.on('data-request', (event, arg)=>{
+ipcMain.on('data-request', (event, arg) => {
     event.returnValue = groupData.getData().data;
 })
 
-ipcMain.on('add-group', (event, arg) =>{
-    if(groupData.addGroup(arg) == false){
+ipcMain.on('add-group', (event, arg) => {
+    if(groupData.addGroup(arg) == false) {
         dialog.showMessageBox(null, config('equals'));
-    }else{
+    } else {
         mainWindow.webContents.send('added-group', arg);
         closeModal();
     }   
 })
 
-ipcMain.on('add-project', (event, arg) =>{
+ipcMain.on('add-project', (event, arg) => {
     groupData.addProject(arg);
     mainWindow.webContents.send('refresh');
     closeModal();
@@ -104,19 +104,19 @@ ipcMain.on('open-git', (event, arg) => {
 
 ipcMain.on('delete-project', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
-    if(response === 1){
+    if(response === 1) {
         groupData.removeProject(arg);
     }
     mainWindow.webContents.send('refresh');
     closeModal();
 })
 
-ipcMain.on('update-project', (event, arg) =>{
+ipcMain.on('update-project', (event, arg) => {
     openModal(project_path); 
     tmp_project = arg;
 })
 
-ipcMain.on('project-request', (event, arg) =>{
+ipcMain.on('project-request', (event, arg) => {
     event.returnValue = tmp_project;
 })
 
@@ -126,7 +126,7 @@ ipcMain.on('updated-project', (event, arg) => {
     mainWindow.webContents.send('refresh');
 })
 
-ipcMain.on('open-folder-dialog', (event, arg) =>{
+ipcMain.on('open-folder-dialog', (event, arg) => {
     let dir = selectDirectory();
     event.returnValue = dir;
 })
@@ -148,7 +148,7 @@ ipcMain.on('updated-group', (event, arg) => {
 
 ipcMain.on('delete-group', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
-    if(response === 1){
+    if(response === 1) {
         groupData.deleteGroup(tmp_group.name);
         mainWindow.webContents.send('refresh');
     }

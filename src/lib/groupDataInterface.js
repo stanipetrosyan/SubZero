@@ -29,7 +29,7 @@ module.exports = {
      * @param { object } update 
      * @param {Array} store
      */
-    updateGroup(old, update, store){
+    updateGroup(store, old, update){
         let groups = store.get(key);
         let index = this.findGroupByName(groups, old.name);
         groups[index] = update;
