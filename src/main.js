@@ -23,6 +23,8 @@ const store = new Store({
     }
 });
 
+
+store.set('groups', []);
 console.log(store);
 
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
@@ -76,11 +78,11 @@ ipcMain.on('close-modal', () => {
 })
 
 ipcMain.on('data-request', (event, arg) => {
-    event.returnValue = groupData.getData().data;
+    event.returnValue = store.get('groups');
 })
 
 ipcMain.on('add-group', (event, arg) => {
-    if(groupData.addGroup(arg) == false) {
+    if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
         mainWindow.webContents.send('added-group', arg);
@@ -89,7 +91,7 @@ ipcMain.on('add-group', (event, arg) => {
 })
 
 ipcMain.on('add-project', (event, arg) => {
-    groupData.addProject(arg);
+    groupInterface.addProject(arg, store);
     mainWindow.webContents.send('refresh');
     closeModal();
 })
@@ -105,7 +107,7 @@ ipcMain.on('open-git', (event, arg) => {
 ipcMain.on('delete-project', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
     if(response === 1) {
-        groupData.removeProject(arg);
+        groupInterface.removeProject(arg, store);
     }
     mainWindow.webContents.send('refresh');
     closeModal();
@@ -121,7 +123,7 @@ ipcMain.on('project-request', (event, arg) => {
 })
 
 ipcMain.on('updated-project', (event, arg) => {
-    groupData.updateProject(tmp_project, arg);
+    groupInterface.updateProject(store, tmp_project, arg);
     closeModal();
     mainWindow.webContents.send('refresh');
 })
@@ -141,7 +143,7 @@ ipcMain.on('group-request', (event, arg) => {
 })
 
 ipcMain.on('updated-group', (event, arg) => {
-    groupData.updateGroup(tmp_group, arg);
+    groupInterface.updateGroup(store, tmp_group, arg);
     closeModal();
     mainWindow.webContents.send('refresh');
 })
@@ -149,7 +151,7 @@ ipcMain.on('updated-group', (event, arg) => {
 ipcMain.on('delete-group', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
     if(response === 1) {
-        groupData.deleteGroup(tmp_group.name);
+        groupInterface.removeGroup(tmp_group.name, store);
         mainWindow.webContents.send('refresh');
     }
     closeModal();

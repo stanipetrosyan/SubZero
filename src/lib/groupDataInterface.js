@@ -37,7 +37,7 @@ module.exports = {
     },
 
     /**
-     * @param {Array} datas
+     * @param {Array} data
      * @param {string} group_name 
      * @returns {number} index of group
      */
