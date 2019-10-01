@@ -21,7 +21,7 @@ module.exports = {
      * @param {Array} store
      */
     removeGroup(group_name, store){
-        store.set(key, removeGroupByName(store.get(key), group_name));
+        store.set(key, this.removeGroupByName(store.get(key), group_name));
     },
 
     /**
@@ -33,7 +33,7 @@ module.exports = {
         let groups = store.get(key);
         let index = this.findGroupByName(groups, old.name);
         groups[index] = update;
-        store.set(key);
+        store.set(key, groups);
     },
 
     /**
@@ -68,8 +68,8 @@ module.exports = {
      * @param {object} project 
      */
     removeProject(project, store){
-        let index = this.findGroupByName(project['group']);
         let groups = store.get(key);
+        let index = this.findGroupByName(groups, project['group']);
         groups[index].projects = this.removeProjectByName(groups[index], project['name'])
         store.set(key, groups);
     },

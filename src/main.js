@@ -24,7 +24,7 @@ const store = new Store({
 });
 
 
-store.set('groups', []);
+//store.set('groups', []);
 console.log(store);
 
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
