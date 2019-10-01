@@ -4,12 +4,8 @@ const { app, ipcMain} = require('electron');
 const dialog = electron.dialog;
 
 const Window = require('./lib/window');
-const DataStore = require('./lib/storage');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
-
-const groupData = new DataStore({name: 'Groups Main'})
-
 
 const Store = require('./lib/store');
 const groupInterface = require('./lib/groupDataInterface');
@@ -22,10 +18,6 @@ const store = new Store({
       user_setup: {}
     }
 });
-
-
-//store.set('groups', []);
-console.log(store);
 
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
