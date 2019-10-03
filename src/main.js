@@ -77,7 +77,7 @@ ipcMain.on('add-group', (event, arg) => {
     if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
-        mainWindow.webContents.send('added-group', arg);
+        mainWindow.webContents.send('refresh');
         closeModal();
     }   
 })

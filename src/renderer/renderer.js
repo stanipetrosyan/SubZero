@@ -1,8 +1,6 @@
 const { ipcRenderer } = require('electron');
 const path = require('path');
-
 const initializer = require('../lib/Initializer');
-const { defineGroup } = require('../custom/sub_group');
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
@@ -11,15 +9,13 @@ let data = null;
 
 refresh();
 
-//defineGroup();
-
 function refresh(){
     data = ipcRenderer.sendSync('data-request');
     printProjectList();
     printGroupList();
 }
 
-function printProjectForGroup(group){
+function printProjectForGroup(group) {
     let projects = initializer.createProjectArrayToAppend(group);
     for(let i = 0; i < group.projects.length; i++){
         var element = projects[i];
@@ -29,14 +25,14 @@ function printProjectForGroup(group){
         element.childNodes[3].addEventListener('click', _=> {
             ipcRenderer.send('update-project', group.projects[i])
         })
-        element.lastChild.addEventListener('click', _=>{
+        element.lastChild.addEventListener('click', _=> {
             ipcRenderer.send("open-git", group.projects[i]);
         })
     }
     initializer.appendToProjectList(projects, project_list);
 }
 
-function printProjectList(){
+function printProjectList() {
     project_list.innerHTML = '';
     data.forEach(element => {
        printProjectForGroup(element);
@@ -57,12 +53,12 @@ function printGroupList(){
     initializer.appendToGroupList(groups, group_list);
 }
 
-document.getElementById('newGroup').addEventListener('click', _=>{
+document.getElementById('newGroup').addEventListener('click', _=> {
     let file = path.join(__dirname, '../browsers/group/group_modal.html')
     ipcRenderer.send('open-modal', file);
 })
 
-document.getElementById('newProject').addEventListener('click', _=>{
+document.getElementById('newProject').addEventListener('click', _=> {
     let file = path.join(__dirname, '../browsers/project/project_modal.html')
     ipcRenderer.send('open-modal', file);
 })
@@ -71,11 +67,6 @@ document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
 })
 
-ipcRenderer.on('added-group', (event, arg) =>{
-    let group = initializer.initializeGroupElement(arg);
-    group_list.append(group);
-})
-
-ipcRenderer.on('refresh', () =>{
+ipcRenderer.on('refresh', () => {
     refresh();
 })
