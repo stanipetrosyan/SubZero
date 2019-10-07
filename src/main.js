@@ -4,11 +4,20 @@ const { app, ipcMain} = require('electron');
 const dialog = electron.dialog;
 
 const Window = require('./lib/window');
-const DataStore = require('./lib/storage');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
 
-const groupData = new DataStore({name: 'Groups Main'})
+const Store = require('./lib/store');
+const groupInterface = require('./lib/groupDataInterface');
+
+const store = new Store({
+    configName: 'data-user',
+    defaults: {
+      groups: [],
+      theme: { name: "Default"},
+      user_setup: {}
+    }
+});
 
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
@@ -20,13 +29,13 @@ let mainWindow = null;
 let tmp_project = null;
 let tmp_group = null;
 
-function main(){
+function main() {
     mainWindow = new Window({
         file: index_path,
     })
 }
 
-function openModal(arg){
+function openModal(arg) {
     if(!modal){
         modal = new Window({
             file: arg,
@@ -38,8 +47,8 @@ function openModal(arg){
     }
 }
 
-function closeModal(){
-    if(modal){
+function closeModal() {
+    if(modal) {
         modal.close();
         modal = null;
         tmp_project = null;
@@ -47,7 +56,7 @@ function closeModal(){
     }
 }
 
-function selectDirectory(){
+function selectDirectory() {
     let options = { properties: ["openDirectory"]}
     return dialog.showOpenDialog(options);
 }
@@ -60,21 +69,21 @@ ipcMain.on('close-modal', () => {
     closeModal();
 })
 
-ipcMain.on('data-request', (event, arg)=>{
-    event.returnValue = groupData.getData().data;
+ipcMain.on('data-request', (event, arg) => {
+    event.returnValue = store.get('groups');
 })
 
-ipcMain.on('add-group', (event, arg) =>{
-    if(groupData.addGroup(arg) == false){
+ipcMain.on('add-group', (event, arg) => {
+    if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
-    }else{
-        mainWindow.webContents.send('added-group', arg);
+    } else {
+        mainWindow.webContents.send('refresh');
         closeModal();
     }   
 })
 
-ipcMain.on('add-project', (event, arg) =>{
-    groupData.addProject(arg);
+ipcMain.on('add-project', (event, arg) => {
+    groupInterface.addProject(arg, store);
     mainWindow.webContents.send('refresh');
     closeModal();
 })
@@ -89,29 +98,29 @@ ipcMain.on('open-git', (event, arg) => {
 
 ipcMain.on('delete-project', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
-    if(response === 1){
-        groupData.removeProject(arg);
+    if(response === 1) {
+        groupInterface.removeProject(arg, store);
     }
     mainWindow.webContents.send('refresh');
     closeModal();
 })
 
-ipcMain.on('update-project', (event, arg) =>{
+ipcMain.on('update-project', (event, arg) => {
     openModal(project_path); 
     tmp_project = arg;
 })
 
-ipcMain.on('project-request', (event, arg) =>{
+ipcMain.on('project-request', (event, arg) => {
     event.returnValue = tmp_project;
 })
 
 ipcMain.on('updated-project', (event, arg) => {
-    groupData.updateProject(tmp_project, arg);
+    groupInterface.updateProject(store, tmp_project, arg);
     closeModal();
     mainWindow.webContents.send('refresh');
 })
 
-ipcMain.on('open-folder-dialog', (event, arg) =>{
+ipcMain.on('open-folder-dialog', (event, arg) => {
     let dir = selectDirectory();
     event.returnValue = dir;
 })
@@ -126,15 +135,15 @@ ipcMain.on('group-request', (event, arg) => {
 })
 
 ipcMain.on('updated-group', (event, arg) => {
-    groupData.updateGroup(tmp_group, arg);
+    groupInterface.updateGroup(store, tmp_group, arg);
     closeModal();
     mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('delete-group', (event, arg) => {
     let response = dialog.showMessageBox(null, config('question'));
-    if(response === 1){
-        groupData.deleteGroup(tmp_group.name);
+    if(response === 1) {
+        groupInterface.removeGroup(tmp_group.name, store);
         mainWindow.webContents.send('refresh');
     }
     closeModal();
