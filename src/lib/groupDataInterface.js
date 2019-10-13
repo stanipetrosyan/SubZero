@@ -25,9 +25,9 @@ module.exports = {
     },
 
     /**
+     * @param {Array} store
      * @param { object } old 
      * @param { object } update 
-     * @param {Array} store
      */
     updateGroup(store, old, update){
         let groups = store.get(key);
@@ -66,6 +66,7 @@ module.exports = {
 
     /**
      * @param {object} project 
+     * @param {Array} store
      */
     removeProject(project, store){
         let groups = store.get(key);
@@ -74,11 +75,17 @@ module.exports = {
         store.set(key, groups);
     },
 
+    /**
+     * 
+     * @param {Array} data 
+     * @param {String} project_name 
+     */
     removeProjectByName(data, project_name) {
         return data.projects.filter(elem => elem['name'] !== project_name)
     },
 
     /**
+     * @param {Array} store
      * @param { object } old 
      * @param { object } update 
      */

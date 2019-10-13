@@ -73,6 +73,16 @@ ipcMain.on('data-request', (event, arg) => {
     event.returnValue = store.get('groups');
 })
 
+ipcMain.on('theme-request', (event, arg) => {
+    event.returnValue = store.get('theme');
+})
+
+ipcMain.on('update-theme', (event, arg) => {
+    store.set('theme', arg);
+    mainWindow.webContents.send('refresh');
+    closeModal();
+})
+
 ipcMain.on('add-group', (event, arg) => {
     if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
