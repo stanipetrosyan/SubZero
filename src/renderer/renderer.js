@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const path = require('path');
 const initializer = require('../lib/Initializer');
+const { setTheme } = require('../lib/theme-setup');
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
@@ -10,23 +11,27 @@ let data = null;
 refresh();
 
 function refresh() {
-    setTheme();
+    setTheme(ipcRenderer.sendSync('theme-request'));
     data = ipcRenderer.sendSync('data-request');
     printProjectList();
     printGroupList();
 }
 
-function setTheme() {
+/*function setTheme() {
+    let current_theme = 
+
     let current_theme = ipcRenderer.sendSync('theme-request');
     var html = document.getElementsByTagName('html')[0];
     if(current_theme['name'] == 'default') { 
         html.style.setProperty("--main-background-color", "#1e1e1e");
-        html.style.setProperty("--main-secondary-background-color", "#131313");        
+        html.style.setProperty("--main-secondary-background-color", "#131313");
+        html.style.setProperty("--main-text-color", "white");       
     } else {
         html.style.setProperty("--main-background-color", "white");
         html.style.setProperty("--main-secondary-background-color", "white");
+        html.style.setProperty("--main-text-color", "black");
     }
-}
+}*/
 function printProjectForGroup(group) {
     let projects = initializer.createProjectArrayToAppend(group);
     for(let i = 0; i < group.projects.length; i++){

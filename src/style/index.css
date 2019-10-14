@@ -4,6 +4,8 @@
     --main-background-color: #1e1e1e;
     --main-secondary-background-color: #131313;
     --main-color: #1C39BB;
+    --main-text-color: white;
+    --main-color-hover-group: #222222;
 }
 
 body, html{
@@ -42,7 +44,7 @@ body, html{
     width:100px; 
 }
 .group-label{
-    color: white;
+    color: var(--main-text-color);
     font-size: 14px;
 }
 .group-item{
@@ -52,26 +54,13 @@ body, html{
     cursor: pointer;
 }
 .group-item:hover{
-    background-color: #222222;
+    background-color: var(--main-color-hover-group);
 }
-
-sub-group:hover{
-    background-color: #222222;
-}
-
-sub-group-color{
-    display:inline-block;
-    margin-left:10px;
-    margin-right: 10px;
-    width: 10px; 
-    height: 10px;
-    border-radius: 50%; 
-}   
 
 .clear-button{
     background-color: #131313;
     border: none;
-    color: white;
+    color: var(--main-text-color);
     margin-left: 20px;
     margin-top: 2%;
     cursor: pointer;
@@ -131,7 +120,7 @@ sub-group-color{
     background-color: #222222;
     border: 2px solid;
     border-color: var(--main-color);
-    color: white;
+    color: var(--main-text-color);
     padding: 6px 40px;
     text-align: center;
     border-radius: 2em;
@@ -145,7 +134,7 @@ sub-group-color{
 
 .button:hover {
     background-color: var(--main-color);
-    color: white;
+    color: var(--main-text-color);
     padding: 8px 42px;
 }
 
@@ -153,7 +142,7 @@ sub-group-color{
     background-color: #222222;
     border: 2px solid;
     border-color: #ff0000;
-    color: white;
+    color: var(--main-text-color);
     padding: 6px 40px;
     text-align: center;
     border-radius: 2em;
@@ -165,12 +154,12 @@ sub-group-color{
     cursor: pointer;
 }
 .button-cancel:hover{
-    color: white;
+    color: var(--main-text-color);
     padding: 8px 42px;
     background-color: #ff0000;
 }
 .title-project{
-    color:white;
+    color:var(--main-text-color);
     font-size: 16px;
 }
 
