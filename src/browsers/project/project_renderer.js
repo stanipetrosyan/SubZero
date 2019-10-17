@@ -2,12 +2,14 @@ const { ipcRenderer } = require('electron');
 const { createArrayGroupContainer, setOpacityRight } = require('../../lib/Initializer');
 const { showErrorMessageBox } = require('../../lib/message');
 const git  = require('../../lib/git-cli');
+const { setTheme } = require('../../lib/theme-setup');
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
 
-const data = ipcRenderer.sendSync('data-request');
+setTheme(ipcRenderer.sendSync('theme-request'));
 
+let data = ipcRenderer.sendSync('data-request');
 let project_folder = null;
 let projectToUpdate = null;
 let editorSelected = null;

@@ -2,7 +2,9 @@ const { ipcRenderer } = require('electron');
 const { appendAllChild } = require('../../lib/Builder');
 const { initializeColorPickerElement } = require('../../lib/Initializer')
 const { showErrorMessageBox } = require('../../lib/message');
+const { setTheme } = require('../../lib/theme-setup');
 
+setTheme(ipcRenderer.sendSync('theme-request'));
 
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');

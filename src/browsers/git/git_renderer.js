@@ -3,8 +3,12 @@ const git = require('../../lib/git-cli');
 const { createDialog } = require('../../lib/dialog')
 const { autocomplete } = require('../../lib/autoComplete');
 const userMessages = require('../../lib/message');
+const { setTheme } = require('../../lib/theme-setup');
 
-const project = ipcRenderer.sendSync('project-request');
+let project = null;
+
+setTheme(ipcRenderer.sendSync('theme-request'));
+project = ipcRenderer.sendSync('project-request');
 
 git.getAllBranches(project['path']).then(res => {
     let branches = res['all'];

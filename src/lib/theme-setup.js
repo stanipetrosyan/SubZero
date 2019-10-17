@@ -18,7 +18,7 @@ function setDarkTheme(obj) {
 
 function setLightTheme(obj) {
     obj.style.setProperty("--main-background-color", "white");
-    obj.style.setProperty("--main-secondary-background-color", "#eeeeee");
+    obj.style.setProperty("--main-secondary-background-color", "white");
     obj.style.setProperty("--main-text-color", " #424242");  
-    obj.style.setProperty("--main-color-hover-group", "white");  
+    obj.style.setProperty("--main-color-hover-group", "#eceff1");  
 }
