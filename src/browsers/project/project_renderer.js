@@ -40,11 +40,12 @@ function setGroupListSelection() {
 }
 
 function getProject() {
+    console.log(project_folder);
     return {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
         group: groupSelected,
-        path: project_folder[0],
+        path: project_folder,
         editor: editorSelected,
         repo: '',
         remote_url: ''
@@ -63,7 +64,7 @@ function setProject(project){
 }
 
 function checkValue(project) {
-    return (project['name'] && project['path'] && project['group'] && project['editor']);
+    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
 }
 
 
