@@ -42,7 +42,7 @@ input{
     border:none;
     border-bottom:1px solid #757575;
     background-color: transparent;
-    color: white;
+    color: var(--main-text-color);
 }
 input:focus{ 
     outline:none; 

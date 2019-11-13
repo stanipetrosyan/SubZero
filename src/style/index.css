@@ -154,7 +154,7 @@ body, html{
     cursor: pointer;
 }
 .button-cancel:hover{
-    color: var(--main-text-color);
+    color: white;
     padding: 8px 42px;
     background-color: #ff0000;
 }
@@ -231,3 +231,4 @@ body, html{
   background-color: DodgerBlue !important; 
   color: #131313; 
 }
+
