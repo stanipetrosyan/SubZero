@@ -60,7 +60,7 @@ function setProject(project){
     document.getElementById(project['editor']).style.opacity = 1;
     groupSelected = document.getElementById(project['group']).id;
     editorSelected = document.getElementById(project['editor']).id;
-    project_folder = project['path'];
+    project_folder = project['path'][0];
 }
 
 function checkValue(project) {
