@@ -16,17 +16,17 @@ let selected = null;
 
 groupToUpdate = ipcRenderer.sendSync('group-request');
 
-if(groupToUpdate){
+if(groupToUpdate) {
     setGroup();
     addBtn.innerHTML = 'UPDATE';
     document.getElementById('delete').style.visibility = 'visible';
-}else{
+} else {
     addBtn.innerHTML = 'ADD';
 }
 
 initializeColorPickerElementsWithClickEvent();
 
-function initializeColorPickerElementsWithClickEvent(){
+function initializeColorPickerElementsWithClickEvent() {
     let colors = initializeColorPickerElement();
     colors.forEach(function(element){
         element.addEventListener('click', () =>{
@@ -37,7 +37,7 @@ function initializeColorPickerElementsWithClickEvent(){
     appendAllChild(ul_element, colors);
 }
 
-select.addEventListener('click', () =>{
+select.addEventListener('click', () => {
     if(active){
         select.className = select.className.substring(0, select.className.length - 10);
     }else{
@@ -46,7 +46,7 @@ select.addEventListener('click', () =>{
     active = !active;
 })
 
-function getGroup(){
+function getGroup() {
     return {
         name: document.getElementById('group-name').value,
         color : selected,
@@ -54,13 +54,13 @@ function getGroup(){
     }
 }
 
-function setGroup(){
+function setGroup() {
     document.getElementById('group-name').value = groupToUpdate['name'];
     shower_color_selected.style.backgroundColor = groupToUpdate['color'];
     selected = groupToUpdate['color'];
 }
 
-function checkValue(group){
+function checkValue(group) {
     return (group['name'] && group['color']);
 }
 
@@ -68,21 +68,21 @@ document.getElementById('cancel').addEventListener('click', () => {
     ipcRenderer.send('close-modal');
 })
 
-document.getElementById('add-update').addEventListener('click', () =>{
+document.getElementById('add-update').addEventListener('click', () => {
     let group = getGroup();
-    if(groupToUpdate){
+    if(groupToUpdate) {
         group['projects'] = groupToUpdate['projects'];
         ipcRenderer.send('updated-group', group);
-    }else{
-        if(checkValue(group)){
+    } else {
+        if(checkValue(group)) {
             ipcRenderer.send('add-group', group);
-        }else{
+        } else {
             showErrorMessageBox();
         }
     }
 })
 
-document.getElementById('delete').addEventListener('click', () =>{
+document.getElementById('delete').addEventListener('click', () => {
     ipcRenderer.send('delete-group');
 })
 
