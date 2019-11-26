@@ -95,7 +95,7 @@ body, html{
 }
 
 .sidenav {
-    height: 100%;
+    height: 99%;
     width: 160px;
     position: fixed;
     z-index: 0;
@@ -103,10 +103,9 @@ body, html{
     left: 0;
     background-color: var(--main-secondary-background-color);
     border-right: 1px solid;
-    border-right-color: #1C39BB;
     overflow-x: hidden;
     padding-top: 20px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .wrapper{
@@ -231,4 +230,27 @@ body, html{
   background-color: DodgerBlue !important; 
   color: #131313; 
 }
+
+/* 
+    Scrollbar sidenav
+*/
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--main-color);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 255, 255, 0); 
+}
+
 
