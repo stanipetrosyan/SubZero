@@ -70,11 +70,13 @@ module.exports = {
      */
     createProjectElement(project){
         let div = builder.createElement('div', 'item', '');
+        let title = builder.createElement('h2', 'title-project', project['name']);
+        title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
         builder.appendAllChild(div, [
-            builder.createElement('p', 'title-project', project['name']),
-            builder.createElement('p', 'title-project', project['language']),
+            title,
+            builder.createElement('p', 'subtitle-project', project['language']),
             builder.createElement('button', 'button button-subzero', 'OPEN'),
-            builder.createElement('div', 'project-modify-icon', '', 'up')
+            
         ]);
         if(project['repo']){
             div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));

@@ -24,7 +24,7 @@ function printProjectForGroup(group) {
         element.childNodes[2].addEventListener('click', _=> {
             ipcRenderer.send('open-project', group.projects[i])
         })
-        element.childNodes[3].addEventListener('click', _=> {
+        element.childNodes[0].lastChild.addEventListener('click', _=> {
             ipcRenderer.send('update-project', group.projects[i])
         })
         element.lastChild.addEventListener('click', _=> {

@@ -5,6 +5,7 @@
     --main-secondary-background-color: #131313;
     --main-color: #1C39BB;
     --main-text-color: white;
+    --main-secondary-text-color: #d7dbdd;
     --main-color-hover-group: #222222;
 }
 
@@ -170,11 +171,17 @@ body, html{
     font-size: 16px;
 }
 
+.subtitle-project{
+    color: var(--main-secondary-text-color);
+    font-size: 13px;
+}
+
 .project-modify-icon{
     display: inline-block;
     margin-top: 10px;
-    width: 40px;
-    height: 40px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
     background-image: url('../resource/Icon/update.png');
     background-size: cover;
     cursor: pointer;
@@ -186,6 +193,7 @@ body, html{
     height: 40px;
     background-image: url('../resource/Icon/remove.png');
     background-size: cover;
+    cursor: pointer;
 }
 
 .project-git-icon{
@@ -195,6 +203,7 @@ body, html{
     height: 40px;
     background-image: url('../resource/Icon/octocat.png');
     background-size: cover;
+    cursor: pointer;
 }
 
 .editor-icon{
