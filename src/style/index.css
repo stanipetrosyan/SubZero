@@ -66,6 +66,10 @@ body, html{
     cursor: pointer;
 }
 
+#newGroup {
+    margin-bottom: 40px;
+}
+
 .clear-button:hover{
     color: #1C39BB;
 }
@@ -84,7 +88,11 @@ body, html{
     bottom:0px;
     height:10%;
     width:100%;
- }
+}
+
+.footer-main-margin-left {
+    left:160px;
+}
 .add-project{
     grid-column: 4;
 }
@@ -95,7 +103,7 @@ body, html{
 }
 
 .sidenav {
-    height: 99%;
+    height: 100%;
     width: 160px;
     position: fixed;
     z-index: 0;
@@ -104,7 +112,7 @@ body, html{
     background-color: var(--main-secondary-background-color);
     border-right: 1px solid;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 10px;
     overflow-y: scroll;
 }
 
