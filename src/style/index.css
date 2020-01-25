@@ -21,7 +21,7 @@ body, html{
 
 .item{
     width: 90%;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #1C39BB;
     margin-left: 2%;
 }
 .group-color {
@@ -144,6 +144,10 @@ body, html{
     background-color: var(--main-color);
     color: white;
     padding: 8px 42px;
+}
+
+.button-right {
+    float: right;
 }
 
 .button-cancel{

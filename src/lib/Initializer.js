@@ -75,7 +75,7 @@ module.exports = {
         builder.appendAllChild(div, [
             title,
             builder.createElement('p', 'subtitle-project', project['language']),
-            builder.createElement('button', 'button button-subzero', 'OPEN'),
+            builder.createElement('button', 'button button-subzero button-right', 'OPEN'),
             
         ]);
         if(project['repo']){
