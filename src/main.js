@@ -33,6 +33,8 @@ function main() {
     mainWindow = new Window({
         file: index_path,
     })
+
+    require('./renderer/menu');
 }
 
 function openModal(arg) {
