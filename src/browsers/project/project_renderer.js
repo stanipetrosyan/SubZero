@@ -40,15 +40,14 @@ function setGroupListSelection() {
 }
 
 function getProject() {
-    console.log(project_folder);
     return {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
         group: groupSelected,
-        path: project_folder,
+        path: project_folder[0],
         editor: editorSelected,
-        repo: '',
-        remote_url: ''
+        repo: null,
+        remote_url: null
     }
 }
 
@@ -69,13 +68,14 @@ function checkValue(project) {
 
 
 function sender(project) {
+    if(!checkValue(project)) {
+        showErrorMessageBox();
+        return;
+    }     
     if(projectToUpdate){
         ipcRenderer.send('updated-project', project);
-    }else{
-        if(checkValue(project))
-            ipcRenderer.send('add-project', project);
-        else
-            showErrorMessageBox();
+    } else {
+        ipcRenderer.send('add-project', project);
     }
 }
 
