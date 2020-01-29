@@ -1,6 +1,6 @@
 const electron = require('electron');
 const path = require('path');
-const { app, ipcMain} = require('electron');
+const { app, ipcMain, Menu, BrowserWindow} = require('electron');
 const dialog = electron.dialog;
 
 const Window = require('./lib/window');
@@ -33,8 +33,9 @@ function main() {
     mainWindow = new Window({
         file: index_path,
     })
-
+    
     require('./renderer/menu');
+    
 }
 
 function openModal(arg) {
@@ -44,7 +45,7 @@ function openModal(arg) {
             width: 500,
             height: 600,
             frame: false,
-            resizable: false
+            resizable: false,
         })
     }
 }

@@ -77,3 +77,8 @@ document.getElementById('group-all').addEventListener('click', _=> {
 ipcRenderer.on('refresh', () => {
     refresh();
 })
+
+ipcRenderer.on('open-themes', () => {
+    let file = path.join(__dirname, '../browsers/themes/set_theme.html')
+    ipcRenderer.send('open-modal', file);
+})

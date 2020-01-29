@@ -1,12 +1,17 @@
-const { Menu } = require('electron');
-const electron = require('electron');
-const app = electron.app;
-
+const {Menu} = require('electron')
+const electron = require('electron')
+const app = electron.app
 
 const template = [
     {
         label: 'Edit',
         submenu: [
+            {
+                label: 'Themes',
+                click(item, focusedWindow) {
+                    focusedWindow.webContents.send('open-themes')
+                }
+            }, 
             {
                 role: 'undo'
             },
@@ -94,7 +99,7 @@ const template = [
         ]
     }
 ]
-  
+
 if (process.platform === 'darwin') {
     const name = app.getName()
     template.unshift({
@@ -172,6 +177,6 @@ if (process.platform === 'darwin') {
         }
     ]
 }
-  
+
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
