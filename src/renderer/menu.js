@@ -1,44 +1,27 @@
 const {Menu} = require('electron')
 const electron = require('electron')
+const shell = require('electron').shell
 const app = electron.app
 
 const template = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Preferences'
+            }
+        ]
+    },
     {
         label: 'Edit',
         submenu: [
             {
                 label: 'Themes',
+                accelerator: process.platform === 'darwin' ? 'Alt+Command+T' : 'Ctrl+T',
                 click(item, focusedWindow) {
                     focusedWindow.webContents.send('open-themes')
                 }
             }, 
-            {
-                role: 'undo'
-            },
-            {
-                role: 'redo'
-            },
-            {
-                type: 'separator'
-            },
-            {
-                role: 'cut'
-            },
-            {
-                role: 'copy'
-            },
-            {
-                role: 'paste'
-            },
-            {
-                role: 'pasteandmatchstyle'
-            },
-            {
-                role: 'delete'
-            },
-            {
-                role: 'selectall'
-            }
         ]
     },
     {
@@ -94,7 +77,14 @@ const template = [
         submenu: [
             {
                 label: 'Learn More',
-                click () { require('electron').shell.openExternal('http://electron.atom.io') }
+                click () { shell.openExternal('http://electron.atom.io') }
+            }, 
+            {
+                label: 'GitHub', 
+                click() { shell.openExternal('http://github.com/StaniPetrosyan/SubZero') }
+            },
+            {
+                label: 'Info'
             }
         ]
     }
@@ -135,7 +125,6 @@ if (process.platform === 'darwin') {
             }
         ]
     })
-    // Edit menu.
     template[1].submenu.push(
         {
             type: 'separator'
@@ -152,7 +141,6 @@ if (process.platform === 'darwin') {
             ]
         }
     )
-    // Window menu.
     template[3].submenu = [
         {
             label: 'Close',
