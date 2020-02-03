@@ -56,13 +56,7 @@ function printGroupList(){
 }
 
 document.getElementById('newGroup').addEventListener('click', _=> {
-    let file = path.join(__dirname, '../browsers/group/group_modal.html')
-    ipcRenderer.send('open-modal', file);
-})
-
-document.getElementById('newProject').addEventListener('click', _=> {
-    let file = path.join(__dirname, '../browsers/project/project_modal.html')
-    ipcRenderer.send('open-modal', file);
+    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
@@ -74,6 +68,13 @@ ipcRenderer.on('refresh', () => {
 })
 
 ipcRenderer.on('open-themes', () => {
-    let file = path.join(__dirname, '../browsers/themes/set_theme.html')
-    ipcRenderer.send('open-modal', file);
+    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/themes/set_theme.html'));
+})
+
+ipcRenderer.on('open-projects', () => {
+    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/project/project_modal.html'));
+})
+
+ipcRenderer.on('open-groups', () => {
+    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
 })
