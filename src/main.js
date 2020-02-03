@@ -1,6 +1,6 @@
 const electron = require('electron');
 const path = require('path');
-const { app, ipcMain, Menu, BrowserWindow} = require('electron');
+const { app, ipcMain } = require('electron');
 const dialog = electron.dialog;
 
 const Window = require('./lib/window');
