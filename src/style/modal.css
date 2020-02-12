@@ -11,6 +11,10 @@ body {
     overflow: hidden; /*is the scroll bar*/
 }
 
+div {
+    color: var(--main-text-color);
+}
+
 .top{
     width: 100%;
     height: 100%;
@@ -44,6 +48,7 @@ input{
     background-color: transparent;
     color: var(--main-text-color);
 }
+
 input:focus{ 
     outline:none; 
 }
@@ -130,7 +135,7 @@ input:focus ~ .highlight {
     height: 40px;
     border-radius: 50%;
     text-align: center;
-    border: 2px solid white;
+    border: 2px solid var(--main-text-color);
     opacity: 0.4;
     cursor: pointer;
 }
