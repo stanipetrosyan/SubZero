@@ -8,21 +8,26 @@ const template = [
         label: 'File',
         submenu: [
             {
-                label: 'Preferences'
-            }, 
-            {
-                label: 'Add Project',
-                accelerator: process.platform === 'darwin' ? 'Alt+Command+P' : 'Ctrl+Alt+P',
-                click(item, focusedWindow) {
-                    focusedWindow.webContents.send('open-projects')
-                }
+                label: 'New..', 
+                submenu: [
+                    {
+                        label: 'Add Project',
+                        accelerator: process.platform === 'darwin' ? 'Alt+Command+P' : 'Ctrl+Alt+P',
+                        click(item, focusedWindow) {
+                            focusedWindow.webContents.send('open-projects')
+                        },
+                    },
+                    {
+                        label: 'Add Group', 
+                        accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
+                        click(item, focusedWindow) {
+                            focusedWindow.webContents.send('open-groups')
+                        }
+                    }
+                ]
             },
             {
-                label: 'Add Group', 
-                accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
-                click(item, focusedWindow) {
-                    focusedWindow.webContents.send('open-groups')
-                }
+                label: 'Preferences'
             }
         ]
     },
@@ -41,6 +46,13 @@ const template = [
     {
         label: 'View',
         submenu: [
+            {  
+                label: 'Search', 
+                accelerator: process.platform === 'darwin' ? 'Command+F' : 'Ctrl+F',
+                click() {
+                    
+                }
+            },
             {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+R',
