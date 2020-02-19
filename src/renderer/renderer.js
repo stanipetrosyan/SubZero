@@ -6,6 +6,9 @@ const { setTheme } = require('../lib/theme-setup');
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
+
+const search_bar = document.getElementById('checkbox');
+
 let data = null;
 
 refresh();
@@ -77,4 +80,8 @@ ipcRenderer.on('open-projects', () => {
 
 ipcRenderer.on('open-groups', () => {
     ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
+})
+
+ipcRenderer.on('open-search-bar', () => {
+    search_bar.checked = !search_bar.checked;
 })
