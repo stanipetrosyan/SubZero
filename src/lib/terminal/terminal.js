@@ -1,3 +1,5 @@
+'use strict'
+
 const cmd = require('node-cmd');
 const platform = process.platform;
 

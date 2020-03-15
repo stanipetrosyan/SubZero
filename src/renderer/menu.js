@@ -11,14 +11,14 @@ const template = [
                 label: 'New..', 
                 submenu: [
                     {
-                        label: 'Add Project',
+                        label: 'Project',
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+P' : 'Ctrl+Alt+P',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-projects')
                         },
                     },
                     {
-                        label: 'Add Group', 
+                        label: 'Group', 
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-groups')
