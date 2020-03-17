@@ -6,6 +6,9 @@ const { setTheme } = require('../lib/theme-setup');
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
+
+const search_bar = document.getElementById('checkbox');
+
 let data = null;
 
 refresh();
@@ -59,6 +62,17 @@ document.getElementById('newGroup').addEventListener('click', _=> {
     ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
 })
 
+document.getElementById('search-bar').addEventListener('input', _ => {
+    let textSearched = document.getElementById('search-bar').value
+    project_list.childNodes.forEach(element => {
+        if (!element.firstChild.innerText.includes(textSearched)) {
+            element.style.display = 'none'
+        } else {
+            element.style.display = 'block'
+        }
+    })
+})
+
 document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
 })
@@ -77,4 +91,8 @@ ipcRenderer.on('open-projects', () => {
 
 ipcRenderer.on('open-groups', () => {
     ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
+})
+
+ipcRenderer.on('open-search-bar', () => {
+    search_bar.checked = !search_bar.checked;
 })
