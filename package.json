@@ -21,11 +21,10 @@
   },
   "homepage": "https://github.com/StaniPetrosyan/SubZero#readme",
   "devDependencies": {
-    "electron": "^3.0.0",
+    "electron": "^8.1.1",
     "electron-packager": "^14.0.1"
   },
   "dependencies": {
-    "electron-store": "^2.0.0",
     "node-cmd": "^3.0.0",
     "simple-git": "^1.110.0"
   }
