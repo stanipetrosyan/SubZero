@@ -7,7 +7,10 @@ const defaultProps = {
     height: 600,
     minWidth: 600,
     minHeight: 600,
-    show: false
+    show: false,
+    webPreferences: {
+        nodeIntegration: true
+    }
 }
 
 class Window extends BrowserWindow{
