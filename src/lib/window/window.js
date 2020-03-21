@@ -1,6 +1,8 @@
 'use strict'
 
 const { BrowserWindow } = require('electron');
+const path = require('path')
+
 
 const defaultProps = {
     width: 800,
@@ -9,7 +11,11 @@ const defaultProps = {
     minHeight: 600,
     show: false,
     webPreferences: {
-        nodeIntegration: true
+        preload: path.join('home/stanislav/Documenti/Electron/SubZero/src', 'preload.js'),
+        nodeIntegration: false
+        /* enableRemoteModule: false,
+        contextIsolation: true,
+        sandbox: true */
     }
 }
 

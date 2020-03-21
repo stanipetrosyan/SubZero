@@ -1,4 +1,4 @@
-const {Menu} = require('electron')
+const { Menu } = require('electron')
 const electron = require('electron')
 const shell = require('electron').shell
 const app = electron.app
@@ -21,7 +21,9 @@ const template = [
                         label: 'Group', 
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
                         click(item, focusedWindow) {
-                            focusedWindow.webContents.send('open-groups')
+                            focusedWindow.webContents.send('open-group')
+                            //focusedWindow.electron.doThing();
+                            //ipcRenderer.send('open-modal', 'browsers/group/group_modal.html')
                         }
                     }
                 ]

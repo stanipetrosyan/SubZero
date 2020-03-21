@@ -1,13 +1,14 @@
-const { ipcRenderer } = require('electron');
-const path = require('path');
+//const { ipcRenderer } = require('electron');
+/* const path = require('path');
 const initializer = require('../lib/Initializer');
-const { setTheme } = require('../lib/theme-setup');
+const { setTheme } = require('../lib/theme-setup'); */
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
 let data = null;
 
+/*
 refresh();
 
 function refresh() {
@@ -22,13 +23,13 @@ function printProjectForGroup(group) {
     for(let i = 0; i < group.projects.length; i++){
         var element = projects[i];
         element.childNodes[2].addEventListener('click', _=> {
-            ipcRenderer.send('open-project', group.projects[i])
+            //ipcRenderer.send('open-project', group.projects[i])
         })
         element.childNodes[0].lastChild.addEventListener('click', _=> {
-            ipcRenderer.send('update-project', group.projects[i])
+            //ipcRenderer.send('update-project', group.projects[i])
         })
         element.lastChild.addEventListener('click', _=> {
-            ipcRenderer.send("open-git", group.projects[i]);
+            //ipcRenderer.send("open-git", group.projects[i]);
         })
     }
     initializer.appendToProjectList(projects, project_list);
@@ -49,21 +50,24 @@ function printGroupList(){
             printProjectForGroup(data[i]);
         })
         groups[i].childNodes[2].addEventListener('click', _=> {
-            ipcRenderer.send('update-group', data[i]);
+            //ipcRenderer.send('update-group', data[i]);
         })
     }
     initializer.appendToGroupList(groups, group_list);
-}
+} */
 
 document.getElementById('newGroup').addEventListener('click', _=> {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
+    /* top.postMessage({
+        type: 'open-group'
+    }) */
+    window.electron.doThing();
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
 })
 
-ipcRenderer.on('refresh', () => {
+/* ipcRenderer.on('refresh', () => {
     refresh();
 })
 
@@ -77,4 +81,4 @@ ipcRenderer.on('open-projects', () => {
 
 ipcRenderer.on('open-groups', () => {
     ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
-})
+}) */

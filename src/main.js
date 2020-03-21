@@ -3,6 +3,9 @@ const path = require('path');
 const { app, ipcMain } = require('electron');
 const dialog = electron.dialog;
 
+const { BrowserWindow } = require('electron');
+
+
 const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
@@ -30,13 +33,36 @@ let tmp_project = null;
 let tmp_group = null;
 
 function main() {
-    mainWindow = new Window({
-        file: index_path,
-    })
-    
-    require('./renderer/menu');
-    
+        // Create the browser window.
+        mainWindow = new BrowserWindow({
+          width: 800,
+          height: 600,
+          webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: false,
+            enableRemoteModule: false,
+            contextIsolation: true,
+          }
+        })
+      
+        // and load the index.html of the app.
+        mainWindow.loadFile(path.join(__dirname, 'renderer/index.html'))
+      
+        // Open the DevTools.
+        // mainWindow.webContents.openDevTools()
+      
+        // Emitted when the window is closed.
+        mainWindow.on('closed', function() {
+          // Dereference the window object, usually you would store windows
+          // in an array if your app supports multi windows, this is the time
+          // when you should delete the corresponding element.
+          mainWindow = null
+        })
+        require('./renderer/menu');
 }
+    
+    
+    
 
 function openModal(arg) {
     if(!modal){
@@ -134,7 +160,9 @@ ipcMain.on('updated-project', (event, arg) => {
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
+    console.log("ciao")
     let dir = selectDirectory();
+    console.log(dir)
     event.returnValue = dir;
 })
 

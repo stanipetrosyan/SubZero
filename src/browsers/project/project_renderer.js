@@ -84,8 +84,10 @@ document.getElementById('cancel').addEventListener('click', () => {
 })
 
 document.getElementById('open').addEventListener('click', () => {
-    project_folder = ipcRenderer.sendSync('open-folder-dialog');
-    document.getElementById('project-path').value = project_folder[0];
+    window.postMessage({
+        type: 'select-dirs'
+    }, '*')
+    //document.getElementById('project-path').value = project_folder[0];
 })
 
 document.getElementById('add').addEventListener('click', () => {
