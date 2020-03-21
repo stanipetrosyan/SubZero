@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/StaniPetrosyan/SubZero#readme",
   "devDependencies": {
-    "electron": "^3.1.8",
+    "electron": "^8.1.1",
     "electron-packager": "^14.2.1"
   },
   "dependencies": {
