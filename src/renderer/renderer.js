@@ -56,11 +56,10 @@ function printGroupList(){
     initializer.appendToGroupList(groups, group_list);
 } */
 
+
+
 document.getElementById('newGroup').addEventListener('click', _=> {
-    /* top.postMessage({
-        type: 'open-group'
-    }) */
-    window.electron.doThing();
+    window.api.openGroupModal();
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
@@ -70,15 +69,4 @@ document.getElementById('group-all').addEventListener('click', _=> {
 /* ipcRenderer.on('refresh', () => {
     refresh();
 })
-
-ipcRenderer.on('open-themes', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/themes/set_theme.html'));
-})
-
-ipcRenderer.on('open-projects', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/project/project_modal.html'));
-})
-
-ipcRenderer.on('open-groups', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
-}) */
+*/

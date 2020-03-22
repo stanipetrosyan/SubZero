@@ -14,7 +14,7 @@ const template = [
                         label: 'Project',
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+P' : 'Ctrl+Alt+P',
                         click(item, focusedWindow) {
-                            focusedWindow.webContents.send('open-projects')
+                            focusedWindow.webContents.send('open-project')
                         },
                     },
                     {
@@ -40,7 +40,7 @@ const template = [
                 label: 'Themes',
                 accelerator: process.platform === 'darwin' ? 'Alt+Command+T' : 'Ctrl+T',
                 click(item, focusedWindow) {
-                    focusedWindow.webContents.send('open-themes')
+                    focusedWindow.webContents.send('open-theme')
                 }
             }, 
         ]
