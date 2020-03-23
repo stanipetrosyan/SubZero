@@ -1,9 +1,28 @@
-const builder = require('./Builder');
+const builder = require('../services/html_builder');
 
 const color_list = require('../../config')('colors');
 
 
 module.exports = {
+    /**
+     * @param {object} project 
+     * @returns {HTMLElement}
+     */
+    createProjectElement(project){
+        let div = builder.createElement('div', 'item', '');
+        let title = builder.createElement('h2', 'title-project', project['name']);
+        title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
+        builder.appendAllChild(div, [
+            title,
+            builder.createElement('p', 'subtitle-project', project['language']),
+            builder.createElement('button', 'button button-subzero button-right', 'OPEN'),
+            
+        ]);
+        if(project['repo']){
+            div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));
+        }
+        return div;
+    },
 
     /**
      * @returns {HTMLCollection}
@@ -24,7 +43,7 @@ module.exports = {
      * @param { object } group 
      * @returns { HTMLElement }
      */
-    initializeGroupElement(group){
+    createGroupElement(group){
         let div = builder.createElement('div','group-item', '');
         let g_type = builder.createElement('div', 'group-type', '')
         let g_color = builder.createElement('span', 'group-color', '');
@@ -64,25 +83,7 @@ module.exports = {
         
     },
 
-    /**
-     * @param {object} project 
-     * @returns {HTMLElement}
-     */
-    createProjectElement(project){
-        let div = builder.createElement('div', 'item', '');
-        let title = builder.createElement('h2', 'title-project', project['name']);
-        title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
-        builder.appendAllChild(div, [
-            title,
-            builder.createElement('p', 'subtitle-project', project['language']),
-            builder.createElement('button', 'button button-subzero button-right', 'OPEN'),
-            
-        ]);
-        if(project['repo']){
-            div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));
-        }
-        return div;
-    },
+    
 
     /**
      * @param {object} group 

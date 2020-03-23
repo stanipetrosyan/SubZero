@@ -1,10 +1,18 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const initializer = require('./lib/Initializer');
+
 
 contextBridge.exposeInMainWorld('api', {
- // it works
-  modal: (data) => ipcRenderer.send(data,  'browsers/group/group_modal.html'),
-  openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
-  openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
+ // example
+    modal: (data) => { return document.createElement('div') },
+
+    createproject: (data) => { return initializer.createProjectElement(data) }, 
+    request: () => { 
+        return ipcRenderer.sendSync('data-request');
+    },
+    openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
+    openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
+   
 })
 
 ipcRenderer.on('open-group', () => {
