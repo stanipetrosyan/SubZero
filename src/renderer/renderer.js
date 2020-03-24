@@ -11,7 +11,6 @@ refresh();
 function refresh() {
    // setTheme(ipcRenderer.sendSync('theme-request'));
     data = window.api.request();
-    console.log(data)
     printProjectList();
     printGroupList();
 }
@@ -24,33 +23,30 @@ function printProjectList() {
 }
 
 function printProjectForGroup(group) {
-    for(let i = 0; i < group.projects.length; i++){
-       let project =  createProjectElement(group.projects[i])
-        // element.childNodes[2].addEventListener('click', _=> {
-        //     //ipcRenderer.send('open-project', group.projects[i])
-        // })
-        // element.childNodes[0].lastChild.addEventListener('click', _=> {
-        //     //ipcRenderer.send('update-project', group.projects[i])
-        // })
-        // element.lastChild.addEventListener('click', _=> {
-        //     //ipcRenderer.send("open-git", group.projects[i]);
-        // })
+    group.projects.forEach(item => {
+        let project =  createProjectElement(item)
+        project.childNodes[0].lastChild.addEventListener('click', _=> {
+            window.api.updateproject(item)
+        })
+        project.childNodes[2].addEventListener('click', _=> {
+            window.api.openproject(item) 
+        })
         project_list.append(project)
-    }
+    })
 }
 
 function printGroupList() {
-    for(let i = 0; i < data.length; i++){
-        let group = createGroupElement(data[i])
+    data.forEach(item => {
+        let group = createGroupElement(item)
         group.childNodes[1].addEventListener('click', _=> {
             project_list.innerHTML = '';
-            printProjectForGroup(data[i]);
+            printProjectForGroup(item);
         })
         group.childNodes[2].addEventListener('click', _=> {
-            //ipcRenderer.send('update-group', data[i]);
+            window.api.updategroup(item)
         })
         group_list.appendChild(group)
-    }
+    })
 }
 
 function createProjectElement(project) {
@@ -78,8 +74,6 @@ function createGroupElement(group) {
     builder.appendAllChild(div, [g_color, g_type, modify]);
     return div;
 }
-
-
 
 document.getElementById('newGroup').addEventListener('click', _=> {
     window.api.openGroupModal();

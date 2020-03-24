@@ -5,11 +5,15 @@ const initializer = require('./lib/Initializer');
 contextBridge.exposeInMainWorld('api', {
  // example
     modal: (data) => { return document.createElement('div') },
-
-    createproject: (data) => { return initializer.createProjectElement(data) }, 
+//
     request: () => { 
         return ipcRenderer.sendSync('data-request');
     },
+    openproject: (data) => ipcRenderer.send('open-project', data),
+    updateproject: (data) => ipcRenderer.send('update-project', data),
+    
+    updategroup: (data) => ipcRenderer.send('update-group', data),
+
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
     openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
    
