@@ -81,9 +81,4 @@ document.getElementById('newGroup').addEventListener('click', _=> {
 
 document.getElementById('group-all').addEventListener('click', _=> {
     refresh();
-})
-
-/* ipcRenderer.on('refresh', () => {
-    refresh();
-})
-*/
+}) 

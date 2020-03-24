@@ -1,6 +1,4 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const initializer = require('./lib/Initializer');
-
 
 // TODO use standard for api
 contextBridge.exposeInMainWorld('api', {

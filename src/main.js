@@ -77,7 +77,7 @@ function openModal(arg) {
                 nodeIntegration: false,
                 enableRemoteModule: false,
                 contextIsolation: true,
-              }
+            }
         })
     }
 }
