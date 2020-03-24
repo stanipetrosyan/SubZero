@@ -1,10 +1,10 @@
-const { ipcRenderer } = require('electron');
-const { appendAllChild } = require('../../lib/Builder');
-const { initializeColorPickerElement } = require('../../lib/Initializer')
-const { showErrorMessageBox } = require('../../lib/message');
-const { setTheme } = require('../../lib/theme-setup');
+'use strict'
 
-setTheme(ipcRenderer.sendSync('theme-request'));
+//const { ipcRenderer } = require('electron');
+//const { showErrorMessageBox } = require('../../lib/message');
+//const { setTheme } = require('../../lib/theme-setup');
+
+//setTheme(ipcRenderer.sendSync('theme-request'));
 
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');
@@ -14,7 +14,9 @@ let active = false;
 let groupToUpdate = null;
 let selected = null;
 
-groupToUpdate = ipcRenderer.sendSync('group-request');
+const builder = new HTMLBuilder();
+
+groupToUpdate = null //ipcRenderer.sendSync('group-request'); 
 
 if(groupToUpdate) {
     setGroup();
@@ -24,9 +26,9 @@ if(groupToUpdate) {
     addBtn.innerHTML = 'ADD';
 }
 
-initializeColorPickerElementsWithClickEvent();
+//initializeColorPickerElementsWithClickEvent();
 
-function initializeColorPickerElementsWithClickEvent() {
+/* function initializeColorPickerElementsWithClickEvent() {
     let colors = initializeColorPickerElement();
     colors.forEach(function(element){
         element.addEventListener('click', () =>{
@@ -35,9 +37,21 @@ function initializeColorPickerElementsWithClickEvent() {
         })
     })
     appendAllChild(ul_element, colors);
-}
+} */
 
-select.addEventListener('click', () => {
+/* function initializeColorPickerElement(){
+    let array = [];
+    let el; 
+    for(let i = 0; i < color_list.length; i++){
+        el = builder.createElement('li', 'color-' + color_list[i], '');
+        builder.setAttribute(el, "data-option", "");
+        builder.setAttribute(el, "data-value", '#' + color_list[i]);
+        array.push(el);
+    }
+    return array;
+} */
+
+/* select.addEventListener('click', () => {
     if(active){
         select.className = select.className.substring(0, select.className.length - 10);
     }else{
@@ -64,9 +78,6 @@ function checkValue(group) {
     return (group['name'] && group['color']);
 }
 
-document.getElementById('cancel').addEventListener('click', () => {
-    ipcRenderer.send('close-modal');
-})
 
 document.getElementById('add-update').addEventListener('click', () => {
     let group = getGroup();
@@ -84,7 +95,12 @@ document.getElementById('add-update').addEventListener('click', () => {
 
 document.getElementById('delete').addEventListener('click', () => {
     ipcRenderer.send('delete-group');
+}) */
+
+document.getElementById('cancel').addEventListener('click', () => {
+    window.api.closeModal();
 })
+
 
 
 

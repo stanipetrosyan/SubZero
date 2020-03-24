@@ -72,6 +72,12 @@ function openModal(arg) {
             height: 600,
             frame: false,
             resizable: false,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js'),
+                nodeIntegration: false,
+                enableRemoteModule: false,
+                contextIsolation: true,
+              }
         })
     }
 }

@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron');
-const { createArrayGroupContainer, setOpacityRight } = require('../../lib/Initializer');
 const { showErrorMessageBox } = require('../../lib/message');
 const git  = require('../../lib/git-cli');
 const { setTheme } = require('../../lib/theme-setup');
@@ -113,3 +112,34 @@ editors[1].addEventListener('click', () => {
     editors = setOpacityRight(editors, 1);
 
 })
+
+
+
+/**
+     *  @param { array } data
+     *  @returns { HTMLCollection } array of containers
+     */
+    function createArrayGroupContainer(data){
+        let array = [];
+        let container;
+        for(var x in data){
+            container = builder.createElement('div', 'group-container' , String(data[x].name[0]).toUpperCase(), data[x].name);
+            container.style.backgroundColor = data[x].color;
+            array.push(container);
+        }
+        return array;
+        
+    }
+    /**
+     * @param { array } array 
+     * @param { number } index element to do not set
+     * @returns { array } opacity setted
+     */
+    function setOpacityRight(array, index){
+        for(var x in array){
+            if(x != index){
+                array[x].style.opacity = 0.4;
+            }
+        }
+        return array
+    }
