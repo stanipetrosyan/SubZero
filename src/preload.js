@@ -8,6 +8,8 @@ contextBridge.exposeInMainWorld('api', {
     request: () => { 
         return ipcRenderer.sendSync('data-request');
     },
+    addgroup: (data) => ipcRenderer.send('add-group', data),
+
     openproject: (data) => ipcRenderer.send('open-project', data),
     updateproject: (data) => ipcRenderer.send('update-project', data),
     

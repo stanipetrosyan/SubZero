@@ -122,7 +122,7 @@ ipcMain.on('add-group', (event, arg) => {
     if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
-        mainWindow.webContents.send('refresh');
+       // mainWindow.webContents.send('refresh');
         closeModal();
     }   
 })

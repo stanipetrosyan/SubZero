@@ -1,6 +1,5 @@
 'use strict'
 
-//const { ipcRenderer } = require('electron');
 //const { showErrorMessageBox } = require('../../lib/message');
 //const { setTheme } = require('../../lib/theme-setup');
 
@@ -37,29 +36,13 @@ select.addEventListener('click', () => {
     }
     active = !active;
 })
-/*
-function getGroup() {
-    return {
-        name: document.getElementById('group-name').value,
-        color : selected,
-        projects : []
-    }
-}
-
-function setGroup() {
-    document.getElementById('group-name').value = groupToUpdate['name'];
-    shower_color_selected.style.backgroundColor = groupToUpdate['color'];
-    selected = groupToUpdate['color'];
-}
-
-function checkValue(group) {
-    return (group['name'] && group['color']);
-}
-
 
 document.getElementById('add-update').addEventListener('click', () => {
-    let group = getGroup();
-    if(groupToUpdate) {
+    let group = getGroupValues();
+    if (checkInputValues(group)) {
+        window.api.addgroup(group)
+    }
+    /* if(groupToUpdate) {
         group['projects'] = groupToUpdate['projects'];
         ipcRenderer.send('updated-group', group);
     } else {
@@ -68,8 +51,29 @@ document.getElementById('add-update').addEventListener('click', () => {
         } else {
             showErrorMessageBox();
         }
-    }
+    } */
 })
+
+function getGroupValues() {
+    return {
+        name: document.getElementById('group-name').value,
+        color : selected,
+        projects : []
+    }
+}
+
+function checkInputValues(group) {
+    return (group['name'] && group['color']);
+}
+/*
+
+function setGroup() {
+    document.getElementById('group-name').value = groupToUpdate['name'];
+    shower_color_selected.style.backgroundColor = groupToUpdate['color'];
+    selected = groupToUpdate['color'];
+}
+
+
 
 document.getElementById('delete').addEventListener('click', () => {
     ipcRenderer.send('delete-group');
