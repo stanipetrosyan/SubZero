@@ -5,15 +5,17 @@ contextBridge.exposeInMainWorld('api', {
  // example
     modal: (data) => { return document.createElement('div') },
 //
-    request: () => { 
-        return ipcRenderer.sendSync('data-request');
-    },
+    request: () => { return ipcRenderer.sendSync('data-request') },
+
     addgroup: (data) => ipcRenderer.send('add-group', data),
+    addproject: (data) => ipcRenderer.send('add-project', data),
 
     openproject: (data) => ipcRenderer.send('open-project', data),
     updateproject: (data) => ipcRenderer.send('update-project', data),
     
     updategroup: (data) => ipcRenderer.send('update-group', data),
+
+    opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog') },
 
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
     openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
@@ -21,18 +23,18 @@ contextBridge.exposeInMainWorld('api', {
 })
 
 ipcRenderer.on('open-group', () => {
-    sender('open-modal',  'browsers/group/group_modal.html')
+    send('open-modal',  'browsers/group/group_modal.html')
 });
 
 ipcRenderer.on('open-project', () => {
-    sender('open-modal',  'browsers/project/project_modal.html')
+    send('open-modal',  'browsers/project/project_modal.html')
 });
 
 ipcRenderer.on('open-theme', () => {
-    sender('open-modal',  'browsers/themes/set_theme.html')
+    send('open-modal',  'browsers/themes/set_theme.html')
 });
 
-function sender(channel, message) {
+function send(channel, message) {
   ipcRenderer.send(channel, message)
 }
 

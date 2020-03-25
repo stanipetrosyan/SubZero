@@ -36,6 +36,7 @@ function printProjectForGroup(group) {
 }
 
 function printGroupList() {
+    group_list.innerHTML = '';
     data.forEach(item => {
         let group = createGroupElement(item)
         group.childNodes[1].addEventListener('click', _=> {

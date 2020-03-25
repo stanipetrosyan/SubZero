@@ -1,20 +1,21 @@
-const { ipcRenderer } = require('electron');
+/* const { ipcRenderer } = require('electron');
 const { showErrorMessageBox } = require('../../lib/message');
 const git  = require('../../lib/git-cli');
-const { setTheme } = require('../../lib/theme-setup');
+const { setTheme } = require('../../lib/theme-setup'); */
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
+const builder = new HTMLBuilder();
 
-setTheme(ipcRenderer.sendSync('theme-request'));
+// setTheme(ipcRenderer.sendSync('theme-request'));
 
-let data = ipcRenderer.sendSync('data-request');
+let data = window.api.request();
 let project_folder = null;
 let projectToUpdate = null;
 let editorSelected = null;
 let groupSelected = null;
 
-projectToUpdate = ipcRenderer.sendSync('project-request');
+//projectToUpdate = ipcRenderer.sendSync('project-request');
 
 setGroupListSelection();
 
@@ -27,30 +28,29 @@ if(projectToUpdate) {
 }
 
 function setGroupListSelection() {
-    let containers = createArrayGroupContainer(data);
-    for(let x in containers){
-        containers[x].addEventListener('click', () => {
-            groupSelected = data[x].name;
-            containers[x].style.opacity = 0.8;
-            containers = setOpacityRight(containers, x);
+    for (let group of data) {
+        let container = builder.createElement('div', 'group-container' , String(group.name[0]).toUpperCase(), group.name);
+        container.style.backgroundColor = group.color;
+        container.addEventListener('click', () => {
+            groupSelected = group.name;
+            container.style.opacity = 0.8;
         })
-        groupList.appendChild(containers[x]);
+        groupList.appendChild(container);
     }
-}
 
-function getProject() {
-    return {
-        name: document.getElementById('project-name').value,
-        language: document.getElementById('project-type').value,
-        group: groupSelected,
-        path: project_folder[0],
-        editor: editorSelected,
-        repo: null,
-        remote_url: null
+}
+/* 
+function setOpacityOfSelectedGroup(array, index){
+    for(var x in array){
+        if(x != index){
+            array[x].style.opacity = 0.4;
+        }
     }
-}
+    return array
+} */
 
-function setProject(project){
+
+/* function setProject(project){
     document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').value = project['path'];
@@ -59,13 +59,9 @@ function setProject(project){
     groupSelected = document.getElementById(project['group']).id;
     editorSelected = document.getElementById(project['editor']).id;
     project_folder = project['path'][0];
-}
+} */
 
-function checkValue(project) {
-    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
-}
-
-
+/* 
 function sender(project) {
     if(!checkValue(project)) {
         showErrorMessageBox();
@@ -77,30 +73,47 @@ function sender(project) {
         ipcRenderer.send('add-project', project);
     }
 }
+ */
 
-document.getElementById('cancel').addEventListener('click', () => {
-    ipcRenderer.send('close-modal');
-})
 
 document.getElementById('open').addEventListener('click', () => {
-    window.postMessage({
-        type: 'select-dirs'
-    }, '*')
+    let directory = window.api.opendirdialog();
     //document.getElementById('project-path').value = project_folder[0];
-})
-
-document.getElementById('add').addEventListener('click', () => {
-    let project = getProject();
-    git.isRepo(project['path']).then(res => {
-        project['repo'] = res;
-        sender(project);
-    })
-})
-document.getElementById('delete').addEventListener('click', _ => {
-    ipcRenderer.send('delete-project', projectToUpdate);
 }) 
 
-editors[0].addEventListener('click', () => {
+document.getElementById('add').addEventListener('click', () => {
+    let project = getProjectValues();
+    if (checkInputValues(project)) {
+        window.api.addproject(project);
+    }
+/*     git.isRepo(project['path']).then(res => {
+        project['repo'] = res;
+        sender(project);
+    }) */
+})
+
+
+function getProjectValues() {
+    return {
+        name: document.getElementById('project-name').value,
+        language: document.getElementById('project-type').value,
+        group: groupSelected,
+        path: project_folder[0],
+        editor: editorSelected,
+        repo: null,
+        remote_url: null
+    }
+}
+
+function checkInputValues(project) {
+    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
+}
+
+/* document.getElementById('delete').addEventListener('click', _ => {
+    ipcRenderer.send('delete-project', projectToUpdate);
+}) 
+ */
+/* editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
     editors = setOpacityRight(editors, 0);
@@ -111,35 +124,8 @@ editors[1].addEventListener('click', () => {
     editors[1].style.opacity = '1';
     editors = setOpacityRight(editors, 1);
 
+}) */
+
+document.getElementById('cancel').addEventListener('click', () => {
+    window.api.closeModal();
 })
-
-
-
-/**
-     *  @param { array } data
-     *  @returns { HTMLCollection } array of containers
-     */
-    function createArrayGroupContainer(data){
-        let array = [];
-        let container;
-        for(var x in data){
-            container = builder.createElement('div', 'group-container' , String(data[x].name[0]).toUpperCase(), data[x].name);
-            container.style.backgroundColor = data[x].color;
-            array.push(container);
-        }
-        return array;
-        
-    }
-    /**
-     * @param { array } array 
-     * @param { number } index element to do not set
-     * @returns { array } opacity setted
-     */
-    function setOpacityRight(array, index){
-        for(var x in array){
-            if(x != index){
-                array[x].style.opacity = 0.4;
-            }
-        }
-        return array
-    }

@@ -167,7 +167,7 @@ ipcMain.on('updated-project', (event, arg) => {
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
     let dir = selectDirectory();
-    console.log(dir)
+    //console.log(dir)
     event.returnValue = dir;
 })
 
