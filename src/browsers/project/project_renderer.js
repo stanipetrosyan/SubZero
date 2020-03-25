@@ -78,7 +78,7 @@ function sender(project) {
 
 document.getElementById('open').addEventListener('click', () => {
     let directory = window.api.opendirdialog();
-    //document.getElementById('project-path').value = project_folder[0];
+    document.getElementById('project-path').value = directory[0];
 }) 
 
 document.getElementById('add').addEventListener('click', () => {
@@ -98,7 +98,7 @@ function getProjectValues() {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
         group: groupSelected,
-        path: project_folder[0],
+        path: document.getElementById('project-path').value,
         editor: editorSelected,
         repo: null,
         remote_url: null
@@ -113,18 +113,18 @@ function checkInputValues(project) {
     ipcRenderer.send('delete-project', projectToUpdate);
 }) 
  */
-/* editors[0].addEventListener('click', () => {
+editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
-    editors = setOpacityRight(editors, 0);
+    //editors = setOpacityRight(editors, 0);
 })
 
 editors[1].addEventListener('click', () => {
     editorSelected = 'atom';
     editors[1].style.opacity = '1';
-    editors = setOpacityRight(editors, 1);
+    //editors = setOpacityRight(editors, 1);
 
-}) */
+})
 
 document.getElementById('cancel').addEventListener('click', () => {
     window.api.closeModal();

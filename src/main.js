@@ -91,11 +91,6 @@ function closeModal() {
     }
 }
 
-function selectDirectory() {
-    let options = { properties: ["openDirectory"]}
-    return dialog.showOpenDialog(options);
-}
-
 ipcMain.on('open-modal', (event, arg) => {
     openModal(arg);
 })
@@ -166,9 +161,7 @@ ipcMain.on('updated-project', (event, arg) => {
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
-    let dir = selectDirectory();
-    //console.log(dir)
-    event.returnValue = dir;
+    event.returnValue = dialog.showOpenDialogSync({ properties: ["openDirectory"]});
 })
 
 ipcMain.on('update-group', (event, arg) => {

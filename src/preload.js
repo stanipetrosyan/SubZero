@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('api', {
     
     updategroup: (data) => ipcRenderer.send('update-group', data),
 
-    opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog') },
+    opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
 
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
     openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
