@@ -5,6 +5,7 @@
 //const { setTheme } = require('../../lib/theme-setup');
 
 //setTheme(ipcRenderer.sendSync('theme-request'));
+const colors = ["F44336", "E91E63", "9C27B0", "673AB7", "3F51B5","2196F3", "03A9F4","00BCD4", "009688", "4CAF50", "8BC34A","CDDC39", "FFEB3B","FFC107","FF9800","FF5722","795548","9E9E9E","607D8B","f1c1bd"]
 
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');
@@ -26,32 +27,9 @@ if(groupToUpdate) {
     addBtn.innerHTML = 'ADD';
 }
 
-//initializeColorPickerElementsWithClickEvent();
+createColorPicker();
 
-/* function initializeColorPickerElementsWithClickEvent() {
-    let colors = initializeColorPickerElement();
-    colors.forEach(function(element){
-        element.addEventListener('click', () =>{
-            selected = element.getAttribute('data-value');
-            shower_color_selected.style.backgroundColor = selected;
-        })
-    })
-    appendAllChild(ul_element, colors);
-} */
-
-/* function initializeColorPickerElement(){
-    let array = [];
-    let el; 
-    for(let i = 0; i < color_list.length; i++){
-        el = builder.createElement('li', 'color-' + color_list[i], '');
-        builder.setAttribute(el, "data-option", "");
-        builder.setAttribute(el, "data-value", '#' + color_list[i]);
-        array.push(el);
-    }
-    return array;
-} */
-
-/* select.addEventListener('click', () => {
+select.addEventListener('click', () => {
     if(active){
         select.className = select.className.substring(0, select.className.length - 10);
     }else{
@@ -59,7 +37,7 @@ if(groupToUpdate) {
     }
     active = !active;
 })
-
+/*
 function getGroup() {
     return {
         name: document.getElementById('group-name').value,
@@ -101,7 +79,15 @@ document.getElementById('cancel').addEventListener('click', () => {
     window.api.closeModal();
 })
 
-
-
-
-
+function createColorPicker() {
+    colors.forEach(color => {
+        let colorPickerElement = builder.createElement('li', 'color-' + color);
+        builder.setAttribute(colorPickerElement, "data-option", "");
+        builder.setAttribute(colorPickerElement, "data-value", '#' + color);
+        colorPickerElement.addEventListener('click', () =>{
+            selected = colorPickerElement.getAttribute('data-value');
+            shower_color_selected.style.backgroundColor = selected;
+        })
+        ul_element.appendChild(colorPickerElement);
+    })
+}
