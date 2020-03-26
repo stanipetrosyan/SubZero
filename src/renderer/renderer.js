@@ -3,16 +3,22 @@
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
-let data = null;
 let builder = new HTMLBuilder();
 
-refresh();
+let data = window.api.request();
+printProjectList()
+printGroupList();
+
+setInterval(refresh, 1000)
 
 function refresh() {
    // setTheme(ipcRenderer.sendSync('theme-request'));
-    data = window.api.request();
-    printProjectList();
-    printGroupList();
+    let data_requested = window.api.request();
+    if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
+        data = data_requested;
+        printProjectList();
+        printGroupList();
+    }
 }
 
 function printProjectList() {
@@ -81,5 +87,6 @@ document.getElementById('newGroup').addEventListener('click', _=> {
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
-    refresh();
+    printProjectList();
+    printGroupList();
 }) 

@@ -12,7 +12,6 @@ contextBridge.exposeInMainWorld('api', {
 
     openproject: (data) => ipcRenderer.send('open-project', data),
     updateproject: (data) => ipcRenderer.send('update-project', data),
-    
     updategroup: (data) => ipcRenderer.send('update-group', data),
 
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
