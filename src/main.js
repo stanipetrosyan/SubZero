@@ -109,7 +109,6 @@ ipcMain.on('theme-request', (event, arg) => {
 
 ipcMain.on('update-theme', (event, arg) => {
     store.set('theme', arg);
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 

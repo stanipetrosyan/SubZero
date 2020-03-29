@@ -8,11 +8,12 @@ let builder = new HTMLBuilder();
 let data = window.api.request();
 printProjectList()
 printGroupList();
+setTheme(window.api.themerequest());
 
 setInterval(refresh, 1000)
 
 function refresh() {
-   // setTheme(ipcRenderer.sendSync('theme-request'));
+    setTheme(window.api.themerequest());
     let data_requested = window.api.request();
     if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
         data = data_requested;

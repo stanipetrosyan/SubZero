@@ -1,13 +1,13 @@
-const { ipcRenderer } = require('electron');
+setTheme(window.api.themerequest());
 
 document.getElementById('light-theme').addEventListener('click', _ =>{
-    ipcRenderer.send('update-theme', {name: 'light'});
+    window.api.updatetheme('light')
 })
 
 document.getElementById('default-theme').addEventListener('click', _ =>{
-    ipcRenderer.send('update-theme', {name: 'default'});
+    window.api.updatetheme('default')
 })
 
 document.getElementById('cancel').addEventListener('click', _ =>{
-    ipcRenderer.send('close-modal');
+    window.api.closeModal();
 })

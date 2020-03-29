@@ -1,13 +1,11 @@
-/* const { ipcRenderer } = require('electron');
-const { showErrorMessageBox } = require('../../lib/message');
-const git  = require('../../lib/git-cli');
-const { setTheme } = require('../../lib/theme-setup'); */
+/* const { showErrorMessageBox } = require('../../lib/message');
+const git  = require('../../lib/git-cli'); */
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
 const builder = new HTMLBuilder();
 
-// setTheme(ipcRenderer.sendSync('theme-request'));
+setTheme(window.api.themerequest());
 
 let data = window.api.request();
 let project_folder = null;

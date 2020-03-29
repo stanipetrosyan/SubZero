@@ -19,7 +19,10 @@ contextBridge.exposeInMainWorld('api', {
 
     grouprequest: () => { return ipcRenderer.sendSync('group-request') },
     projectrequest: () => { return ipcRenderer.sendSync('project-request') },
-    
+
+    updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
+    themerequest: () => {return ipcRenderer.sendSync('theme-request')},
+
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
 
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
