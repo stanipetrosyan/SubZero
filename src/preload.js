@@ -9,11 +9,15 @@ contextBridge.exposeInMainWorld('api', {
 
     addgroup: (data) => ipcRenderer.send('add-group', data),
     addproject: (data) => ipcRenderer.send('add-project', data),
-
     openproject: (data) => ipcRenderer.send('open-project', data),
     updateproject: (data) => ipcRenderer.send('update-project', data),
     updategroup: (data) => ipcRenderer.send('update-group', data),
+    deletegroup: () => ipcRenderer.sendSync('delete-group'),
+    deleteproject: () => ipcRenderer.sendSync('delete-project'),
 
+    grouprequest: () => { return ipcRenderer.sendSync('group-request') },
+    projectrequest: () => { return ipcRenderer.sendSync('project-request') },
+    
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
 
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),

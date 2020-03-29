@@ -15,7 +15,7 @@ let projectToUpdate = null;
 let editorSelected = null;
 let groupSelected = null;
 
-//projectToUpdate = ipcRenderer.sendSync('project-request');
+projectToUpdate = window.api.projectrequest();
 
 setGroupListSelection();
 
@@ -39,18 +39,9 @@ function setGroupListSelection() {
     }
 
 }
-/* 
-function setOpacityOfSelectedGroup(array, index){
-    for(var x in array){
-        if(x != index){
-            array[x].style.opacity = 0.4;
-        }
-    }
-    return array
-} */
 
 
-/* function setProject(project){
+function setProject(project){
     document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').value = project['path'];
@@ -59,7 +50,7 @@ function setOpacityOfSelectedGroup(array, index){
     groupSelected = document.getElementById(project['group']).id;
     editorSelected = document.getElementById(project['editor']).id;
     project_folder = project['path'][0];
-} */
+}
 
 /* 
 function sender(project) {
@@ -74,6 +65,17 @@ function sender(project) {
     }
 }
  */
+
+ /* 
+function setOpacityOfSelectedGroup(array, index){
+    for(var x in array){
+        if(x != index){
+            array[x].style.opacity = 0.4;
+        }
+    }
+    return array
+} */
+
 
 
 document.getElementById('open').addEventListener('click', () => {
@@ -109,10 +111,15 @@ function checkInputValues(project) {
     return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
 }
 
-/* document.getElementById('delete').addEventListener('click', _ => {
-    ipcRenderer.send('delete-project', projectToUpdate);
+document.getElementById('delete').addEventListener('click', _ => {
+    window.api.deleteproject();
 }) 
- */
+
+
+document.getElementById('cancel').addEventListener('click', () => {
+    window.api.closeModal();
+})
+
 editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
@@ -124,8 +131,4 @@ editors[1].addEventListener('click', () => {
     editors[1].style.opacity = '1';
     //editors = setOpacityRight(editors, 1);
 
-})
-
-document.getElementById('cancel').addEventListener('click', () => {
-    window.api.closeModal();
 })

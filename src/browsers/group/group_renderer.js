@@ -2,7 +2,6 @@
 
 //const { showErrorMessageBox } = require('../../lib/message');
 //const { setTheme } = require('../../lib/theme-setup');
-
 //setTheme(ipcRenderer.sendSync('theme-request'));
 const colors = ["F44336", "E91E63", "9C27B0", "673AB7", "3F51B5","2196F3", "03A9F4","00BCD4", "009688", "4CAF50", "8BC34A","CDDC39", "FFEB3B","FFC107","FF9800","FF5722","795548","9E9E9E","607D8B","f1c1bd"]
 
@@ -16,10 +15,10 @@ let selected = null;
 
 const builder = new HTMLBuilder();
 
-groupToUpdate = null //ipcRenderer.sendSync('group-request'); 
+groupToUpdate = window.api.grouprequest();
 
 if(groupToUpdate) {
-    setGroup();
+    //setGroup();
     addBtn.innerHTML = 'UPDATE';
     document.getElementById('delete').style.visibility = 'visible';
 } else {
@@ -73,11 +72,11 @@ function setGroup() {
     selected = groupToUpdate['color'];
 }
 
-
+*/
 
 document.getElementById('delete').addEventListener('click', () => {
-    ipcRenderer.send('delete-group');
-}) */
+    window.api.deletegroup();
+})
 
 document.getElementById('cancel').addEventListener('click', () => {
     window.api.closeModal();

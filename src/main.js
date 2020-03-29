@@ -117,14 +117,12 @@ ipcMain.on('add-group', (event, arg) => {
     if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
-       // mainWindow.webContents.send('refresh');
         closeModal();
     }   
 })
 
 ipcMain.on('add-project', (event, arg) => {
     groupInterface.addProject(arg, store);
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 
@@ -137,11 +135,10 @@ ipcMain.on('open-git', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('question'));
+    let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
-        groupInterface.removeProject(arg, store);
+        groupInterface.removeProject(tmp_project, store);
     }
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 
@@ -180,10 +177,9 @@ ipcMain.on('updated-group', (event, arg) => {
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('question'));
+    let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
         groupInterface.removeGroup(tmp_group.name, store);
-        mainWindow.webContents.send('refresh');
     }
     closeModal();
 })
