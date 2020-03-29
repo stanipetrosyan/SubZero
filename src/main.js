@@ -154,7 +154,6 @@ ipcMain.on('project-request', (event, arg) => {
 ipcMain.on('updated-project', (event, arg) => {
     groupInterface.updateProject(store, tmp_project, arg);
     closeModal();
-    mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
@@ -173,7 +172,6 @@ ipcMain.on('group-request', (event, arg) => {
 ipcMain.on('updated-group', (event, arg) => {
     groupInterface.updateGroup(store, tmp_group, arg);
     closeModal();
-    mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('delete-group', (event, arg) => {

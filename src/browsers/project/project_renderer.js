@@ -37,9 +37,7 @@ function setGroupListSelection() {
         })
         groupList.appendChild(container);
     }
-
 }
-
 
 function setProject(project){
     document.getElementById('project-name').value = project['name'];
@@ -51,20 +49,6 @@ function setProject(project){
     editorSelected = document.getElementById(project['editor']).id;
     project_folder = project['path'][0];
 }
-
-/* 
-function sender(project) {
-    if(!checkValue(project)) {
-        showErrorMessageBox();
-        return;
-    }     
-    if(projectToUpdate){
-        ipcRenderer.send('updated-project', project);
-    } else {
-        ipcRenderer.send('add-project', project);
-    }
-}
- */
 
  /* 
 function setOpacityOfSelectedGroup(array, index){
@@ -86,8 +70,14 @@ document.getElementById('open').addEventListener('click', () => {
 document.getElementById('add').addEventListener('click', () => {
     let project = getProjectValues();
     if (checkInputValues(project)) {
-        window.api.addproject(project);
-    }
+        if (projectToUpdate) {
+            window.api.updatedproject(project);
+        } else {
+            window.api.addproject(project);
+        }
+    } /* else {
+        showErrorMessageBox();
+    } */
 /*     git.isRepo(project['path']).then(res => {
         project['repo'] = res;
         sender(project);

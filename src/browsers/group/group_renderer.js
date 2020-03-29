@@ -18,7 +18,7 @@ const builder = new HTMLBuilder();
 groupToUpdate = window.api.grouprequest();
 
 if(groupToUpdate) {
-    //setGroup();
+    setGroupValues();
     addBtn.innerHTML = 'UPDATE';
     document.getElementById('delete').style.visibility = 'visible';
 } else {
@@ -39,17 +39,13 @@ select.addEventListener('click', () => {
 document.getElementById('add-update').addEventListener('click', () => {
     let group = getGroupValues();
     if (checkInputValues(group)) {
-        window.api.addgroup(group)
-    }
-    /* if(groupToUpdate) {
-        group['projects'] = groupToUpdate['projects'];
-        ipcRenderer.send('updated-group', group);
-    } else {
-        if(checkValue(group)) {
-            ipcRenderer.send('add-group', group);
-        } else {
-            showErrorMessageBox();
-        }
+        if (groupToUpdate) {
+            group['projects'] = groupToUpdate['projects'];
+            window.api.updatedgroup(group)
+        } else 
+            window.api.addgroup(group)
+    } /* else {
+        showErrorMessageBox();
     } */
 })
 
@@ -61,18 +57,15 @@ function getGroupValues() {
     }
 }
 
-function checkInputValues(group) {
-    return (group['name'] && group['color']);
-}
-/*
-
-function setGroup() {
+function setGroupValues() {
     document.getElementById('group-name').value = groupToUpdate['name'];
     shower_color_selected.style.backgroundColor = groupToUpdate['color'];
     selected = groupToUpdate['color'];
 }
 
-*/
+function checkInputValues(group) {
+    return (group['name'] && group['color']);
+}
 
 document.getElementById('delete').addEventListener('click', () => {
     window.api.deletegroup();

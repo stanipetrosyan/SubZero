@@ -12,6 +12,8 @@ contextBridge.exposeInMainWorld('api', {
     openproject: (data) => ipcRenderer.send('open-project', data),
     updateproject: (data) => ipcRenderer.send('update-project', data),
     updategroup: (data) => ipcRenderer.send('update-group', data),
+    updatedgroup: (data) => ipcRenderer.send('updated-group', data),
+    updatedproject: (data) => ipcRenderer.send('updated-project', data),
     deletegroup: () => ipcRenderer.sendSync('delete-group'),
     deleteproject: () => ipcRenderer.sendSync('delete-project'),
 

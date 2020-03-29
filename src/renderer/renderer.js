@@ -29,6 +29,7 @@ function printProjectList() {
 }
 
 function printProjectForGroup(group) {
+    console.log(group);
     group.projects.forEach(item => {
         let project =  createProjectElement(item)
         project.childNodes[0].lastChild.addEventListener('click', _=> {
