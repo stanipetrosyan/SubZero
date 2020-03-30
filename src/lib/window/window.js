@@ -1,8 +1,6 @@
 'use strict'
 
 const { BrowserWindow } = require('electron');
-const path = require('path')
-
 
 const defaultProps = {
     width: 800,

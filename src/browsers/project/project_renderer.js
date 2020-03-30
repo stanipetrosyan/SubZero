@@ -1,4 +1,4 @@
-//const git  = require('../../lib/git-cli'); */
+'use strict'
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
@@ -47,18 +47,6 @@ function setProject(project){
     project_folder = project['path'][0];
 }
 
- /* 
-function setOpacityOfSelectedGroup(array, index){
-    for(var x in array){
-        if(x != index){
-            array[x].style.opacity = 0.4;
-        }
-    }
-    return array
-} */
-
-
-
 document.getElementById('open').addEventListener('click', () => {
     let directory = window.api.opendirdialog();
     document.getElementById('project-path').value = directory[0];
@@ -75,10 +63,6 @@ document.getElementById('add').addEventListener('click', () => {
     } else {
         window.api.showErrorMessage();
     }
-/*     git.isRepo(project['path']).then(res => {
-        project['repo'] = res;
-        sender(project);
-    }) */
 })
 
 
@@ -110,12 +94,21 @@ document.getElementById('cancel').addEventListener('click', () => {
 editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
-    //editors = setOpacityRight(editors, 0);
+    editors = setOpacity(editors, 0);
 })
 
 editors[1].addEventListener('click', () => {
     editorSelected = 'atom';
     editors[1].style.opacity = '1';
-    //editors = setOpacityRight(editors, 1);
-
+    editors = setOpacity(editors, 1);
 })
+
+ 
+function setOpacity(array, index){
+    for(var x in array){
+        if(x != index){
+            array[x].style.opacity = 0.4;
+        }
+    }
+    return array
+}
