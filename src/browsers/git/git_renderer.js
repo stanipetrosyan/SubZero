@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron');
+/* const { ipcRenderer } = require('electron');
 const git = require('../../lib/git-cli');
 const { createDialog } = require('../../lib/dialog')
 const { autocomplete } = require('../../lib/autoComplete');
@@ -100,4 +100,4 @@ function pullRepo(){
 
 document.getElementById("cancel").addEventListener('click', _=>{
     ipcRenderer.send("close-modal");
-});
+}); */

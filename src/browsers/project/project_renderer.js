@@ -1,21 +1,18 @@
-const { ipcRenderer } = require('electron');
-const { createArrayGroupContainer, setOpacityRight } = require('../../lib/Initializer');
-const { showErrorMessageBox } = require('../../lib/message');
-const git  = require('../../lib/git-cli');
-const { setTheme } = require('../../lib/theme-setup');
+'use strict'
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
+const builder = new HTMLBuilder();
 
-setTheme(ipcRenderer.sendSync('theme-request'));
+setTheme(window.api.themerequest());
 
-let data = ipcRenderer.sendSync('data-request');
+let data = window.api.request();
 let project_folder = null;
 let projectToUpdate = null;
 let editorSelected = null;
 let groupSelected = null;
 
-projectToUpdate = ipcRenderer.sendSync('project-request');
+projectToUpdate = window.api.projectrequest();
 
 setGroupListSelection();
 
@@ -28,26 +25,14 @@ if(projectToUpdate) {
 }
 
 function setGroupListSelection() {
-    let containers = createArrayGroupContainer(data);
-    for(let x in containers){
-        containers[x].addEventListener('click', () => {
-            groupSelected = data[x].name;
-            containers[x].style.opacity = 0.8;
-            containers = setOpacityRight(containers, x);
+    for (let group of data) {
+        let container = builder.createElement('div', 'group-container' , String(group.name[0]).toUpperCase(), group.name);
+        container.style.backgroundColor = group.color;
+        container.addEventListener('click', () => {
+            groupSelected = group.name;
+            container.style.opacity = 0.8;
         })
-        groupList.appendChild(containers[x]);
-    }
-}
-
-function getProject() {
-    return {
-        name: document.getElementById('project-name').value,
-        language: document.getElementById('project-type').value,
-        group: groupSelected,
-        path: project_folder[0],
-        editor: editorSelected,
-        repo: null,
-        remote_url: null
+        groupList.appendChild(container);
     }
 }
 
@@ -62,52 +47,68 @@ function setProject(project){
     project_folder = project['path'][0];
 }
 
-function checkValue(project) {
-    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
-}
+document.getElementById('open').addEventListener('click', () => {
+    let directory = window.api.opendirdialog();
+    document.getElementById('project-path').value = directory[0];
+}) 
 
-
-function sender(project) {
-    if(!checkValue(project)) {
-        showErrorMessageBox();
-        return;
-    }     
-    if(projectToUpdate){
-        ipcRenderer.send('updated-project', project);
+document.getElementById('add').addEventListener('click', () => {
+    let project = getProjectValues();
+    if (checkInputValues(project)) {
+        if (projectToUpdate) {
+            window.api.updatedproject(project);
+        } else {
+            window.api.addproject(project);
+        }
     } else {
-        ipcRenderer.send('add-project', project);
+        window.api.showErrorMessage();
+    }
+})
+
+
+function getProjectValues() {
+    return {
+        name: document.getElementById('project-name').value,
+        language: document.getElementById('project-type').value,
+        group: groupSelected,
+        path: document.getElementById('project-path').value,
+        editor: editorSelected,
+        repo: null,
+        remote_url: null
     }
 }
 
-document.getElementById('cancel').addEventListener('click', () => {
-    ipcRenderer.send('close-modal');
-})
+function checkInputValues(project) {
+    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
+}
 
-document.getElementById('open').addEventListener('click', () => {
-    project_folder = ipcRenderer.sendSync('open-folder-dialog');
-    document.getElementById('project-path').value = project_folder[0];
-})
-
-document.getElementById('add').addEventListener('click', () => {
-    let project = getProject();
-    git.isRepo(project['path']).then(res => {
-        project['repo'] = res;
-        sender(project);
-    })
-})
 document.getElementById('delete').addEventListener('click', _ => {
-    ipcRenderer.send('delete-project', projectToUpdate);
+    window.api.deleteproject();
 }) 
+
+
+document.getElementById('cancel').addEventListener('click', () => {
+    window.api.closeModal();
+})
 
 editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
-    editors = setOpacityRight(editors, 0);
+    editors = setOpacity(editors, 0);
 })
 
 editors[1].addEventListener('click', () => {
     editorSelected = 'atom';
     editors[1].style.opacity = '1';
-    editors = setOpacityRight(editors, 1);
-
+    editors = setOpacity(editors, 1);
 })
+
+ 
+function setOpacity(array, index){
+    for(var x in array){
+        if(x != index){
+            array[x].style.opacity = 0.4;
+        }
+    }
+    return array
+}

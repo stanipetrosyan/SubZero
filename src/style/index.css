@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@font-face {
+    font-family: Lato;
+    src:  url('../resource/Font/Lato/Lato-Regular.ttf') format('ttf'),
+}
 
 :root {
     --main-background-color: #1e1e1e;

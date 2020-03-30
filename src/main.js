@@ -3,6 +3,10 @@ const path = require('path');
 const { app, ipcMain } = require('electron');
 const dialog = electron.dialog;
 
+
+const { BrowserWindow } = require('electron');
+
+
 const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
@@ -24,6 +28,13 @@ const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html'
 const index_path = path.join(__dirname, '../src/renderer/index.html');
 const git_path = path.join(__dirname, '../src/browsers/git/git_modal.html');
 
+const webPreferences = {
+    preload: path.join(__dirname, 'preload.js'),
+    nodeIntegration: false,
+    enableRemoteModule: false,
+    contextIsolation: true,
+}
+
 let modal = null;
 let mainWindow = null;
 let tmp_project = null;
@@ -32,10 +43,9 @@ let tmp_group = null;
 function main() {
     mainWindow = new Window({
         file: index_path,
-    })
-    
-    require('./renderer/menu');
-    
+        webPreferences
+    }) 
+    require('./renderer/menu');     
 }
 
 function openModal(arg) {
@@ -46,6 +56,7 @@ function openModal(arg) {
             height: 600,
             frame: false,
             resizable: false,
+            webPreferences
         })
     }
 }
@@ -59,17 +70,16 @@ function closeModal() {
     }
 }
 
-function selectDirectory() {
-    let options = { properties: ["openDirectory"]}
-    return dialog.showOpenDialog(options);
-}
-
 ipcMain.on('open-modal', (event, arg) => {
     openModal(arg);
 })
 
 ipcMain.on('close-modal', () => {
     closeModal();
+})
+
+ipcMain.on('error-message', (event, arg) => {
+    return dialog.showMessageBoxSync(null, config('error'))
 })
 
 ipcMain.on('data-request', (event, arg) => {
@@ -82,7 +92,6 @@ ipcMain.on('theme-request', (event, arg) => {
 
 ipcMain.on('update-theme', (event, arg) => {
     store.set('theme', arg);
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 
@@ -90,14 +99,12 @@ ipcMain.on('add-group', (event, arg) => {
     if(groupInterface.addGroup(arg, store) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
-        mainWindow.webContents.send('refresh');
         closeModal();
     }   
 })
 
 ipcMain.on('add-project', (event, arg) => {
     groupInterface.addProject(arg, store);
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 
@@ -110,11 +117,10 @@ ipcMain.on('open-git', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('question'));
+    let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
-        groupInterface.removeProject(arg, store);
+        groupInterface.removeProject(tmp_project, store);
     }
-    mainWindow.webContents.send('refresh');
     closeModal();
 })
 
@@ -130,12 +136,10 @@ ipcMain.on('project-request', (event, arg) => {
 ipcMain.on('updated-project', (event, arg) => {
     groupInterface.updateProject(store, tmp_project, arg);
     closeModal();
-    mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
-    let dir = selectDirectory();
-    event.returnValue = dir;
+    event.returnValue = dialog.showOpenDialogSync({ properties: ["openDirectory"]});
 })
 
 ipcMain.on('update-group', (event, arg) => {
@@ -150,14 +154,12 @@ ipcMain.on('group-request', (event, arg) => {
 ipcMain.on('updated-group', (event, arg) => {
     groupInterface.updateGroup(store, tmp_group, arg);
     closeModal();
-    mainWindow.webContents.send('refresh');
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let response = dialog.showMessageBox(null, config('question'));
+    let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
         groupInterface.removeGroup(tmp_group.name, store);
-        mainWindow.webContents.send('refresh');
     }
     closeModal();
 })

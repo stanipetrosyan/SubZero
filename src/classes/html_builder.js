@@ -1,13 +1,12 @@
-module.exports = {
-
-    /**
+class HTMLBuilder {
+     /**
      * @param {string} tagName
      * @param {string} className 
      * @param {string} innerText 
      * @param {string} id 
      * @returns {HTMLElement}
      */
-     createElement(tagName, className, innerText, id){
+    createElement(tagName, className, innerText, id){
         let elem =  document.createElement(tagName);
         if(className)
             elem = this.setClassName(elem, className);
@@ -17,17 +16,17 @@ module.exports = {
             elem.id = id;
 
         return elem;
-    },
+    }
 
     setClassName(elem, className){
         elem.className = className;
         return elem;
-    },
+    }
 
     setInner(elem, text){
         elem.innerHTML = text;
         return elem;
-    },
+    }
     
     /**
      * @param { HTMLElement } parent 
@@ -37,7 +36,7 @@ module.exports = {
         for(var x in childs){
             parent.appendChild(childs[x]);
         }
-    },
+    }
     
     /**
      * @param {HTMLElement} elem 

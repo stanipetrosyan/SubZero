@@ -1,40 +1,25 @@
-const { ipcRenderer } = require('electron');
-const path = require('path');
-const initializer = require('../lib/Initializer');
-const { setTheme } = require('../lib/theme-setup');
+'use strict'
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 
+let builder = new HTMLBuilder();
 
-const search_bar = document.getElementById('checkbox');
+let data = window.api.request();
+printProjectList()
+printGroupList();
+setTheme(window.api.themerequest());
 
-let data = null;
-
-refresh();
+setInterval(refresh, 1000)
 
 function refresh() {
-    setTheme(ipcRenderer.sendSync('theme-request'));
-    data = ipcRenderer.sendSync('data-request');
-    printProjectList();
-    printGroupList();
-}
-
-function printProjectForGroup(group) {
-    let projects = initializer.createProjectArrayToAppend(group);
-    for(let i = 0; i < group.projects.length; i++){
-        var element = projects[i];
-        element.childNodes[2].addEventListener('click', _=> {
-            ipcRenderer.send('open-project', group.projects[i])
-        })
-        element.childNodes[0].lastChild.addEventListener('click', _=> {
-            ipcRenderer.send('update-project', group.projects[i])
-        })
-        element.lastChild.addEventListener('click', _=> {
-            ipcRenderer.send("open-git", group.projects[i]);
-        })
+    setTheme(window.api.themerequest());
+    let data_requested = window.api.request();
+    if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
+        data = data_requested;
+        printProjectList();
+        printGroupList();
     }
-    initializer.appendToProjectList(projects, project_list);
 }
 
 function printProjectList() {
@@ -44,22 +29,62 @@ function printProjectList() {
     });
 }
 
-function printGroupList(){
-    let groups = initializer.createGroupArrayToAppend(data);
-    for(let i = 0; i < data.length; i++){
-        groups[i].childNodes[1].addEventListener('click', _=> {
+function printProjectForGroup(group) {
+    group.projects.forEach(item => {
+        let project =  createProjectElement(item)
+        project.childNodes[0].lastChild.addEventListener('click', _=> {
+            window.api.updateproject(item)
+        })
+        project.childNodes[2].addEventListener('click', _=> {
+            window.api.openproject(item) 
+        })
+        project_list.append(project)
+    })
+}
+
+function printGroupList() {
+    group_list.innerHTML = '';
+    data.forEach(item => {
+        let group = createGroupElement(item)
+        group.childNodes[1].addEventListener('click', _=> {
             project_list.innerHTML = '';
-            printProjectForGroup(data[i]);
+            printProjectForGroup(item);
         })
-        groups[i].childNodes[2].addEventListener('click', _=> {
-            ipcRenderer.send('update-group', data[i]);
+        group.childNodes[2].addEventListener('click', _=> {
+            window.api.updategroup(item)
         })
+        group_list.appendChild(group)
+    })
+}
+
+function createProjectElement(project) {
+    let div = builder.createElement('div', 'item', '');
+    let title = builder.createElement('h2', 'title-project', project['name']);
+    title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
+    builder.appendAllChild(div, [
+        title,
+        builder.createElement('p', 'subtitle-project', project['language']),
+        builder.createElement('button', 'button button-subzero button-right', 'OPEN'), 
+    ]);
+    if(project['repo']){
+        div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));
     }
-    initializer.appendToGroupList(groups, group_list);
+    return div;
+}
+
+function createGroupElement(group) {
+    let div = builder.createElement('div','group-item', '');
+    let g_type = builder.createElement('div', 'group-type', '')
+    let g_color = builder.createElement('span', 'group-color', '');
+    let modify = builder.createElement('div', 'group-modify-icon', '');
+    g_color.style.backgroundColor = group['color'];
+    g_type.appendChild(builder.createElement('p', 'group-label', group['name']));
+    builder.appendAllChild(div, [g_color, g_type, modify]);
+    return div;
 }
 
 document.getElementById('newGroup').addEventListener('click', _=> {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
+    window.api.openGroupModal();
 })
 
 document.getElementById('search-bar').addEventListener('input', _ => {
@@ -74,25 +99,6 @@ document.getElementById('search-bar').addEventListener('input', _ => {
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
-    refresh();
-})
-
-ipcRenderer.on('refresh', () => {
-    refresh();
-})
-
-ipcRenderer.on('open-themes', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/themes/set_theme.html'));
-})
-
-ipcRenderer.on('open-projects', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/project/project_modal.html'));
-})
-
-ipcRenderer.on('open-groups', () => {
-    ipcRenderer.send('open-modal', path.join(__dirname, '../browsers/group/group_modal.html'));
-})
-
-ipcRenderer.on('open-search-bar', () => {
-    search_bar.checked = !search_bar.checked;
-})
+    printProjectList();
+    printGroupList();
+}) 

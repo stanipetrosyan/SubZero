@@ -1,11 +1,9 @@
-module.exports = {
-    setTheme(current_theme) {
-        var html = document.getElementsByTagName('html')[0];
-        if(current_theme['name'] == 'default') { 
-            setDarkTheme(html);
-        } else {
-            setLightTheme(html);
-        }
+function setTheme(current_theme) {
+    var html = document.getElementsByTagName('html')[0];
+    if(current_theme['name'] == 'default') { 
+        setDarkTheme(html);
+    } else {
+        setLightTheme(html);
     }
 }
 

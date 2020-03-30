@@ -1,10 +1,6 @@
-const { ipcRenderer } = require('electron');
-const { appendAllChild } = require('../../lib/Builder');
-const { initializeColorPickerElement } = require('../../lib/Initializer')
-const { showErrorMessageBox } = require('../../lib/message');
-const { setTheme } = require('../../lib/theme-setup');
+'use strict'
 
-setTheme(ipcRenderer.sendSync('theme-request'));
+const colors = ["F44336", "E91E63", "9C27B0", "673AB7", "3F51B5","2196F3", "03A9F4","00BCD4", "009688", "4CAF50", "8BC34A","CDDC39", "FFEB3B","FFC107","FF9800","FF5722","795548","9E9E9E","607D8B","f1c1bd"]
 
 const select = document.getElementById('select');
 const ul_element = document.getElementById('color-list');
@@ -14,28 +10,20 @@ let active = false;
 let groupToUpdate = null;
 let selected = null;
 
-groupToUpdate = ipcRenderer.sendSync('group-request');
+const builder = new HTMLBuilder();
+setTheme(window.api.themerequest());
+
+groupToUpdate = window.api.grouprequest();
 
 if(groupToUpdate) {
-    setGroup();
+    setGroupValues();
     addBtn.innerHTML = 'UPDATE';
     document.getElementById('delete').style.visibility = 'visible';
 } else {
     addBtn.innerHTML = 'ADD';
 }
 
-initializeColorPickerElementsWithClickEvent();
-
-function initializeColorPickerElementsWithClickEvent() {
-    let colors = initializeColorPickerElement();
-    colors.forEach(function(element){
-        element.addEventListener('click', () =>{
-            selected = element.getAttribute('data-value');
-            shower_color_selected.style.backgroundColor = selected;
-        })
-    })
-    appendAllChild(ul_element, colors);
-}
+createColorPicker();
 
 select.addEventListener('click', () => {
     if(active){
@@ -46,7 +34,20 @@ select.addEventListener('click', () => {
     active = !active;
 })
 
-function getGroup() {
+document.getElementById('add-update').addEventListener('click', () => {
+    let group = getGroupValues();
+    if (checkInputValues(group)) {
+        if (groupToUpdate) {
+            group['projects'] = groupToUpdate['projects'];
+            window.api.updatedgroup(group)
+        } else 
+            window.api.addgroup(group)
+    } else {
+        window.api.showErrorMessage();
+    }
+})
+
+function getGroupValues() {
     return {
         name: document.getElementById('group-name').value,
         color : selected,
@@ -54,38 +55,33 @@ function getGroup() {
     }
 }
 
-function setGroup() {
+function setGroupValues() {
     document.getElementById('group-name').value = groupToUpdate['name'];
     shower_color_selected.style.backgroundColor = groupToUpdate['color'];
     selected = groupToUpdate['color'];
 }
 
-function checkValue(group) {
+function checkInputValues(group) {
     return (group['name'] && group['color']);
 }
 
-document.getElementById('cancel').addEventListener('click', () => {
-    ipcRenderer.send('close-modal');
-})
-
-document.getElementById('add-update').addEventListener('click', () => {
-    let group = getGroup();
-    if(groupToUpdate) {
-        group['projects'] = groupToUpdate['projects'];
-        ipcRenderer.send('updated-group', group);
-    } else {
-        if(checkValue(group)) {
-            ipcRenderer.send('add-group', group);
-        } else {
-            showErrorMessageBox();
-        }
-    }
-})
-
 document.getElementById('delete').addEventListener('click', () => {
-    ipcRenderer.send('delete-group');
+    window.api.deletegroup();
 })
 
+document.getElementById('cancel').addEventListener('click', () => {
+    window.api.closeModal();
+})
 
-
-
+function createColorPicker() {
+    colors.forEach(color => {
+        let colorPickerElement = builder.createElement('li', 'color-' + color);
+        builder.setAttribute(colorPickerElement, "data-option", "");
+        builder.setAttribute(colorPickerElement, "data-value", '#' + color);
+        colorPickerElement.addEventListener('click', () =>{
+            selected = colorPickerElement.getAttribute('data-value');
+            shower_color_selected.style.backgroundColor = selected;
+        })
+        ul_element.appendChild(colorPickerElement);
+    })
+}
