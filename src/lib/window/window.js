@@ -9,14 +9,7 @@ const defaultProps = {
     height: 600,
     minWidth: 600,
     minHeight: 600,
-    show: false,
-    /* webPreferences: {
-        preload: path.join('home/stanislav/Documenti/Electron/SubZero/src', 'preload.js'),
-        nodeIntegration: false,
-        enableRemoteModule: false,
-        contextIsolation: true,
-        sandbox: true 
-    } */
+    show: false
 }
 
 class Window extends BrowserWindow{

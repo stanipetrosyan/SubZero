@@ -28,42 +28,25 @@ const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html'
 const index_path = path.join(__dirname, '../src/renderer/index.html');
 const git_path = path.join(__dirname, '../src/browsers/git/git_modal.html');
 
+const webPreferences = {
+    preload: path.join(__dirname, 'preload.js'),
+    nodeIntegration: false,
+    enableRemoteModule: false,
+    contextIsolation: true,
+}
+
 let modal = null;
 let mainWindow = null;
 let tmp_project = null;
 let tmp_group = null;
 
 function main() {
-        // Create the browser window.
-        mainWindow = new BrowserWindow({
-          width: 800,
-          height: 600,
-          webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            nodeIntegration: false,
-            enableRemoteModule: false,
-            contextIsolation: true,
-          }
-        })
-      
-        // and load the index.html of the app.
-        mainWindow.loadFile(path.join(__dirname, 'renderer/index.html'))
-      
-        // Open the DevTools.
-        // mainWindow.webContents.openDevTools()
-      
-        // Emitted when the window is closed.
-        mainWindow.on('closed', function() {
-          // Dereference the window object, usually you would store windows
-          // in an array if your app supports multi windows, this is the time
-          // when you should delete the corresponding element.
-          mainWindow = null
-        })
-        require('./renderer/menu');
+    mainWindow = new Window({
+        file: index_path,
+        webPreferences
+    }) 
+    require('./renderer/menu');     
 }
-    
-    
-    
 
 function openModal(arg) {
     if(!modal){
@@ -73,12 +56,7 @@ function openModal(arg) {
             height: 600,
             frame: false,
             resizable: false,
-            webPreferences: {
-                preload: path.join(__dirname, 'preload.js'),
-                nodeIntegration: false,
-                enableRemoteModule: false,
-                contextIsolation: true,
-            }
+            webPreferences
         })
     }
 }
