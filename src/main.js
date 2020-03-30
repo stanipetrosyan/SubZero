@@ -3,6 +3,7 @@ const path = require('path');
 const { app, ipcMain } = require('electron');
 const dialog = electron.dialog;
 
+
 const { BrowserWindow } = require('electron');
 
 
@@ -97,6 +98,10 @@ ipcMain.on('open-modal', (event, arg) => {
 
 ipcMain.on('close-modal', () => {
     closeModal();
+})
+
+ipcMain.on('error-message', (event, arg) => {
+    return dialog.showMessageBoxSync(null, config('error'))
 })
 
 ipcMain.on('data-request', (event, arg) => {

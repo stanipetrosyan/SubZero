@@ -1,5 +1,4 @@
-/* const { showErrorMessageBox } = require('../../lib/message');
-const git  = require('../../lib/git-cli'); */
+//const git  = require('../../lib/git-cli'); */
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
@@ -73,9 +72,9 @@ document.getElementById('add').addEventListener('click', () => {
         } else {
             window.api.addproject(project);
         }
-    } /* else {
-        showErrorMessageBox();
-    } */
+    } else {
+        window.api.showErrorMessage();
+    }
 /*     git.isRepo(project['path']).then(res => {
         project['repo'] = res;
         sender(project);

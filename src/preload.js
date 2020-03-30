@@ -1,4 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const dialog = require('electron').dialog;
+const config = require('../config')
 
 // TODO use standard for api
 contextBridge.exposeInMainWorld('api', {
@@ -27,7 +29,9 @@ contextBridge.exposeInMainWorld('api', {
 
     openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
     openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
-    closeModal: () => ipcRenderer.send('close-modal')
+    closeModal: () => ipcRenderer.send('close-modal'),
+
+    showErrorMessage: () => { ipcRenderer.send('error-message') }
 })
 
 ipcRenderer.on('open-group', () => {
