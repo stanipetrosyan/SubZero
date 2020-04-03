@@ -102,3 +102,9 @@ document.getElementById('group-all').addEventListener('click', _=> {
     printProjectList();
     printGroupList();
 }) 
+
+/*
+const search_bar = document.getElementById('checkbox');
+ipcRenderer.on('open-search-bar', () => {
+    search_bar.checked = !search_bar.checked;
+}) */

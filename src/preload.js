@@ -51,6 +51,7 @@ ipcRenderer.on('open-theme', () => {
     send('open-modal',  theme_path)
 });
 
+
 function send(channel, message) {
   ipcRenderer.send(channel, message)
 }
