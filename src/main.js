@@ -26,7 +26,6 @@ const store = new Store({
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
 const index_path = path.join(__dirname, '../src/renderer/index.html');
-const git_path = path.join(__dirname, '../src/browsers/git/git_modal.html');
 
 const webPreferences = {
     preload: path.join(__dirname, 'preload.js'),
@@ -110,10 +109,6 @@ ipcMain.on('add-project', (event, arg) => {
 
 ipcMain.on('open-project', (event, arg) => {
     openProjectUsingEditor(arg['path'], arg['editor']);
-})
-ipcMain.on('open-git', (event, arg) => {
-    tmp_project = arg;
-    openModal(git_path);
 })
 
 ipcMain.on('delete-project', (event, arg) => {
