@@ -3,18 +3,13 @@ const path = require('path');
 const { app, ipcMain } = require('electron');
 const dialog = electron.dialog;
 
-
-const { BrowserWindow } = require('electron');
-
-
 const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
 
-const Store = require('./lib/store');
 const groupInterface = require('./lib/groupDataInterface');
 
-const store = new Store({
+const store = new groupInterface({
     configName: 'data-user',
     defaults: {
       groups: [],
@@ -95,7 +90,7 @@ ipcMain.on('update-theme', (event, arg) => {
 })
 
 ipcMain.on('add-group', (event, arg) => {
-    if(groupInterface.addGroup(arg, store) == false) {
+    if(store.addGroup(arg) == false) {
         dialog.showMessageBox(null, config('equals'));
     } else {
         closeModal();
@@ -103,7 +98,7 @@ ipcMain.on('add-group', (event, arg) => {
 })
 
 ipcMain.on('add-project', (event, arg) => {
-    groupInterface.addProject(arg, store);
+    store.addProject(arg);
     closeModal();
 })
 
@@ -114,7 +109,7 @@ ipcMain.on('open-project', (event, arg) => {
 ipcMain.on('delete-project', (event, arg) => {
     let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
-        groupInterface.removeProject(tmp_project, store);
+        store.removeProject(tmp_project);
     }
     closeModal();
 })
@@ -129,7 +124,7 @@ ipcMain.on('project-request', (event, arg) => {
 })
 
 ipcMain.on('updated-project', (event, arg) => {
-    groupInterface.updateProject(store, tmp_project, arg);
+    store.updateProject(tmp_project, arg);
     closeModal();
 })
 
@@ -147,14 +142,14 @@ ipcMain.on('group-request', (event, arg) => {
 })
 
 ipcMain.on('updated-group', (event, arg) => {
-    groupInterface.updateGroup(store, tmp_group, arg);
+    store.updateGroup(tmp_group, arg);
     closeModal();
 })
 
 ipcMain.on('delete-group', (event, arg) => {
     let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
-        groupInterface.removeGroup(tmp_group.name, store);
+        store.removeGroup(tmp_group.name);
     }
     closeModal();
 })
