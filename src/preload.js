@@ -1,6 +1,11 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const dialog = require('electron').dialog;
-const config = require('../config')
+const path = require('path');
+
+
+const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
+const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
+const theme_path = path.join(__dirname, '../src/browsers/themes/set_theme.html')
+
 
 // TODO use standard for api
 contextBridge.exposeInMainWorld('api', {
@@ -27,23 +32,23 @@ contextBridge.exposeInMainWorld('api', {
 
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
 
-    openGroupModal: () => ipcRenderer.send('open-modal',  'browsers/group/group_modal.html'),
-    openProjectModal: () => ipcRenderer.send('open-modal',  'browsers/project/project_modal.html'),
+    openGroupModal: () => ipcRenderer.send('open-modal',  group_path),
+    openProjectModal: () => ipcRenderer.send('open-modal',  project_path),
     closeModal: () => ipcRenderer.send('close-modal'),
 
     showErrorMessage: () => { ipcRenderer.send('error-message') }
 })
 
 ipcRenderer.on('open-group', () => {
-    send('open-modal',  'browsers/group/group_modal.html')
+    send('open-modal',  group_path)
 });
 
 ipcRenderer.on('open-project', () => {
-    send('open-modal',  'browsers/project/project_modal.html')
+    send('open-modal',  project_path)
 });
 
 ipcRenderer.on('open-theme', () => {
-    send('open-modal',  'browsers/themes/set_theme.html')
+    send('open-modal',  theme_path)
 });
 
 function send(channel, message) {
