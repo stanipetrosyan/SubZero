@@ -2,6 +2,7 @@
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
+const search_bar = document.getElementById('checkbox');
 
 let builder = new HTMLBuilder();
 
