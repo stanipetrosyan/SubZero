@@ -2,6 +2,7 @@
 
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
+const search_bar = document.getElementById('checkbox');
 
 let builder = new HTMLBuilder();
 
@@ -102,9 +103,3 @@ document.getElementById('group-all').addEventListener('click', _=> {
     printProjectList();
     printGroupList();
 }) 
-
-/*
-const search_bar = document.getElementById('checkbox');
-ipcRenderer.on('open-search-bar', () => {
-    search_bar.checked = !search_bar.checked;
-}) */
