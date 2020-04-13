@@ -12,30 +12,30 @@
     --main-color-hover-group: #222222;
 }
 
-body, html{
+body, html {
   font-family: 'Lato', sans-serif;
   background-color: var(--main-background-color);
 }
 
 
-.subzero-theme{
+.subzero-theme {
     background-color: var(--main-color);
 }
 
-.item{
+.item {
     width: 90%;
     border-bottom: 1px solid #1C39BB;
     margin-left: 2%;
 }
 .group-color {
-    display:inline-block;
-    margin-left:10px;
+    display: inline-block;
+    margin-left: 10px;
     margin-right: 10px;
     width: 10px; 
     height: 10px;
     border-radius: 50%; 
 }
-.group-modify-icon{
+.group-modify-icon {
     display: inline-block;
     margin-top: 10px;
     width: 20px;
@@ -44,8 +44,8 @@ body, html{
     background-size: cover;
 }
 .group-type {
-    display:inline-block; 
-    width:100px; 
+    display: inline-block; 
+    width: 100px; 
 }
 .group-label{
     color: var(--main-text-color);
@@ -302,7 +302,7 @@ body, html{
     background-color: var(--main-secondary-background-color);
     border: none;
     padding: 5px 10px;
-    width: 90%;
+    width: 40%;
     font-size: 16px;
     position: relative;
     padding-top: 2%;
@@ -310,7 +310,11 @@ body, html{
     outline: none;
     border-bottom: 1px solid var(--main-color);
     color: var(--main-text-color);
-    transition: width 0.4s ease-in-out;
+    transition: width  0.4s ease-in-out;
+}
+
+.search-bar:focus {
+    
 }
 
   

@@ -22,15 +22,15 @@ class GroupsStoreInterface extends Store {
     }
 
     /**
-     * @param {string} group_name
+     * @param {object} group
      */
-    removeGroup(group_name) {
-        this.set(key, removeGroupByName(this.get(key), group_name));
+    removeGroup(group) {
+        this.set(key, removeGroupByName(this.get(key), group['name']));
     }
 
     /**
-     * @param { object } old 
-     * @param { object } update 
+     * @param {object} old 
+     * @param {object} update 
      */
     updateGroup(old, update) {
         let groups = this.get(key);
