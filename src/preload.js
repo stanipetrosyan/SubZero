@@ -11,6 +11,8 @@ const theme_path = path.join(__dirname, '../src/browsers/themes/set_theme.html')
 contextBridge.exposeInMainWorld('api', {
  // example
     modal: (data) => { return document.createElement('div') },
+
+    alert: (data) => console.log(data),
 //
     request: () => { return ipcRenderer.sendSync('data-request') },
 

@@ -11,6 +11,8 @@ printProjectList()
 printGroupList();
 setTheme(window.api.themerequest());
 
+project_list.appendChild(card);
+
 setInterval(refresh, 1000)
 
 function refresh() {
@@ -32,13 +34,13 @@ function printProjectList() {
 
 function printProjectForGroup(group) {
     group.projects.forEach(item => {
-        let project =  createProjectElement(item)
-        project.childNodes[0].lastChild.addEventListener('click', _=> {
+        let project = createProjectElement(item)
+        /* project.childNodes[0].lastChild.addEventListener('click', _=> {
             window.api.updateproject(item)
         })
         project.childNodes[2].addEventListener('click', _=> {
             window.api.openproject(item) 
-        })
+        }) */
         project_list.append(project)
     })
 }
@@ -59,7 +61,11 @@ function printGroupList() {
 }
 
 function createProjectElement(project) {
-    let div = builder.createElement('div', 'item', '');
+    let card = document.createElement('div', {is: 'sub-card'})
+    card.setAttribute('name', project['name'])
+    card.setAttribute('color', '#DD22FF')
+    return card;
+   /*  let div = builder.createElement('div', 'item', '');
     let title = builder.createElement('h2', 'title-project', project['name']);
     title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
     builder.appendAllChild(div, [
@@ -70,7 +76,7 @@ function createProjectElement(project) {
     if(project['repo']){
         div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));
     }
-    return div;
+    return div; */
 }
 
 function createGroupElement(group) {

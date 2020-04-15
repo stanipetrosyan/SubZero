@@ -103,7 +103,8 @@ ipcMain.on('add-project', (event, arg) => {
 })
 
 ipcMain.on('open-project', (event, arg) => {
-    openProjectUsingEditor(arg['path'], arg['editor']);
+    let project = store.getProjectByName(arg);
+    openProjectUsingEditor(project['path'], project['editor']);
 })
 
 ipcMain.on('delete-project', (event, arg) => {

@@ -8,8 +8,8 @@ function setTheme(current_theme) {
 }
 
 function setDarkTheme(obj) {  
-    obj.style.setProperty("--main-background-color", "#1e1e1e");
-    obj.style.setProperty("--main-secondary-background-color", "#131313");
+    obj.style.setProperty("--main-background-color", "#121212");
+    obj.style.setProperty("--main-secondary-background-color", "#121212");
     obj.style.setProperty("--main-text-color", "white");
     obj.style.setProperty("--main-color-hover-group", "#222222");
     obj.style.setProperty("--main-secondary-text-color", "#d7dbdd")

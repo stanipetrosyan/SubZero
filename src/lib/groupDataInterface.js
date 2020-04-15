@@ -67,6 +67,19 @@ class GroupsStoreInterface extends Store {
         this.removeProject(old);
         this.addProject(update);
     }
+
+    getProjectByName(name) {
+        let groups = this.get(key);
+        for (let group of groups) {
+            for (let project of group['projects']) {
+                if (project['name'] == name ) {
+                    return project;
+                }
+            }
+        }
+
+        return null;
+    }
 }
 
 function findGroupByName(data, group_name) {

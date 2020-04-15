@@ -5,7 +5,7 @@
 
 :root {
     --main-background-color: #1e1e1e;
-    --main-secondary-background-color: #131313;
+    --main-secondary-background-color: #121212;
     --main-color: #1C39BB;
     --main-text-color: white;
     --main-secondary-text-color: #d7dbdd;
@@ -22,11 +22,11 @@ body, html {
     background-color: var(--main-color);
 }
 
-.item {
+/* .item {
     width: 90%;
     border-bottom: 1px solid #1C39BB;
     margin-left: 2%;
-}
+} */
 .group-color {
     display: inline-block;
     margin-left: 10px;
@@ -178,15 +178,15 @@ body, html {
     padding: 8px 42px;
     background-color: #ff0000;
 }
-.title-project{
+/* .title-project{
     color:var(--main-text-color);
     font-size: 16px;
-}
+} */
 
-.subtitle-project{
+/* .subtitle-project{
     color: var(--main-secondary-text-color);
     font-size: 13px;
-}
+} */
 
 .project-modify-icon{
     display: inline-block;
@@ -313,11 +313,6 @@ body, html {
     transition: width  0.4s ease-in-out;
 }
 
-.search-bar:focus {
-    
-}
-
-  
 input[type=checkbox] {
     position: absolute; 
     z-index: 1; 
