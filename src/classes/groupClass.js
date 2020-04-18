@@ -44,10 +44,19 @@ class Group extends HTMLDivElement {
         container.style.width = '100px';
         container.style.color = 'white';
         container.style.fontSize = '14px';
-        container.innerText = `${this.name}`
+		container.innerText = `${this.name}`
+		
+		let updateIcon = document.createElement('div');
+		updateIcon.style.display = 'inline-block';
+		updateIcon.style.marginTop = '10px';
+		updateIcon.style.width = '20px';
+		updateIcon.style.height = '20px';
+		updateIcon.style.backgroundImage = `url('../resource/Icon/update.png')`;
+		updateIcon.style.backgroundSize = 'cover';
 
-        shadow.appendChild(color);
-        shadow.appendChild(container)
+		shadow.appendChild(color);
+		shadow.appendChild(container)
+		shadow.appendChild(updateIcon);
     }
 }
   
