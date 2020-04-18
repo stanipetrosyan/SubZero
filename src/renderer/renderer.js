@@ -11,8 +11,6 @@ printProjectList()
 printGroupList();
 setTheme(window.api.themerequest());
 
-project_list.appendChild(card);
-
 setInterval(refresh, 1000)
 
 function refresh() {
