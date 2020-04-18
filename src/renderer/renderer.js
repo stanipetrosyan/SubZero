@@ -4,8 +4,6 @@ const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 const search_bar = document.getElementById('checkbox');
 
-let builder = new HTMLBuilder();
-
 let data = window.api.request();
 printProjectList()
 printGroupList();
@@ -32,14 +30,7 @@ function printProjectList() {
 
 function printProjectForGroup(group) {
     group.projects.forEach(item => {
-        let project = createProjectElement(item)
-        /* project.childNodes[0].lastChild.addEventListener('click', _=> {
-            window.api.updateproject(item)
-        })
-        project.childNodes[2].addEventListener('click', _=> {
-            window.api.openproject(item) 
-        }) */
-        project_list.append(project)
+        project_list.append(createProjectElement(item))
     })
 }
 
@@ -63,28 +54,9 @@ function createProjectElement(project) {
     card.setAttribute('name', project['name'])
     card.setAttribute('color', '#DD22FF')
     return card;
-   /*  let div = builder.createElement('div', 'item', '');
-    let title = builder.createElement('h2', 'title-project', project['name']);
-    title.appendChild(builder.createElement('div', 'project-modify-icon', '', 'up'));
-    builder.appendAllChild(div, [
-        title,
-        builder.createElement('p', 'subtitle-project', project['language']),
-        builder.createElement('button', 'button button-subzero button-right', 'OPEN'), 
-    ]);
-    if(project['repo']){
-        div.appendChild(builder.createElement('div', 'project-git-icon', '', 'git'));
-    }
-    return div; */
 }
 
 function createGroupElement(group) {
-    /* let div = builder.createElement('div','group-item', '');
-    let g_type = builder.createElement('div', 'group-type', '')
-    let g_color = builder.createElement('span', 'group-color', '');
-    let modify = builder.createElement('div', 'group-modify-icon', '');
-    g_color.style.backgroundColor = group['color'];
-    g_type.appendChild(builder.createElement('p', 'group-label', group['name']));
-    builder.appendAllChild(div, [g_color, g_type, modify]); */
     let div = document.createElement('div', {is: 'sub-group'})
     div.setAttribute('name', group['name']);
     div.setAttribute('color', group['color'])

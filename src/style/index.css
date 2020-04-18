@@ -102,10 +102,6 @@ body, html {
     padding: 8px 42px;
 }
 
-.button-right {
-    float: right;
-}
-
 .button-cancel{
     background-color: var(--main-background-color);
     border: 2px solid;
@@ -127,16 +123,6 @@ body, html {
     background-color: #ff0000;
 }
 
-.project-modify-icon{
-    display: inline-block;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    background-image: url('../resource/Icon/update.png');
-    background-size: cover;
-    cursor: pointer;
-}
 .project-delete-icon{
     display: inline-block;
     margin-top: 10px;

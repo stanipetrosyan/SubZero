@@ -117,7 +117,7 @@ ipcMain.on('delete-project', (event, arg) => {
 
 ipcMain.on('update-project', (event, arg) => {
     openModal(project_path); 
-    tmp_project = arg;
+    tmp_project = store.getProjectByName(arg);
 })
 
 ipcMain.on('project-request', (event, arg) => {

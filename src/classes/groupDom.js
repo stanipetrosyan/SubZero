@@ -1,4 +1,4 @@
-class Group extends HTMLDivElement {
+class GroupDOM extends HTMLDivElement {
     constructor() {
       	super();
     }
@@ -61,4 +61,4 @@ class Group extends HTMLDivElement {
 }
   
   
-customElements.define('sub-group', Group, {extends: "div"});
+customElements.define('sub-group', GroupDOM, {extends: "div"});
