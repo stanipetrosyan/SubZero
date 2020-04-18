@@ -49,13 +49,13 @@ function printGroupList() {
     group_list.innerHTML = '';
     data.forEach(item => {
         let group = createGroupElement(item)
-        group.childNodes[1].addEventListener('click', _=> {
+       /*  group.childNodes[1].addEventListener('click', _=> {
             project_list.innerHTML = '';
             printProjectForGroup(item);
         })
         group.childNodes[2].addEventListener('click', _=> {
             window.api.updategroup(item)
-        })
+        }) */
         group_list.appendChild(group)
     })
 }
@@ -80,13 +80,16 @@ function createProjectElement(project) {
 }
 
 function createGroupElement(group) {
-    let div = builder.createElement('div','group-item', '');
+    /* let div = builder.createElement('div','group-item', '');
     let g_type = builder.createElement('div', 'group-type', '')
     let g_color = builder.createElement('span', 'group-color', '');
     let modify = builder.createElement('div', 'group-modify-icon', '');
     g_color.style.backgroundColor = group['color'];
     g_type.appendChild(builder.createElement('p', 'group-label', group['name']));
-    builder.appendAllChild(div, [g_color, g_type, modify]);
+    builder.appendAllChild(div, [g_color, g_type, modify]); */
+    let div = document.createElement('div', {is: 'sub-group'})
+    div.setAttribute('name', group['name']);
+    div.setAttribute('color', group['color'])
     return div;
 }
 
