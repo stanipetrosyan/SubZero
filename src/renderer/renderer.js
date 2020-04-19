@@ -47,7 +47,7 @@ function printGroupList() {
 }
 
 function createProjectElement(project) {
-    let card = document.createElement('div', {is: 'sub-card'})
+    let card = document.createElement('sub-project')
     card.setAttribute('name', project['name'])
     card.setAttribute('color', '#DD22FF')
     return card;

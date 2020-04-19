@@ -20,17 +20,20 @@ body, html {
     Home Page Structure
 */
 
-.wrapper {
-    display: grid;
-    grid-template-rows: 1fr 3fr 1fr 1fr;
-    grid-template-columns: 150px 1fr 1fr;
-    height: 85vh;
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background-color: var(--main-secondary-background-color);
+    border-right: 1px solid;
+    overflow-x: hidden;
+    padding-top: 10px;
+    overflow-y: scroll;
 }
 
-.wrapper-top {
-    grid-row: 1;
-    grid-column: 3;
-}
 .content {
     grid-row: 1/4;
     grid-column: 2/4;
@@ -46,21 +49,6 @@ body, html {
     height:10%;
     width:100%;
 }
-
-.sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    background-color: var(--main-secondary-background-color);
-    border-right: 1px solid;
-    overflow-x: hidden;
-    padding-top: 10px;
-    overflow-y: scroll;
-}
-
 
 .clear-button{
     background-color: var(--main-secondary-background-color);
@@ -210,6 +198,18 @@ body, html {
 /* 
     CURTAIN SEARCH
 */ 
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr 1fr;
+    grid-template-columns: 150px 1fr 1fr;
+    height: 85vh;
+}
+
+.wrapper-top {
+    grid-row: 1;
+    grid-column: 3;
+}
 
 .curtain {
     width: 100%; 

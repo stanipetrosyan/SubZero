@@ -1,4 +1,4 @@
-class ProjectDOM extends HTMLDivElement {
+class ProjectDOM extends HTMLElement {
 	constructor() {
 		super();
 	}
@@ -31,11 +31,13 @@ class ProjectDOM extends HTMLDivElement {
 		this.style.display = 'block'
 		this.style.backgroundColor = "#1e1e1e"
 		this.style.color = 'var(--main-text-color)'
+		this.style.margin = '20px';
 
 		let container = document.createElement('div');
-		container.style.padding = '2px 16px'
+		container.style.padding = '10px 16px'
 
-		let name =  document.createElement('h1');
+		let name =  document.createElement('h3');
+		name.innerHTML = `${this.name}`;
 
 		let settings = document.createElement('button');
 		settings.style.backgroundColor = 'var(--main-color)';
@@ -66,8 +68,6 @@ class ProjectDOM extends HTMLDivElement {
 			this.style.boxShadow = '0 4px 8px 0 rgba(0,0,0,0.2)';
 		})
 
-		name.innerHTML = `${this.name}`;
-
 		container.appendChild(name);
 		container.appendChild(settings);
 		container.appendChild(open);
@@ -76,4 +76,4 @@ class ProjectDOM extends HTMLDivElement {
 }
 
 
-customElements.define('sub-card', ProjectDOM, {extends: "div"});
+customElements.define('sub-project', ProjectDOM);
