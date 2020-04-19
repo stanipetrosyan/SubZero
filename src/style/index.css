@@ -7,23 +7,22 @@
     --bg-color: #121212;
     --primary-color: #1C39BB;
     --font-color: white;
-    --main-secondary-text-color: #d7dbdd;
-    --main-color-hover-group: #222222;
+    --secondary-font-color: #d7dbdd;
+    --card-bg-color: #1e1e1e;
 }
 
 [data-theme="dark"] {
     --bg-color: #121212;
-    --primary-color: #1C39BB;
     --font-color: white;
-    --main-secondary-text-color: #d7dbdd;
-    --main-color-hover-group: #222222;
+    --secondary-font-color: #d7dbdd;
+    --card-bg-color: #1e1e1e;
 }
 
 [data-theme="light"] {
     --bg-color: white;
     --font-color: #424242;
-    --main-color-hover-group: #eceff1;
-    --main-secondary-text-color: #616a6b;
+    --secondary-font-color: #616a6b;
+    --card-bg-color: white;
 }
 
 body, html {

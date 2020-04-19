@@ -44,7 +44,7 @@ class GroupDOM extends HTMLElement {
         let container = document.createElement('div');
         container.style.display = 'inline-block';
         container.style.width = '100px';
-        container.style.color = 'white';
+        container.style.color = 'var(--font-color)';
         container.style.fontSize = '14px';
 		container.innerText = `${this.name}`
 		

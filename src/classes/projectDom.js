@@ -25,12 +25,13 @@ class ProjectDOM extends HTMLElement {
 
 	connectedCallback() {
 		let shadow = this.attachShadow({mode:'open'});
+
 		this.style.boxShadow = '0 4px 8px 0 rgba(0,0,0,0.2)';
 		this.style.borderRadius = '5px';
 		this.style.width = '40%';
 		this.style.display = 'block'
-		this.style.backgroundColor = "#1e1e1e"
-		this.style.color = 'var(--main-text-color)'
+		this.style.backgroundColor = "var(--card-bg-color)"
+		this.style.color = 'var(--font-color)'
 		this.style.margin = '20px';
 
 		let container = document.createElement('div');
@@ -40,7 +41,7 @@ class ProjectDOM extends HTMLElement {
 		name.innerHTML = `${this.name}`;
 
 		let settings = document.createElement('button');
-		settings.style.backgroundColor = 'var(--main-color)';
+		settings.style.backgroundColor = 'var(--card-bg-color)';
 		settings.style.border = 'none';
 		settings.innerHTML = "SETTING";
 		settings.style.color = this.color;
@@ -48,7 +49,7 @@ class ProjectDOM extends HTMLElement {
 
 
 		let open = document.createElement('button');
-		open.style.backgroundColor = 'white';
+		open.style.backgroundColor = 'var(--card-bg-color)';
 		open.style.border = 'none';
 		open.innerHTML = "OPEN";
 		open.style.color = this.color;
