@@ -38,13 +38,10 @@ function printGroupList() {
     group_list.innerHTML = '';
     data.forEach(item => {
         let group = createGroupElement(item)
-       /*  group.childNodes[1].addEventListener('click', _=> {
+        group.addEventListener('click', _ => {
             project_list.innerHTML = '';
             printProjectForGroup(item);
         })
-        group.childNodes[2].addEventListener('click', _=> {
-            window.api.updategroup(item)
-        }) */
         group_list.appendChild(group)
     })
 }
@@ -57,7 +54,7 @@ function createProjectElement(project) {
 }
 
 function createGroupElement(group) {
-    let div = document.createElement('div', {is: 'sub-group'})
+    let div = document.createElement('sub-group')
     div.setAttribute('name', group['name']);
     div.setAttribute('color', group['color'])
     return div;

@@ -135,7 +135,7 @@ ipcMain.on('open-folder-dialog', (event, arg) => {
 
 ipcMain.on('update-group', (event, arg) => {
     openModal(group_path); 
-    tmp_group = arg;
+    tmp_group = store.getGroupByName(arg);
 })
 
 ipcMain.on('group-request', (event, arg) => {

@@ -1,6 +1,6 @@
-class GroupDOM extends HTMLDivElement {
+class GroupDOM extends HTMLElement {
     constructor() {
-      	super();
+        super();
     }
   
     static get observedAttributes() {
@@ -25,6 +25,8 @@ class GroupDOM extends HTMLDivElement {
   
     connectedCallback() {
         let shadow = this.attachShadow({mode:'open'});
+        
+        this.style.display = 'block'
         this.style.width = '100%';
         this.style.marginBottom = '5px';
         this.style.height = '50px';
@@ -52,13 +54,16 @@ class GroupDOM extends HTMLDivElement {
 		updateIcon.style.width = '20px';
 		updateIcon.style.height = '20px';
 		updateIcon.style.backgroundImage = `url('../resource/Icon/update.png')`;
-		updateIcon.style.backgroundSize = 'cover';
+        updateIcon.style.backgroundSize = 'cover';
+        updateIcon.addEventListener('click', _ => {
+            window.api.updategroup(this.name)
+        })
 
 		shadow.appendChild(color);
 		shadow.appendChild(container)
-		shadow.appendChild(updateIcon);
+        shadow.appendChild(updateIcon);
     }
 }
   
   
-customElements.define('sub-group', GroupDOM, {extends: "div"});
+customElements.define('sub-group', GroupDOM);

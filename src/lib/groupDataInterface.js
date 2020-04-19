@@ -39,6 +39,11 @@ class GroupsStoreInterface extends Store {
         this.set(key, groups);
     }
     
+    getGroupByName(name) {
+        let groups = this.get(key);
+        return groups[findGroupByName(groups, name)];
+    }
+    
     /**
      * @param {object} project 
      */
@@ -77,7 +82,6 @@ class GroupsStoreInterface extends Store {
                 }
             }
         }
-
         return null;
     }
 }
