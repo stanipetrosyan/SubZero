@@ -7,12 +7,8 @@ html, body{
 }
 
 body {
-    color: #fff;
+    color: var(--font-color);
     overflow: hidden; /*is the scroll bar*/
-}
-
-div {
-    color: var(--main-text-color);
 }
 
 .top {
@@ -124,24 +120,6 @@ input:focus ~ .highlight {
     background-image: url('../resource/Icon/open_folder.png');
     background-size: cover;
     cursor: pointer;
-}
-
-.group-container{
-    display: inline-block;
-    margin-left: 10px;
-    color: white;
-    font-size: 1.8em;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    border: 2px solid var(--main-text-color);
-    opacity: 0.4;
-    cursor: pointer;
-}
-
-.group-container:hover{
-    opacity: 0.8;
 }
 
 .group-delete-icon{

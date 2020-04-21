@@ -2,7 +2,6 @@
 
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
-const builder = new HTMLBuilder();
 
 setTheme(window.api.themerequest());
 
@@ -26,11 +25,12 @@ if(projectToUpdate) {
 
 function setGroupListSelection() {
     for (let group of data) {
-        let container = builder.createElement('div', 'group-container' , String(group.name[0]).toUpperCase(), group.name);
-        container.style.backgroundColor = group.color;
+        let container = document.createElement('sub-group-container');
+        container.setAttribute('color', group['color']);
+        container.setAttribute('name', group['name']);
         container.addEventListener('click', () => {
+            container.style.opacity = '0.8';
             groupSelected = group.name;
-            container.style.opacity = 0.8;
         })
         groupList.appendChild(container);
     }
