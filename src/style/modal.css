@@ -111,22 +111,3 @@ input:focus ~ .highlight {
     from  { background: #1C39BB }
     to    { width:0; background:transparent; }
 }
-
-.open-icon{
-    display: inline-block;
-    padding-top: 10px;
-    width: 40px;
-    height: 40px;
-    background-image: url('../resource/Icon/open_folder.png');
-    background-size: cover;
-    cursor: pointer;
-}
-
-.group-delete-icon{
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-image: url('../resource/Icon/remove.png');
-    background-size: cover;
-    margin-left: 10%;
-}
