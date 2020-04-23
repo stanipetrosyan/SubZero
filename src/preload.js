@@ -6,11 +6,6 @@ const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html'
 const theme_path = path.join(__dirname, '../src/browsers/themes/set_theme.html')
 
 contextBridge.exposeInMainWorld('api', {
- // example
-    modal: (data) => { return document.createElement('div') },
-
-    alert: (data) => console.log(data),
-//
     updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
 
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },

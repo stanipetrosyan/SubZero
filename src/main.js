@@ -64,31 +64,9 @@ function closeModal() {
     }
 }
 
-ipcMain.on('open-modal', (event, arg) => {
-    openModal(arg);
-})
-
-ipcMain.on('close-modal', () => {
-    closeModal();
-})
-
-ipcMain.on('error-message', (event, arg) => {
-    return dialog.showMessageBoxSync(null, config('error'))
-})
-
-ipcMain.on('data-request', (event, arg) => {
-    event.returnValue = store.get('groups');
-})
-
-ipcMain.on('theme-request', (event, arg) => {
-    event.returnValue = store.get('theme');
-})
-
-ipcMain.on('update-theme', (event, arg) => {
-    store.set('theme', arg);
-    closeModal();
-})
-
+/* 
+    GROUPS EVENTS
+*/
 ipcMain.on('add-group', (event, arg) => {
     if(store.addGroup(arg) == false) {
         dialog.showMessageBox(null, config('equals'));
@@ -97,49 +75,9 @@ ipcMain.on('add-group', (event, arg) => {
     }   
 })
 
-ipcMain.on('add-project', (event, arg) => {
-    store.addProject(arg);
-    closeModal();
-})
-
-ipcMain.on('open-project', (event, arg) => {
-    let project = store.getProjectByName(arg);
-    openProjectUsingEditor(project['path'], project['editor']);
-})
-
-ipcMain.on('delete-project', (event, arg) => {
-    let response = dialog.showMessageBoxSync(null, config('question'));
-    if(response === 1) {
-        store.removeProject(tmp_project);
-    }
-    closeModal();
-})
-
-ipcMain.on('update-project', (event, arg) => {
-    openModal(project_path); 
-    tmp_project = store.getProjectByName(arg);
-})
-
-ipcMain.on('project-request', (event, arg) => {
-    event.returnValue = tmp_project;
-})
-
-ipcMain.on('updated-project', (event, arg) => {
-    store.updateProject(tmp_project, arg);
-    closeModal();
-})
-
-ipcMain.on('open-folder-dialog', (event, arg) => {
-    event.returnValue = dialog.showOpenDialogSync({ properties: ["openDirectory"]});
-})
-
 ipcMain.on('update-group', (event, arg) => {
     openModal(group_path); 
     tmp_group = store.getGroupByName(arg);
-})
-
-ipcMain.on('group-request', (event, arg) => {
-    event.returnValue = tmp_group;
 })
 
 ipcMain.on('updated-group', (event, arg) => {
@@ -152,6 +90,80 @@ ipcMain.on('delete-group', (event, arg) => {
     if(response === 1) {
         store.removeGroup(tmp_group);
     }
+    closeModal();
+})
+
+/* 
+    PROJECTS EVENTS
+*/
+ipcMain.on('add-project', (event, arg) => {
+    store.addProject(arg);
+    closeModal();
+})
+
+ipcMain.on('update-project', (event, arg) => {
+    openModal(project_path); 
+    tmp_project = store.getProjectByName(arg);
+})
+
+ipcMain.on('updated-project', (event, arg) => {
+    store.updateProject(tmp_project, arg);
+    closeModal();
+})
+
+ipcMain.on('delete-project', (event, arg) => {
+    let response = dialog.showMessageBoxSync(null, config('question'));
+    if(response === 1) {
+        store.removeProject(tmp_project);
+    }
+    closeModal();
+})
+
+ipcMain.on('open-project', (event, arg) => {
+    let project = store.getProjectByName(arg);
+    openProjectUsingEditor(project['path'], project['editor']);
+})
+
+/* 
+    REQUEST DATA
+*/
+ipcMain.on('group-request', (event, arg) => {
+    event.returnValue = tmp_group;
+})
+
+ipcMain.on('project-request', (event, arg) => {
+    event.returnValue = tmp_project;
+})
+
+ipcMain.on('data-request', (event, arg) => {
+    event.returnValue = store.get('groups');
+})
+
+ipcMain.on('theme-request', (event, arg) => {
+    event.returnValue = store.get('theme');
+})
+
+/* 
+    MODAL & DIALOG EVENTS
+*/
+ipcMain.on('open-modal', (event, arg) => {
+    openModal(arg);
+})
+
+ipcMain.on('close-modal', () => {
+    closeModal();
+})
+
+ipcMain.on('error-message', (event, arg) => {
+    return dialog.showMessageBoxSync(null, config('error'))
+})
+
+ipcMain.on('open-folder-dialog', (event, arg) => {
+    event.returnValue = dialog.showOpenDialogSync({ properties: ["openDirectory"]});
+})
+
+ipcMain.on('update-theme', (event, arg) => {
+    store.set('theme', arg);
     closeModal();
 })
 
