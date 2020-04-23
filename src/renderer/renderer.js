@@ -13,7 +13,7 @@ setInterval(refresh, 1000)
 
 function refresh() {
     setTheme(window.request.theme());
-    let data_requested = window.api.request();
+    let data_requested = window.request.data();
     if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
         data = data_requested;
         printProjectList();

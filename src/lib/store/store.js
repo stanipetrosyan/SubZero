@@ -4,12 +4,21 @@ const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+const options = {
+    configName: 'data-user',
+    defaults: {
+        groups: [],
+        theme: { name: "Default"},
+        user_setup: {}
+    }
+}
+
 class Store {
-    constructor(opts) {
+    constructor() {
         const userDataPath = (electron.app || electron.remote.app).getPath('userData');
-        this.path = path.join(userDataPath, opts.configName + '.json');
+        this.path = path.join(userDataPath, options.configName + '.json');
         
-        this.data = parseDataFile(this.path, opts.defaults);
+        this.data = parseDataFile(this.path, options.defaults);
     }
     
     get(key) {

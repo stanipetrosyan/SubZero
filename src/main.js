@@ -9,14 +9,7 @@ const config = require('../config')
 
 const groupInterface = require('./lib/groupDataInterface');
 
-const store = new groupInterface({
-    configName: 'data-user',
-    defaults: {
-      groups: [],
-      theme: { name: "Default"},
-      user_setup: {}
-    }
-});
+const store = new groupInterface();
 
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
