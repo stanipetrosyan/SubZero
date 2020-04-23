@@ -3,15 +3,15 @@
 const groupList = document.getElementById('group-list');
 const editors = document.getElementsByClassName('editor-icon');
 
-setTheme(window.api.themerequest());
+setTheme(window.request.theme());
 
-let data = window.api.request();
+let data = window.request.data();
 let project_folder = null;
 let projectToUpdate = null;
 let editorSelected = null;
 let groupSelected = null;
 
-projectToUpdate = window.api.projectrequest();
+projectToUpdate = window.request.project();
 
 setGroupListSelection();
 
@@ -36,7 +36,7 @@ function setGroupListSelection() {
     }
 }
 
-function setProject(project){
+function setProject(project) {
     document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').value = project['path'];
@@ -56,9 +56,9 @@ document.getElementById('add').addEventListener('click', () => {
     let project = getProjectValues();
     if (checkInputValues(project)) {
         if (projectToUpdate) {
-            window.api.updatedproject(project);
+            window.projects.updated(project);
         } else {
-            window.api.addproject(project);
+            window.projects.add(project);
         }
     } else {
         window.api.showErrorMessage();
@@ -83,7 +83,7 @@ function checkInputValues(project) {
 }
 
 document.getElementById('delete').addEventListener('click', _ => {
-    window.api.deleteproject();
+    window.projects.delete();
 }) 
 
 

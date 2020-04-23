@@ -4,15 +4,15 @@ const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 const search_bar = document.getElementById('checkbox');
 
-let data = window.api.request();
+let data = window.request.data();
 printProjectList()
 printGroupList();
-setTheme(window.api.themerequest());
+setTheme(window.request.theme());
 
 setInterval(refresh, 1000)
 
 function refresh() {
-    setTheme(window.api.themerequest());
+    setTheme(window.request.theme());
     let data_requested = window.api.request();
     if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
         data = data_requested;
@@ -59,10 +59,6 @@ function createGroupElement(group) {
     div.setAttribute('color', group['color'])
     return div;
 }
-
-document.getElementById('newGroup').addEventListener('click', _=> {
-    window.api.openGroupModal();
-})
 
 document.getElementById('search-bar').addEventListener('input', _ => {
     let textSearched = document.getElementById('search-bar').value

@@ -1,36 +1,17 @@
 const { contextBridge, ipcRenderer } = require('electron');
 const path = require('path');
 
-
 const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
 const theme_path = path.join(__dirname, '../src/browsers/themes/set_theme.html')
 
-
-// TODO use standard for api
 contextBridge.exposeInMainWorld('api', {
  // example
     modal: (data) => { return document.createElement('div') },
 
     alert: (data) => console.log(data),
 //
-    request: () => { return ipcRenderer.sendSync('data-request') },
-
-    addgroup: (data) => ipcRenderer.send('add-group', data),
-    addproject: (data) => ipcRenderer.send('add-project', data),
-    openproject: (data) => ipcRenderer.send('open-project', data),
-    updateproject: (data) => ipcRenderer.send('update-project', data),
-    updategroup: (data) => ipcRenderer.send('update-group', data),
-    updatedgroup: (data) => ipcRenderer.send('updated-group', data),
-    updatedproject: (data) => ipcRenderer.send('updated-project', data),
-    deletegroup: () => ipcRenderer.sendSync('delete-group'),
-    deleteproject: () => ipcRenderer.sendSync('delete-project'),
-
-    grouprequest: () => { return ipcRenderer.sendSync('group-request') },
-    projectrequest: () => { return ipcRenderer.sendSync('project-request') },
-
     updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
-    themerequest: () => {return ipcRenderer.sendSync('theme-request')},
 
     opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
 
@@ -39,6 +20,28 @@ contextBridge.exposeInMainWorld('api', {
     closeModal: () => ipcRenderer.send('close-modal'),
 
     showErrorMessage: () => { ipcRenderer.send('error-message') }
+})
+
+contextBridge.exposeInMainWorld('groups', {
+    add: (data) => ipcRenderer.send('add-group', data),
+    update: (data) => ipcRenderer.send('update-group', data),
+    updated: (data) => ipcRenderer.send('updated-group', data),
+    delete: () => ipcRenderer.sendSync('delete-group')
+})
+
+contextBridge.exposeInMainWorld('projects', {
+    add: (data) => ipcRenderer.send('add-project', data),
+    update: (data) => ipcRenderer.send('update-project', data),
+    updated: (data) => ipcRenderer.send('updated-project', data),
+    delete: () => ipcRenderer.sendSync('delete-project'),
+    open: (data) => ipcRenderer.send('open-project', data)
+})
+
+contextBridge.exposeInMainWorld('request', {
+    group: () => { return ipcRenderer.sendSync('group-request') },
+    project: () => { return ipcRenderer.sendSync('project-request') },
+    theme: () => { return ipcRenderer.sendSync('theme-request') },
+    data: () => { return ipcRenderer.sendSync('data-request') }
 })
 
 ipcRenderer.on('open-group', () => {

@@ -11,9 +11,9 @@ let groupToUpdate = null;
 let selected = null;
 
 const builder = new HTMLBuilder();
-setTheme(window.api.themerequest());
+setTheme(window.request.theme());
 
-groupToUpdate = window.api.grouprequest();
+groupToUpdate = window.request.group();
 
 if(groupToUpdate) {
     setGroupValues();
@@ -39,9 +39,9 @@ document.getElementById('add-update').addEventListener('click', () => {
     if (checkInputValues(group)) {
         if (groupToUpdate) {
             group['projects'] = groupToUpdate['projects'];
-            window.api.updatedgroup(group)
+            window.groups.updated(group)
         } else 
-            window.api.addgroup(group)
+            window.groups.add(group)
     } else {
         window.api.showErrorMessage();
     }
@@ -66,7 +66,7 @@ function checkInputValues(group) {
 }
 
 document.getElementById('delete').addEventListener('click', () => {
-    window.api.deletegroup();
+    window.groups.delete();
 })
 
 document.getElementById('cancel').addEventListener('click', () => {

@@ -55,11 +55,11 @@ class ProjectDOM extends HTMLElement {
 		open.style.color = this.color;
 
 		open.addEventListener('click', _ => {
-			window.api.openproject(this.name);
+			window.projects.open(this.name);
 		})
 
 		settings.addEventListener('click', _ => {
-			window.api.updateproject(this.name);
+			window.projects.update(this.name);
 		})
 
 		this.addEventListener('mouseover', _ => {

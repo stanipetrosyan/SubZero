@@ -56,7 +56,7 @@ class GroupDOM extends HTMLElement {
 		updateIcon.style.backgroundImage = `url('../resource/Icon/update.png')`;
         updateIcon.style.backgroundSize = 'cover';
         updateIcon.addEventListener('click', _ => {
-            window.api.updategroup(this.name)
+            window.groups.update(this.name)
         })
 
 		shadow.appendChild(color);
