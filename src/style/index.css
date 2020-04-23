@@ -10,6 +10,12 @@
     --secondary-font-color: #d7dbdd;
     --card-bg-color: #1e1e1e;
 }
+/* 
+    primary 6200ee
+    variante 3700b3
+    secondario 03dac6
+    variante 018786
+*/
 
 [data-theme="dark"] {
     --bg-color: #121212;
@@ -38,11 +44,6 @@ body, html {
     grid-template-rows: 1fr 3fr 1fr 1fr;
     grid-template-columns: 150px 1fr 1fr;
     height: 85vh;
-}
-
-.wrapper-top {
-    grid-row: 1;
-    grid-column: 3;
 }
 
 .sidenav {
@@ -78,55 +79,24 @@ body, html {
     ELEMENTS
 */
 
-.clear-button{
-    background-color: var(--bg-color);
-    border: none;
-    color: var(--font-color);
-    margin-left: 20px;
-    margin-top: 2%;
-    cursor: pointer;
-}
-
-#newGroup {
-    margin-bottom: 40px;
-}
-
-.clear-button:hover{
-    color: #1C39BB;
-}
-
-
-.button {
-    background-color: var(--bg-color);
-    border: 2px solid;
-    border-color: var(--primary-color);
-    color: var(--font-color);
-    padding: 6px 40px;
-    text-align: center;
-    border-radius: 2em;
-    text-decoration: none;
+button {
     display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
+    background-color: var(--bg-color);
+    color: #DD22FF;
+    border: none;
+    border-radius: 4px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
 
-.button:hover {
+button:hover {
     color: white;
-    padding: 8px 42px;
-}
-
-.button-subzero {
-    border-color: var(--primary-color);
-}
-
-.button-subzero:hover {
-    background-color: var(--primary-color);
+    padding: 6px 16px;
+    background-color: #DD22FF;
 }
 
 .button-cancel {
-    border-color: #ff0000;
+    color: #ff0000;
 }
 
 .button-cancel:hover{
@@ -154,38 +124,6 @@ body, html {
 .editor-icon:hover{
     opacity: 1;
 }
-
-/*
-    Autocomplete style
-*/
-
-.autocomplete-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
-    color: black;
-}
-
-.autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff; 
-    border-bottom: 1px solid #d4d4d4; 
-}
-
-.autocomplete-items div:hover {
-    background-color: #e9e9e9; 
-}
-
-.autocomplete-active {
-    background-color: DodgerBlue !important; 
-    color: #131313; 
-}
 /* 
     Scrollbar sidenav
 */
@@ -209,6 +147,11 @@ body, html {
 /* 
     CURTAIN SEARCH
 */ 
+
+.wrapper-top {
+    grid-row: 1;
+    grid-column: 3;
+}
 
 .curtain {
     width: 100%; 

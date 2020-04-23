@@ -43,9 +43,9 @@ class ProjectDOM extends HTMLElement {
 		let settings = document.createElement('button');
 		settings.style.backgroundColor = 'var(--card-bg-color)';
 		settings.style.border = 'none';
-		settings.innerHTML = "SETTING";
 		settings.style.color = this.color;
 		settings.style.display = 'inline-block';
+		settings.innerHTML = "SETTING";
 
 
 		let open = document.createElement('button');
