@@ -10,7 +10,6 @@ let active = false;
 let groupToUpdate = null;
 let selected = null;
 
-const builder = new HTMLBuilder();
 setTheme(window.request.theme());
 
 groupToUpdate = window.request.group();
@@ -75,9 +74,10 @@ document.getElementById('cancel').addEventListener('click', () => {
 
 function createColorPicker() {
     colors.forEach(color => {
-        let colorPickerElement = builder.createElement('li', 'color-' + color);
-        builder.setAttribute(colorPickerElement, "data-option", "");
-        builder.setAttribute(colorPickerElement, "data-value", '#' + color);
+        let colorPickerElement = document.createElement('li');
+        colorPickerElement.setAttribute('class', 'color-' + color)
+        colorPickerElement.setAttribute('data-option', "");
+        colorPickerElement.setAttribute('data-value', '#' + color);
         colorPickerElement.addEventListener('click', () =>{
             selected = colorPickerElement.getAttribute('data-value');
             shower_color_selected.style.backgroundColor = selected;
