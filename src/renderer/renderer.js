@@ -3,6 +3,7 @@
 const group_list = document.getElementById('group-list');
 const project_list = document.getElementById('project-list');
 const search_bar = document.getElementById('checkbox');
+const menu = document.getElementById('menu');
 
 let data = window.request.data();
 printProjectList()
@@ -42,9 +43,27 @@ function printGroupList() {
             project_list.innerHTML = '';
             printProjectForGroup(item);
         })
+        group.addEventListener('contextmenu', createContextMenu);
         group_list.appendChild(group)
     })
 }
+
+function createContextMenu(e) {
+    e.preventDefault();
+    menu.style.top = `${e.clientY}px`;
+    menu.style.left = `${e.clientX}px`;
+    menu.classList.remove('hidden');
+
+    document.addEventListener('click', documentClickHandler);
+}
+
+function documentClickHandler(e) {
+    const isClickedOutside = !menu.contains(e.target);
+    if (isClickedOutside) {
+        menu.classList.add('hidden');
+        document.removeEventListener('click', documentClickHandler);
+    }
+};
 
 function createProjectElement(project) {
     let card = document.createElement('sub-project')

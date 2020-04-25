@@ -124,6 +124,22 @@ button:hover {
 .editor-icon:hover{
     opacity: 1;
 }
+
+/*
+    CONTEXTMENU
+*/
+.absolute {
+    position: absolute;
+}
+.hidden {
+    display: none;
+}
+
+#menu {
+    background-color: white;
+}
+
+
 /* 
     Scrollbar sidenav
 */
