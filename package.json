@@ -6,6 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
+    "test": "mocha",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . SubZero --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"SubZero\"",
     "package-linux": "electron-packager . SubZero --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
@@ -22,7 +23,9 @@
   "homepage": "https://github.com/StaniPetrosyan/SubZero#readme",
   "devDependencies": {
     "electron": "^8.1.1",
-    "electron-packager": "^14.2.1"
+    "electron-packager": "^14.2.1",
+    "mocha": "^7.1.2",
+    "spectron": "^10.0.1"
   },
   "dependencies": {
     "minimist": "^1.2.5",
