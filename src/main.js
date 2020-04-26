@@ -79,11 +79,11 @@ ipcMain.on('updated-group', (event, arg) => {
 })
 
 ipcMain.on('delete-group', (event, arg) => {
+    let group = store.getGroupByName(arg);
     let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 1) {
-        store.removeGroup(tmp_group);
+        store.removeGroup(group);
     }
-    closeModal();
 })
 
 /* 

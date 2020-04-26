@@ -43,19 +43,29 @@ function printGroupList() {
             project_list.innerHTML = '';
             printProjectForGroup(item);
         })
-        group.addEventListener('contextmenu', createContextMenu);
+        group.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            menu.style.top = `${e.clientY}px`;
+            menu.style.left = `${e.clientX}px`;
+            let editAction = createActionContextMenu('Edit');
+            let deleteAction = createActionContextMenu('Delete')
+
+            editAction.addEventListener('click', _ => {
+                window.groups.update(item['name'])
+            })
+            deleteAction.addEventListener('click', _ => {
+                window.groups.delete(item['name'])
+            })
+
+            menu.classList.remove('hidden');
+            menu.appendChild(editAction);
+            menu.appendChild(deleteAction);
+            document.addEventListener('click', documentClickHandler);
+        });
         group_list.appendChild(group)
     })
 }
 
-function createContextMenu(e) {
-    e.preventDefault();
-    menu.style.top = `${e.clientY}px`;
-    menu.style.left = `${e.clientX}px`;
-    menu.classList.remove('hidden');
-
-    document.addEventListener('click', documentClickHandler);
-}
 
 function documentClickHandler(e) {
     const isClickedOutside = !menu.contains(e.target);
@@ -64,6 +74,12 @@ function documentClickHandler(e) {
         document.removeEventListener('click', documentClickHandler);
     }
 };
+
+function createActionContextMenu(name) {
+    let el = document.createElement('li');
+    el.innerText = name;
+    return el;
+}
 
 function createProjectElement(project) {
     let card = document.createElement('sub-project')

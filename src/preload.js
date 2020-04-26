@@ -21,7 +21,7 @@ contextBridge.exposeInMainWorld('groups', {
     add: (data) => ipcRenderer.send('add-group', data),
     update: (data) => ipcRenderer.send('update-group', data),
     updated: (data) => ipcRenderer.send('updated-group', data),
-    delete: () => ipcRenderer.sendSync('delete-group')
+    delete: (data) => ipcRenderer.send('delete-group', data)
 })
 
 contextBridge.exposeInMainWorld('projects', {

@@ -47,21 +47,9 @@ class GroupDOM extends HTMLElement {
         container.style.color = 'var(--font-color)';
         container.style.fontSize = '14px';
 		container.innerText = `${this.name}`
-		
-		let updateIcon = document.createElement('div');
-		updateIcon.style.display = 'inline-block';
-		updateIcon.style.marginTop = '10px';
-		updateIcon.style.width = '20px';
-		updateIcon.style.height = '20px';
-		updateIcon.style.backgroundImage = `url('../resource/Icon/update.png')`;
-        updateIcon.style.backgroundSize = 'cover';
-        updateIcon.addEventListener('click', _ => {
-            window.groups.update(this.name)
-        })
 
 		shadow.appendChild(color);
 		shadow.appendChild(container)
-        shadow.appendChild(updateIcon);
     }
 }
   
