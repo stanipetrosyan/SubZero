@@ -29,8 +29,17 @@ class GroupDOM extends HTMLElement {
         this.style.display = 'block'
         this.style.width = '100%';
         this.style.marginBottom = '5px';
+        this.style.marginTop = '10px';
         this.style.height = '50px';
+        this.style.lineHeight = '50px';
         this.style.cursor = 'pointer';
+       
+        this.addEventListener('mouseover', _ => {
+			this.style.backgroundColor = '#616a6b';
+		})
+		this.addEventListener('mouseout', _ => {
+			this.style.backgroundColor = 'var(--bg-color)';
+		})
 
         let color = document.createElement('span');  
         color.style.display = 'inline-block';
