@@ -7,7 +7,7 @@ const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('../config')
 
-const groupInterface = require('./lib/groupDataInterface');
+const groupInterface = require('./lib/groupStoreInterface');
 
 const store = new groupInterface();
 

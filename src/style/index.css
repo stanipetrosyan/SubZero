@@ -126,18 +126,28 @@ button:hover {
 }
 
 /*
-    CONTEXTMENU
+    CONTEXTMENU 
 */
-.absolute {
-    position: absolute;
-}
-.hidden {
-    display: none;
+ul {
+    z-index: 1;
+    background-color: white;
+    list-style-type: none;
+    position: fixed;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 10px 0px;
+    border-radius: 4px;
 }
 
-#menu {
-    background-color: white;
+li {
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
 }
+
+li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 
 
 /* 

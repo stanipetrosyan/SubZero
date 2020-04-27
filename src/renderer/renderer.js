@@ -43,42 +43,50 @@ function printGroupList() {
             project_list.innerHTML = '';
             printProjectForGroup(item);
         })
-        group.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            menu.style.top = `${e.clientY}px`;
-            menu.style.left = `${e.clientX}px`;
-            let editAction = createActionContextMenu('Edit');
-            let deleteAction = createActionContextMenu('Delete')
+        group.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            let menu = createContextMenu(event);
+            let editAction = menu.children[0]
+            let deleteAction = menu.children[1]
 
             editAction.addEventListener('click', _ => {
                 window.groups.update(item['name'])
+                menu.parentNode.removeChild(menu);
+                menu = undefined;
             })
             deleteAction.addEventListener('click', _ => {
                 window.groups.delete(item['name'])
+                menu.parentNode.removeChild(menu);
+                menu = undefined;
             })
-
-            menu.classList.remove('hidden');
-            menu.appendChild(editAction);
-            menu.appendChild(deleteAction);
-            document.addEventListener('click', documentClickHandler);
+            document.body.appendChild(menu);
+            window.addEventListener('click', (event) => {
+                if (menu) {
+                    const isClickedOutside = !menu.contains(event.target);
+                    if (isClickedOutside) { 
+                        menu.parentNode.removeChild(menu);
+                        menu = undefined;   
+                        document.removeEventListener('click', window)
+                    }
+                }        
+            });
         });
         group_list.appendChild(group)
     })
 }
 
+function createContextMenu(event) {
+    let menu = document.createElement('ul');
+    let editAction = document.createElement('li');
+    let deleteAction = document.createElement('li');
+    editAction.innerText = "Edit";
+    deleteAction.innerText = "Delete";
+    menu.appendChild(editAction);
+    menu.appendChild(deleteAction);
 
-function documentClickHandler(e) {
-    const isClickedOutside = !menu.contains(e.target);
-    if (isClickedOutside) {
-        menu.classList.add('hidden');
-        document.removeEventListener('click', documentClickHandler);
-    }
-};
-
-function createActionContextMenu(name) {
-    let el = document.createElement('li');
-    el.innerText = name;
-    return el;
+    menu.style.top = `${event.clientY}px`;
+    menu.style.left = `${event.clientX}px`;
+    return menu;
 }
 
 function createProjectElement(project) {

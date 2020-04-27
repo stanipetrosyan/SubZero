@@ -1,4 +1,4 @@
-setTheme(window.api.themerequest());
+setTheme(window.request.theme());
 
 document.getElementById('light-theme').addEventListener('click', _ =>{
     window.api.updatetheme('light')
