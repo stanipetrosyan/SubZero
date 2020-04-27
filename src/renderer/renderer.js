@@ -52,24 +52,12 @@ function printGroupList() {
             editAction.addEventListener('click', _ => {
                 window.groups.update(item['name'])
                 menu.parentNode.removeChild(menu);
-                menu = undefined;
             })
             deleteAction.addEventListener('click', _ => {
                 window.groups.delete(item['name'])
                 menu.parentNode.removeChild(menu);
-                menu = undefined;
             })
             document.body.appendChild(menu);
-            window.addEventListener('click', (event) => {
-                if (menu) {
-                    const isClickedOutside = !menu.contains(event.target);
-                    if (isClickedOutside) { 
-                        menu.parentNode.removeChild(menu);
-                        menu = undefined;   
-                        document.removeEventListener('click', window)
-                    }
-                }        
-            });
         });
         group_list.appendChild(group)
     })
@@ -77,6 +65,7 @@ function printGroupList() {
 
 function createContextMenu(event) {
     let menu = document.createElement('ul');
+    menu.setAttribute('id', 'menu');
     let editAction = document.createElement('li');
     let deleteAction = document.createElement('li');
     editAction.innerText = "Edit";
@@ -118,3 +107,14 @@ document.getElementById('group-all').addEventListener('click', _=> {
     printProjectList();
     printGroupList();
 }) 
+
+
+window.addEventListener('click', (event) => {
+    let menu = document.getElementById('menu')
+    if (menu) {
+        const isClickedOutside = !menu.contains(event.target);
+        if (isClickedOutside) { 
+            menu.parentNode.removeChild(menu);
+        }
+    }
+});
