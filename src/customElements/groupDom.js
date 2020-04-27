@@ -35,7 +35,7 @@ class GroupDOM extends HTMLElement {
         this.style.cursor = 'pointer';
        
         this.addEventListener('mouseover', _ => {
-			this.style.backgroundColor = '#616a6b';
+			this.style.backgroundColor = '#252525';
 		})
 		this.addEventListener('mouseout', _ => {
 			this.style.backgroundColor = 'var(--bg-color)';
