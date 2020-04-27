@@ -95,7 +95,7 @@ function createGroupElement(group) {
 document.getElementById('search-bar').addEventListener('input', _ => {
     let textSearched = document.getElementById('search-bar').value
     project_list.childNodes.forEach(element => {
-        if (!element.firstChild.innerText.includes(textSearched)) {
+        if (!element.getAttribute('name').includes(textSearched)) {
             element.style.display = 'none'
         } else {
             element.style.display = 'block'
