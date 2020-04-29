@@ -22,28 +22,26 @@ const template = [
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-group')
-                            //focusedWindow.electron.doThing();
-                            //ipcRenderer.send('open-modal', 'browsers/group/group_modal.html')
                         }
                     }
                 ]
             },
             {
-                label: 'Preferences'
+                label: 'Preferences',
+                submenu: [
+                    {
+                        label: 'Themes',
+                        accelerator: process.platform === 'darwin' ? 'Alt+Command+T' : 'Ctrl+T',
+                        click(item, focusedWindow) {
+                            focusedWindow.webContents.send('open-theme')
+                        }
+                    }
+                ]
             }
         ]
     },
     {
         label: 'Edit',
-        submenu: [
-            {
-                label: 'Themes',
-                accelerator: process.platform === 'darwin' ? 'Alt+Command+T' : 'Ctrl+T',
-                click(item, focusedWindow) {
-                    focusedWindow.webContents.send('open-theme')
-                }
-            }, 
-        ]
     },
     {
         label: 'View',

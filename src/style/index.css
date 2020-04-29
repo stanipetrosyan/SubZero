@@ -7,27 +7,21 @@
     --bg-color: #121212;
     --primary-color: #1C39BB;
     --font-color: white;
-    --secondary-font-color: #d7dbdd;
     --card-bg-color: #1e1e1e;
+    --hover-color:  #252525;
 }
-/* 
-    primary 6200ee
-    variante 3700b3
-    secondario 03dac6
-    variante 018786
-*/
 
 [data-theme="dark"] {
     --bg-color: #121212;
     --font-color: white;
-    --secondary-font-color: #d7dbdd;
+    --hover-color: #252525;
     --card-bg-color: #1e1e1e;
 }
 
 [data-theme="light"] {
     --bg-color: white;
     --font-color: #424242;
-    --secondary-font-color: #616a6b;
+    --hover-color: #e9f3f8;
     --card-bg-color: white;
 }
 
@@ -145,10 +139,8 @@ li {
 }
 
 li:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #e9f3f8;
 }
-
-
 
 /* 
     Scrollbar sidenav

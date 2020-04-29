@@ -66,10 +66,13 @@ function printGroupList() {
 function createContextMenu(event) {
     let menu = document.createElement('ul');
     menu.setAttribute('id', 'menu');
+
     let editAction = document.createElement('li');
-    let deleteAction = document.createElement('li');
     editAction.innerText = "Edit";
+
+    let deleteAction = document.createElement('li');
     deleteAction.innerText = "Delete";
+
     menu.appendChild(editAction);
     menu.appendChild(deleteAction);
 

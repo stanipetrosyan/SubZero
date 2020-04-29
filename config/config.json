@@ -1,7 +1,7 @@
 {
     "question": {
         "type": "question",
-        "buttons": ["Cancel", "Yes, please", "No, thanks"],
+        "buttons": ["Yes, please", "No, thanks"],
         "defaultId": 1,
         "title": "Remove",
         "message": "Do you want to do this?",
