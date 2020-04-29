@@ -12,14 +12,14 @@ const template = [
                 submenu: [
                     {
                         label: 'Project',
-                        accelerator: process.platform === 'darwin' ? 'Alt+Command+P' : 'Ctrl+Alt+P',
+                        accelerator: process.platform === 'darwin' ? 'Command+P' : 'Ctrl+P',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-project')
                         },
                     },
                     {
                         label: 'Group', 
-                        accelerator: process.platform === 'darwin' ? 'Alt+Command+G' : 'Ctrl+Alt+G',
+                        accelerator: process.platform === 'darwin' ? 'Command+G' : 'Ctrl+G',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-group')
                         }
@@ -31,7 +31,7 @@ const template = [
                 submenu: [
                     {
                         label: 'Themes',
-                        accelerator: process.platform === 'darwin' ? 'Alt+Command+T' : 'Ctrl+T',
+                        accelerator: process.platform === 'darwin' ? 'Command+T' : 'Ctrl+T',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-theme')
                         }
