@@ -25,10 +25,12 @@ class GroupContainerDOM extends HTMLElement {
   
     connectedCallback() {
         this.style.display = 'inline-block';
+        this.style.lineHeight = '40px';
         this.style.width = '40px';
         this.style.height = '40px';
+        this.style.color = 'white';
         this.style.marginLeft = '10px';
-        this.style.fontSize = '1.8em';
+        this.style.fontSize = '1.6em';
         this.style.backgroundColor = this.color;
         this.style.textAlign = 'center';
         this.style.borderRadius = '50%';
