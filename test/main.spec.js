@@ -16,13 +16,20 @@ describe('Application launch', function () {
 
     afterEach(function () {
         if (this.app && this.app.isRunning()) {
-            return this.app.stop()
+            this.app.stop();
         }
     })
 
-    it('shows an initial window', function () {
-        return this.app.client.getWindowCount().then(function (count) {
-            assert.equal(count, 1)
-        })
+    it ('should show main window', async function () {
+        const count = await this.app.client.getWindowCount();
+        assert.equal(count, 1)
+
     })
-})
+
+    it('should open new group window', async function () {
+        this.app.client.click('#newGroup')
+        const count = await this.app.client.getWindowCount();
+        assert.equal(count, 1);
+        this.app.client.windowByIndex(1);    
+    })
+}) 
