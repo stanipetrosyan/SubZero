@@ -48,7 +48,7 @@ body, html {
     z-index: 0;
     top: 0;
     left: 0;
-    border-right: 1px solid;
+    border-right: none;
     overflow-x: hidden;
     padding-top: 10px;
     overflow-y: scroll;

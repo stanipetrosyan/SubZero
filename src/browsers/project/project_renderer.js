@@ -48,7 +48,7 @@ function setProject(project) {
 }
 
 document.getElementById('open').addEventListener('click', () => {
-    let directory = window.api.opendirdialog();
+    let directory = window.modals.folder();
     document.getElementById('project-path').value = directory[0];
 }) 
 
@@ -61,7 +61,7 @@ document.getElementById('add').addEventListener('click', () => {
             window.projects.add(project);
         }
     } else {
-        window.api.showErrorMessage();
+        window.notifies.error();
     }
 })
 
@@ -88,7 +88,7 @@ document.getElementById('delete').addEventListener('click', _ => {
 
 
 document.getElementById('cancel').addEventListener('click', () => {
-    window.api.closeModal();
+    window.modals.close();
 })
 
 editors[0].addEventListener('click', () => {

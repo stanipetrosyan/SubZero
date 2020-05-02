@@ -5,18 +5,6 @@ const project_path = path.join(__dirname, '../src/browsers/project/project_modal
 const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
 const theme_path = path.join(__dirname, '../src/browsers/themes/set_theme.html')
 
-contextBridge.exposeInMainWorld('api', {
-    updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
-
-    opendirdialog: () => { return ipcRenderer.sendSync('open-folder-dialog'); },
-
-    openGroupModal: () => ipcRenderer.send('open-modal',  group_path),
-    openProjectModal: () => ipcRenderer.send('open-modal',  project_path),
-    closeModal: () => ipcRenderer.send('close-modal'),
-
-    showErrorMessage: () => { ipcRenderer.send('error-message') }
-})
-
 contextBridge.exposeInMainWorld('groups', {
     add: (data) => ipcRenderer.send('add-group', data),
     update: (data) => ipcRenderer.send('update-group', data),
@@ -32,11 +20,27 @@ contextBridge.exposeInMainWorld('projects', {
     open: (data) => ipcRenderer.send('open-project', data)
 })
 
+contextBridge.exposeInMainWorld('user', {
+    updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
+})
+
 contextBridge.exposeInMainWorld('request', {
     group: () => { return ipcRenderer.sendSync('group-request') },
     project: () => { return ipcRenderer.sendSync('project-request') },
     theme: () => { return ipcRenderer.sendSync('theme-request') },
     data: () => { return ipcRenderer.sendSync('data-request') }
+})
+
+contextBridge.exposeInMainWorld('modals', {
+    group: () => ipcRenderer.send('open-modal',  group_path),
+    project: () => ipcRenderer.send('open-modal',  project_path),
+    theme: () => ipcRenderer.send('open-modal', theme_path),
+    folder: () => { return ipcRenderer.sendSync('open-folder-dialog') },
+    close: () => ipcRenderer.send('close-modal'),
+})
+
+contextBridge.exposeInMainWorld('notifies', {
+    error: () =>  ipcRenderer.send('error-message')
 })
 
 ipcRenderer.on('open-group', () => {

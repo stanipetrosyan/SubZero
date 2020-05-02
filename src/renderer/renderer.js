@@ -111,11 +111,6 @@ document.getElementById('group-all').addEventListener('click', _=> {
     printGroupList();
 }) 
 
-document.getElementById('newGroup').addEventListener('click', () => {
-    window.api.openGroupModal();
-})
-
-
 window.addEventListener('click', (event) => {
     let menu = document.getElementById('menu')
     if (menu) {

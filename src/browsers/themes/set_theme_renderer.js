@@ -1,13 +1,13 @@
 setTheme(window.request.theme());
 
 document.getElementById('light-theme').addEventListener('click', _ =>{
-    window.api.updatetheme('light')
+    window.user.updatetheme('light')
 })
 
 document.getElementById('default-theme').addEventListener('click', _ =>{
-    window.api.updatetheme('default')
+    window.user.updatetheme('default')
 })
 
 document.getElementById('cancel').addEventListener('click', _ =>{
-    window.api.closeModal();
+    window.modals.close();
 })

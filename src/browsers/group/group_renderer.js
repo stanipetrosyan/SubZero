@@ -42,7 +42,7 @@ document.getElementById('add-update').addEventListener('click', () => {
         } else 
             window.groups.add(group)
     } else {
-        window.api.showErrorMessage();
+        window.notifies.error();
     }
 })
 
@@ -69,7 +69,7 @@ document.getElementById('delete').addEventListener('click', () => {
 })
 
 document.getElementById('cancel').addEventListener('click', () => {
-    window.api.closeModal();
+    window.modals.close();
 })
 
 function createColorPicker() {

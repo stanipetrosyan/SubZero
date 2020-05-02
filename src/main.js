@@ -81,7 +81,7 @@ ipcMain.on('updated-group', (event, arg) => {
 ipcMain.on('delete-group', (event, arg) => {
     let group = store.getGroupByName(arg);
     let response = dialog.showMessageBoxSync(null, config('question'));
-    if(response === 1) {
+    if(response === 0) {
         store.removeGroup(group);
     }
 })
@@ -106,7 +106,7 @@ ipcMain.on('updated-project', (event, arg) => {
 
 ipcMain.on('delete-project', (event, arg) => {
     let response = dialog.showMessageBoxSync(null, config('question'));
-    if(response === 1) {
+    if(response === 0) {
         store.removeProject(tmp_project);
     }
     closeModal();
