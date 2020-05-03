@@ -143,6 +143,19 @@ li:hover {
     background-color: #e9f3f8;
 }
 
+/*
+    NONE PROJECT INFO
+*/
+.none-project-info {
+    color: var(--font-color);
+    grid-column: 2/3;
+    grid-row: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    visibility: hidden;
+}
 /* 
     Scrollbar sidenav
 */

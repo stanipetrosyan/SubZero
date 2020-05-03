@@ -1,29 +1,29 @@
 'use strict'
 
-const group_list = document.getElementById('group-list');
-const project_list = document.getElementById('project-list');
-const search_bar = document.getElementById('checkbox');
+const groupList = document.getElementById('group-list');
+const projectList = document.getElementById('project-list');
+const searchBar = document.getElementById('checkbox');
 const menu = document.getElementById('menu');
+const emptyProjectsInfo = document.getElementById('projects-info');
 
-let data = window.request.data();
-printProjectList()
-printGroupList();
-setTheme(window.request.theme());
+let data = null;
+refresh();
 
 setInterval(refresh, 1000)
 
 function refresh() {
     setTheme(window.request.theme());
-    let data_requested = window.request.data();
-    if (JSON.stringify(data) !== JSON.stringify(data_requested)) {
-        data = data_requested;
+    let dataRequested = window.request.data();
+    if (data == null || JSON.stringify(data) !== JSON.stringify(dataRequested)) {
+        data = dataRequested;
+        projectsIsEmpty(data) ? emptyProjectsInfo.style.visibility = 'visible' : emptyProjectsInfo.style.visibility = 'hidden';
         printProjectList();
         printGroupList();
     }
 }
 
 function printProjectList() {
-    project_list.innerHTML = '';
+    projectList.innerHTML = '';
     data.forEach(element => {
        printProjectForGroup(element);
     });
@@ -31,16 +31,16 @@ function printProjectList() {
 
 function printProjectForGroup(group) {
     group.projects.forEach(item => {
-        project_list.append(createProjectElement(item))
+        projectList.append(createProjectElement(item))
     })
 }
 
 function printGroupList() {
-    group_list.innerHTML = '';
+    groupList.innerHTML = '';
     data.forEach(item => {
         let group = createGroupElement(item)
         group.addEventListener('click', _ => {
-            project_list.innerHTML = '';
+            projectList.innerHTML = '';
             printProjectForGroup(item);
         })
         group.addEventListener('contextmenu', (event) => {
@@ -59,7 +59,7 @@ function printGroupList() {
             })
             document.body.appendChild(menu);
         });
-        group_list.appendChild(group)
+        groupList.appendChild(group)
     })
 }
 
@@ -98,9 +98,18 @@ function createGroupElement(group) {
     return div;
 }
 
+function projectsIsEmpty(data) {
+    for (let group of data) {
+        if (group.projects.length > 0) {
+            return false
+        }
+    }
+    return true
+}
+
 document.getElementById('search-bar').addEventListener('input', _ => {
     let textSearched = document.getElementById('search-bar').value
-    project_list.childNodes.forEach(element => {
+    projectList.childNodes.forEach(element => {
         if (!element.getAttribute('name').includes(textSearched)) {
             element.style.display = 'none'
         } else {

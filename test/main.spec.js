@@ -26,10 +26,10 @@ describe('Application launch', function () {
 
     })
 
-    it('should open new group window', async function () {
-        this.app.client.click('#newGroup')
+    it('should open new project window', async function () {
+        this.app.client.click('#new-project')
         const count = await this.app.client.getWindowCount();
         assert.equal(count, 1);
-        this.app.client.windowByIndex(1);    
+        return this.app.client.windowByIndex(1);    
     })
 }) 

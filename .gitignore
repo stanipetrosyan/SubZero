@@ -1,5 +1,3 @@
-# ignora la cartella node_modules
 node_modules
 
-# ignora la cartella per il packaging
 release-builds
