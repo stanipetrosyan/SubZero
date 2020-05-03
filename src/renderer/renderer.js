@@ -75,9 +75,12 @@ function createContextMenu(event) {
 
     menu.appendChild(editAction);
     menu.appendChild(deleteAction);
+    let menuPositionX = event.clientX;
+    let menuPositionY = (event.clientY > (window.innerHeight - 100)) ? event.clientY - 100 : event.clientY;
 
-    menu.style.top = `${event.clientY}px`;
-    menu.style.left = `${event.clientX}px`;
+    menu.style.top = `${menuPositionY}px`;
+    menu.style.left = `${menuPositionX}px`;
+
     return menu;
 }
 
