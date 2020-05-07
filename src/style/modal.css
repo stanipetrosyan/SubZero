@@ -29,25 +29,31 @@ body {
     grid-row: 1;
     grid-column: 1;
 }
+
+/*
+    INPUT TEXT
+*/
 .input-position{ 
     position:relative; 
-    margin-bottom:45px; 
+    margin-bottom: 20px; 
     margin-top: 7%;
 }
+
 input{
     font-size:18px;
-    padding:10px 10px 10px 5px;
+    padding: 0px 10px 10px 0px;
     display:block;
     width: 90%;
     border:none;
     border-bottom:1px solid #757575;
     background-color: transparent;
-    color: var(--main-text-color);
+    color: var(--font-color);
 }
 
 input:focus{ 
     outline:none; 
 }
+
 label{
     color:#999; 
     font-size:18px;
@@ -59,11 +65,6 @@ label{
     transition:0.2s ease all; 
 }
 
-input:focus ~ label, input:valid ~ label{
-    top:-20px;
-    font-size:14px;
-    color: #1C39BB;
-}
 .bar{ 
     position:relative;
     display:block;
@@ -74,6 +75,7 @@ input:focus ~ label, input:valid ~ label{
     display:block;
     width:80%;
 }
+
 .bar:before, .bar:after{
     content:'';
     height:2px; 
@@ -83,33 +85,16 @@ input:focus ~ label, input:valid ~ label{
     background: #1C39BB; 
     transition:0.2s ease all; 
 }
+
 .bar:before {
-  left:50%;
+    left:50%;
 }
 .bar:after {
-  right:50%; 
+    right:50%; 
 }
 
 input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
-.highlight {
-    position:absolute;
-    height:60%; 
-    width:100px; 
-    top:25%; 
-    left:0;
-    pointer-events:none;
-    opacity:0.5;
-}
-  
-input:focus ~ .highlight {
-    animation:inputHighlighter 0.3s ease;
-}
-  
-@keyframes inputHighlighter {
-    from  { background: #1C39BB }
-    to    { width:0; background:transparent; }
+    width:50%;
 }
 
 /*

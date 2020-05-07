@@ -11,8 +11,8 @@ const groupInterface = require('./lib/groupStoreInterface');
 
 const store = new groupInterface();
 
-const project_path = path.join(__dirname, '../src/browsers/project/project_modal.html')
-const group_path = path.join(__dirname, '../src/browsers/group/group_modal.html')
+const project_path = path.join(__dirname, '../src/windows/project/project_modal.html')
+const group_path = path.join(__dirname, '../src/windows/group/group_modal.html')
 const index_path = path.join(__dirname, '../src/renderer/index.html');
 
 const webPreferences = {
