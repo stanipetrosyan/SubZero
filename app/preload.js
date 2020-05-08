@@ -1,9 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 const path = require('path');
 
-const project_path = path.join(__dirname, '../src/windows/project/project_modal.html')
-const group_path = path.join(__dirname, '../src/windows/group/group_modal.html')
-const theme_path = path.join(__dirname, '../src/windows/themes/set_theme.html')
+const project_path = path.join(__dirname, '../app/windows/project/project_modal.html')
+const group_path = path.join(__dirname, '../app/windows/group/group_modal.html')
+const theme_path = path.join(__dirname, '../app/windows/themes/set_theme.html')
 
 contextBridge.exposeInMainWorld('groups', {
     add: (data) => ipcRenderer.send('add-group', data),

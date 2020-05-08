@@ -11,9 +11,9 @@ const groupInterface = require('./lib/groupStoreInterface');
 
 const store = new groupInterface();
 
-const project_path = path.join(__dirname, '../src/windows/project/project_modal.html')
-const group_path = path.join(__dirname, '../src/windows/group/group_modal.html')
-const index_path = path.join(__dirname, '../src/renderer/index.html');
+const project_path = path.join(__dirname, '../app/windows/project/project_modal.html')
+const group_path = path.join(__dirname, '../app/windows/group/group_modal.html')
+const index_path = path.join(__dirname, '../app/renderer/index.html');
 
 const webPreferences = {
     preload: path.join(__dirname, 'preload.js'),
