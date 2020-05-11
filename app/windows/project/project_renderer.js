@@ -39,7 +39,7 @@ function setGroupListSelection() {
 function setProject(project) {
     document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
-    document.getElementById('project-path').value = project['path'];
+    document.getElementById('project-path').innerText = project['path'];
    // document.getElementById(project['group']).style.opacity = 0.8;
     document.getElementById(project['editor']).style.opacity = 1;
     //groupSelected = document.getElementById(project['group']).id;
@@ -49,7 +49,7 @@ function setProject(project) {
 
 document.getElementById('open').addEventListener('click', () => {
     let directory = window.modals.folder();
-    document.getElementById('project-path').value = directory[0];
+    document.getElementById('project-path').innerText = directory[0];
 }) 
 
 document.getElementById('add').addEventListener('click', () => {
@@ -71,7 +71,7 @@ function getProjectValues() {
         name: document.getElementById('project-name').value,
         language: document.getElementById('project-type').value,
         group: groupSelected,
-        path: document.getElementById('project-path').value,
+        path: document.getElementById('project-path').innerText,
         editor: editorSelected,
         repo: null,
         remote_url: null

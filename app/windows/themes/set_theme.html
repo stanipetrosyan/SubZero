@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="./style.css" />
         <link rel="stylesheet" type="text/css" href="../../style/index.css" />
-        <link rel="stylesheet" type="text/css" href="../../style/modal.css" />
-        <link rel="stylesheet" type="text/css" href="../../style/cs-select.css" />
-        <link rel="stylesheet" type="text/css" href="../../style/cs-skin-boxes.css" />
-
     </head>
     <body>
 
-        <div class="card" id="default-theme">
-            <img src="../../resource/themes/DarkTheme.png" style="width:100%">
-            <div class="container">
-              <h4><b>Dark Theme</b></h4>
+        <div class="card dark" id="default-theme">
+            <div class="content">
+                <div class="color-theme bg-dark"></div>
+                <div class="color-theme font-dark"></div>
+                <div class="color-theme primary-dark"></div>
+                <div class="color-theme secondary-dark"></div>
+                <p><strong>Dark theme</strong></p>
             </div>
+            
         </div> 
 
-        <div class="card" id="light-theme">
-            <img src="../../resource/themes/DarkTheme.png" style="width:100%">
-            <div class="container">
-              <h4><b>Light Theme</b></h4>
+        <div class="card light" id="light-theme">
+            <div class="content">
+                <div class="color-theme bg-light"></div>
+                <div class="color-theme font-light"></div>
+                <div class="color-theme primary-light"></div>
+                <div class="color-theme secondary-light"></div>
+                <p><strong>Light theme</strong></p>
             </div>
         </div>
-        <div class="footer">
-            <div class="second-left">
-                <button class="button-cancel" id="cancel">CANCEL</button>
-            </div>
-        </div> 
+        <button class="button-cancel" id="cancel">CANCEL</button>
+        
     </body>
     <script src="../../renderer/theme-setup.js"></script>
     <script src="./set_theme_renderer.js"></script>
