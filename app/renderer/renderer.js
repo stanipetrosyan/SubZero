@@ -108,9 +108,9 @@ function projectsIsEmpty(data) {
 }
 
 document.getElementById('search-bar').addEventListener('input', _ => {
-    let textSearched = document.getElementById('search-bar').value
+    let textSearched = document.getElementById('search-bar').value.toUpperCase();
     projectList.childNodes.forEach(element => {
-        if (!element.getAttribute('name').includes(textSearched)) {
+        if (!element.getAttribute('name').toUpperCase().includes(textSearched)) {
             element.style.display = 'none'
         } else {
             element.style.display = 'block'
