@@ -17,7 +17,6 @@ groupToUpdate = window.request.group();
 if(groupToUpdate) {
     setGroupValues();
     addBtn.innerHTML = 'UPDATE';
-    document.getElementById('delete').style.visibility = 'visible';
 } else {
     addBtn.innerHTML = 'ADD';
 }
@@ -63,10 +62,6 @@ function setGroupValues() {
 function checkInputValues(group) {
     return (group['name'] && group['color']);
 }
-
-document.getElementById('delete').addEventListener('click', () => {
-    window.groups.delete();
-})
 
 document.getElementById('cancel').addEventListener('click', () => {
     window.modals.close();
