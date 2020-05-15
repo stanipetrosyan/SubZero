@@ -1,7 +1,7 @@
 'use strict'
 
 const groupList = document.getElementById('group-list');
-const editors = document.getElementsByClassName('editor-icon');
+let editors = document.getElementsByTagName('img');
 
 setTheme(window.request.theme());
 
@@ -40,9 +40,9 @@ function setProject(project) {
     document.getElementById('project-name').value = project['name'];
     document.getElementById('project-type').value = project['language'];
     document.getElementById('project-path').innerText = project['path'];
-   // document.getElementById(project['group']).style.opacity = 0.8;
+    document.getElementById(project['group']).style.opacity = 0.8;
     document.getElementById(project['editor']).style.opacity = 1;
-    //groupSelected = document.getElementById(project['group']).id;
+    groupSelected = document.getElementById(project['group']).id;
     editorSelected = document.getElementById(project['editor']).id;
     project_folder = project['path'][0];
 }
@@ -54,6 +54,7 @@ document.getElementById('open').addEventListener('click', () => {
 
 document.getElementById('add').addEventListener('click', () => {
     let project = getProjectValues();
+    console.log(project);
     if (checkInputValues(project)) {
         if (projectToUpdate) {
             window.projects.updated(project);
@@ -79,7 +80,7 @@ function getProjectValues() {
 }
 
 function checkInputValues(project) {
-    return (project['name'] && document.getElementById('project-path').value && project['group'] && project['editor']);
+    return (project['name'] && project['path'] && project['group'] && project['editor']);
 }
 
 document.getElementById('delete').addEventListener('click', _ => {
@@ -94,21 +95,20 @@ document.getElementById('cancel').addEventListener('click', () => {
 editors[0].addEventListener('click', () => {
     editorSelected = 'vscode';
     editors[0].style.opacity = '1';
-    editors = setOpacity(editors, 0);
+    editors = setOpacity(editors, 'vscode');
 })
 
 editors[1].addEventListener('click', () => {
     editorSelected = 'atom';
     editors[1].style.opacity = '1';
-    editors = setOpacity(editors, 1);
+    editors = setOpacity(editors, 'atom');
 })
 
  
-function setOpacity(array, index){
-    for(var x in array){
-        if(x != index){
-            array[x].style.opacity = 0.4;
-        }
+function setOpacity(array, id){
+    for(let element of array){
+        if (element.getAttribute('id') != id)
+            element.style.opacity = 0.4
     }
     return array
 }
