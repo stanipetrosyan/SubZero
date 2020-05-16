@@ -8,6 +8,10 @@ html, body{
     overflow: hidden;
 }
 
+div {
+    color: var(--font-color);
+}
+
 input {
     width: 90%;
 }

@@ -31,6 +31,7 @@ function setGroupListSelection() {
         container.addEventListener('click', () => {
             container.style.opacity = '0.8';
             groupSelected = group.name;
+            setOpacity(groupList.children, container.getAttribute('id'))
         })
         groupList.appendChild(container);
     }
