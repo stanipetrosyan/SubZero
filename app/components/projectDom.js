@@ -4,23 +4,15 @@ class ProjectDOM extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ['name', 'color']
+		return ['name']
 	}
 
 	get name() {
 		return this.getAttribute('name')
 	}
 
-	get color() {
-		return this.getAttribute('color')
-	}
-
 	set name(name) {
 		this.setAttribute('name', name)
-	}
-
-	set color(color) {
-		this.setAttribute('color', color)
 	}
 
 	connectedCallback() {
@@ -43,7 +35,7 @@ class ProjectDOM extends HTMLElement {
 		let settings = document.createElement('button');
 		settings.style.backgroundColor = 'var(--card-bg-color)';
 		settings.style.border = 'none';
-		settings.style.color = this.color;
+		settings.style.color = 'var(--primary-color)';
 		settings.style.display = 'inline-block';
 		settings.innerHTML = "SETTING";
 
@@ -52,7 +44,7 @@ class ProjectDOM extends HTMLElement {
 		open.style.backgroundColor = 'var(--card-bg-color)';
 		open.style.border = 'none';
 		open.innerHTML = "OPEN";
-		open.style.color = this.color;
+		open.style.color = 'var(--primary-color)';
 
 		open.addEventListener('click', _ => {
 			window.projects.open(this.name);

@@ -13,6 +13,8 @@
 
 [data-theme="dark"] {
     --bg-color: #121212;
+    --primary-color: #00acc1;
+    /*--primary-color: #E91E63*/
     --font-color: white;
     --hover-color: #252525;
     --card-bg-color: #1e1e1e;
@@ -20,6 +22,7 @@
 
 [data-theme="light"] {
     --bg-color: white;
+    --primary-color: #1C39BB;
     --font-color: #424242;
     --hover-color: #e9f3f8;
     --card-bg-color: white;
@@ -77,7 +80,7 @@ body, html {
 button {
     display: inline-block;
     background-color: var(--bg-color);
-    color: #DD22FF;
+    color: var(--primary-color);
     border: none;
     border-radius: 4px;
     transition-duration: 0.4s;
@@ -87,7 +90,7 @@ button {
 button:hover {
     color: white;
     padding: 6px 16px;
-    background-color: #DD22FF;
+    background-color: var(--primary-color);
 }
 
 .button-cancel {
@@ -149,7 +152,7 @@ label {
     width:0;
     bottom:1px; 
     position:absolute;
-    background: #1C39BB; 
+    background: var(--primary-color); 
     transition:0.2s ease all; 
 }
 

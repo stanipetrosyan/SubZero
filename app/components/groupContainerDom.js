@@ -25,7 +25,7 @@ class GroupContainerDOM extends HTMLElement {
   
     connectedCallback() {
         this.style.display = 'inline-block';
-        this.style.lineHeight = '40px';
+        this.style.lineHeight = '45px';
         this.style.width = '40px';
         this.style.height = '40px';
         this.style.color = 'white';

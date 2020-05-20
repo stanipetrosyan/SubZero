@@ -87,7 +87,6 @@ function createContextMenu(event) {
 function createProjectElement(project) {
     let card = document.createElement('sub-project')
     card.setAttribute('name', project['name'])
-    card.setAttribute('color', '#DD22FF')
     return card;
 }
 
