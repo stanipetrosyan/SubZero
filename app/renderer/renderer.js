@@ -85,9 +85,7 @@ function createContextMenu(event) {
 }
 
 function createProjectElement(project) {
-    let card = document.createElement('sub-project')
-    card.setAttribute('name', project['name'])
-    return card;
+    return document.createElement('sub-project').setAttribute('name', project['name'])
 }
 
 function createGroupElement(group) {
