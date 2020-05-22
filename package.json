@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/StaniPetrosyan/SubZero#readme",
   "devDependencies": {
-    "electron": "^8.1.1",
+    "electron": "^9.0.0",
     "electron-packager": "^14.2.1",
     "mocha": "^7.1.2",
     "spectron": "^10.0.1"
