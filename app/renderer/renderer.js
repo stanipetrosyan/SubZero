@@ -31,7 +31,25 @@ function printProjectList() {
 
 function printProjectForGroup(group) {
     group.projects.forEach(item => {
-        projectList.append(createProjectElement(item))
+        let project = createProjectElement(item);
+        project.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            let menu = createContextMenu(event);
+            let editAction = menu.children[0]
+            let deleteAction = menu.children[1]
+
+            editAction.addEventListener('click', _ => {
+                window.projects.update(item['name'])
+                menu.parentNode.removeChild(menu);
+            })
+            deleteAction.addEventListener('click', _ => {
+                window.projects.delete(item['name'])
+                menu.parentNode.removeChild(menu);
+            })
+            document.body.appendChild(menu);
+        });
+
+        projectList.appendChild(project);
     })
 }
 

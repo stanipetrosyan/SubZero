@@ -32,14 +32,6 @@ class ProjectDOM extends HTMLElement {
 		let name =  document.createElement('h3');
 		name.innerHTML = `${this.name}`;
 
-		let settings = document.createElement('button');
-		settings.style.backgroundColor = 'var(--card-bg-color)';
-		settings.style.border = 'none';
-		settings.style.color = 'var(--primary-color)';
-		settings.style.display = 'inline-block';
-		settings.innerHTML = "SETTING";
-
-
 		let open = document.createElement('button');
 		open.style.backgroundColor = 'var(--card-bg-color)';
 		open.style.border = 'none';
@@ -50,10 +42,6 @@ class ProjectDOM extends HTMLElement {
 			window.projects.open(this.name);
 		})
 
-		settings.addEventListener('click', _ => {
-			window.projects.update(this.name);
-		})
-
 		this.addEventListener('mouseover', _ => {
 			this.style.boxShadow = '0 8px 16px 0 rgba(0,0,0,0.2)';
 		})
@@ -62,11 +50,9 @@ class ProjectDOM extends HTMLElement {
 		})
 
 		container.appendChild(name);
-		container.appendChild(settings);
 		container.appendChild(open);
 		shadow.appendChild(container);
 	}
 }
-
 
 customElements.define('sub-project', ProjectDOM);

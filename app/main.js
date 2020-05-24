@@ -105,9 +105,10 @@ ipcMain.on('updated-project', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
+    let project = store.getProjectByName(arg);
     let response = dialog.showMessageBoxSync(null, config('question'));
     if(response === 0) {
-        store.removeProject(tmp_project);
+        store.removeProject(project);
     }
     closeModal();
 })

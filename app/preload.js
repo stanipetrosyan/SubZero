@@ -16,7 +16,7 @@ contextBridge.exposeInMainWorld('projects', {
     add: (data) => ipcRenderer.send('add-project', data),
     update: (data) => ipcRenderer.send('update-project', data),
     updated: (data) => ipcRenderer.send('updated-project', data),
-    delete: () => ipcRenderer.sendSync('delete-project'),
+    delete: (data) => ipcRenderer.send('delete-project', data),
     open: (data) => ipcRenderer.send('open-project', data)
 })
 

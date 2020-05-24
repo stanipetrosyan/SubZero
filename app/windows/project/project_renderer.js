@@ -18,7 +18,6 @@ setGroupListSelection();
 if(projectToUpdate) {
     document.getElementById('add').innerText = 'UPDATE'
     setProject(projectToUpdate);
-    document.getElementById('delete').style.visibility = 'visible';
 } else {
     document.getElementById('add').innerText = 'ADD'
 }
@@ -55,7 +54,6 @@ document.getElementById('open').addEventListener('click', () => {
 
 document.getElementById('add').addEventListener('click', () => {
     let project = getProjectValues();
-    console.log(project);
     if (checkInputValues(project)) {
         if (projectToUpdate) {
             window.projects.updated(project);
@@ -83,11 +81,6 @@ function getProjectValues() {
 function checkInputValues(project) {
     return (project['name'] && project['path'] && project['group'] && project['editor']);
 }
-
-document.getElementById('delete').addEventListener('click', _ => {
-    window.projects.delete();
-}) 
-
 
 document.getElementById('cancel').addEventListener('click', () => {
     window.modals.close();
