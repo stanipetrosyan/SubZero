@@ -25,7 +25,7 @@
     "electron": "^9.0.0",
     "electron-packager": "^14.2.1",
     "mocha": "^7.1.2",
-    "spectron": "^10.0.1"
+    "spectron": "^11.0.0"
   },
   "dependencies": {
     "minimist": "^1.2.5",

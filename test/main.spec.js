@@ -3,33 +3,37 @@ const assert = require('assert')
 const electronPath = require('electron')
 const path = require('path')
 
+const app = new Application({
+    path: electronPath,
+    args: [path.join(__dirname, '..')]
+})
+
 describe('Application launch', function () {
     this.timeout(10000)
 
     beforeEach(function () {
-        this.app = new Application({
-            path: electronPath,
-            args: [path.join(__dirname, '..')]
-        })
-        return this.app.start()
+        return app.start()
     })
 
     afterEach(function () {
-        if (this.app && this.app.isRunning()) {
-            this.app.stop();
+        if (app && app.isRunning()) {
+            return app.stop();
         }
     })
+    
 
-    it ('should show main window', async function () {
-        const count = await this.app.client.getWindowCount();
-        assert.equal(count, 1)
-
+    it ('should show main window', async () => {
+        const count = await app.client.getWindowCount();
+        return assert.equal(count, 1)
     })
 
-    it('should open new project window', async function () {
-        this.app.client.click('#new-project')
-        const count = await this.app.client.getWindowCount();
-        assert.equal(count, 1);
-        return this.app.client.windowByIndex(1);    
-    })
+/*     it('has the correct title', async () => {
+        const title = await app.client.waitUntilWindowLoaded().getTitle();
+        return assert.equal(title, 'SubZero');
+    });
+    
+    it ('should not have the developer tools open', async () => {
+        const devToolsAreOpen = await app.client.waitUntilWindowLoaded().browserWindow.isDevToolOpened();
+        return assert.equal(devToolsAreOpen, false)
+    }) */
 }) 
