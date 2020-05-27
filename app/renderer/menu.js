@@ -28,15 +28,10 @@ const template = [
             },
             {
                 label: 'Preferences',
-                submenu: [
-                    {
-                        label: 'Themes',
-                        accelerator: process.platform === 'darwin' ? 'Command+T' : 'Ctrl+T',
-                        click(item, focusedWindow) {
-                            focusedWindow.webContents.send('open-theme')
-                        }
-                    }
-                ]
+                accelerator: process.platform === 'darwin' ? 'Command+T' : 'Ctrl+T',
+                click(item, focusedWindow) {
+                    focusedWindow.webContents.send('open-preferences')
+                }
             }
         ]
     },

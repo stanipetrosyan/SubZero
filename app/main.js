@@ -5,14 +5,14 @@ const dialog = electron.dialog;
 
 const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
-const config = require('../config')
+const config = require('./config')
 
 const groupInterface = require('./lib/groupStoreInterface');
 
 const store = new groupInterface();
 
-const project_path = path.join(__dirname, '../app/windows/project/project_modal.html')
-const group_path = path.join(__dirname, '../app/windows/group/group_modal.html')
+const project_path = path.join(__dirname, '../app/components/projectWindow/index.html')
+const group_path = path.join(__dirname, '../app/components/groupWindow/index.html')
 const index_path = path.join(__dirname, '../app/renderer/index.html');
 
 const webPreferences = {
