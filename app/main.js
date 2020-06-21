@@ -28,7 +28,7 @@ let tmp_project = null;
 let tmp_group = null;
 
 function main() {
-    mainWindow = new Window({
+    mainWindow = Window({
         file: index_path,
         webPreferences
     }) 
@@ -37,7 +37,7 @@ function main() {
 
 function openModal(arg) {
     if(!modal){
-        modal = new Window({
+        modal = Window({
             file: arg,
             width: 500,
             height: 600,
@@ -62,7 +62,7 @@ function closeModal() {
 */
 ipcMain.on('add-group', (event, arg) => {
     if(store.addGroup(arg) == false) {
-        dialog.showMessageBox(null, config('equals'));
+        dialog.showMessageBox(modal, config('equals'));
     } else {
         closeModal();
     }   
@@ -80,7 +80,7 @@ ipcMain.on('updated-group', (event, arg) => {
 
 ipcMain.on('delete-group', (event, arg) => {
     let group = store.getGroupByName(arg);
-    let response = dialog.showMessageBoxSync(null, config('question'));
+    let response = dialog.showMessageBoxSync(mainWindow, config('question'));
     if(response === 0) {
         store.removeGroup(group);
     }
@@ -106,7 +106,7 @@ ipcMain.on('updated-project', (event, arg) => {
 
 ipcMain.on('delete-project', (event, arg) => {
     let project = store.getProjectByName(arg);
-    let response = dialog.showMessageBoxSync(null, config('question'));
+    let response = dialog.showMessageBoxSync(mainWindow, config('question'));
     if(response === 0) {
         store.removeProject(project);
     }
@@ -149,7 +149,7 @@ ipcMain.on('close-modal', () => {
 })
 
 ipcMain.on('error-message', (event, arg) => {
-    return dialog.showMessageBoxSync(null, config('error'))
+    return dialog.showMessageBoxSync(modal, config('error'))
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
