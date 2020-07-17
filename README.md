@@ -7,34 +7,39 @@
 
 
 ### Description
-The easiest way to manage your local project.
+The easiest way to manage your local project in one place.
 
-<p align="center">
-<img src="resource/SubZero.png" alt="SubZero"
-	title="SubZero" width="497" height="342"/>
-</p>
+![](resource/SubZero.png)
 
-## Contribution
+
+## Features
+
+* All your projects in one place.
+* Easier management and better division thanks to the creation of groups
+* Open your project directly from SubZero on your favorite IDE (at v 0.0.1 supports VSC and ATOM)
+
+
+## Contributing
 
 ### Start
 
 ```java
-npm install
-
-npm start
+$ git clone https://github.com/StaniPetrosyan/SubZero.git
+$ npm install
+$ npm start
 ```
 
 ### Build project
   
 ```java
-// For Linux
-npm run package-linux
+// Linux
+$ npm run package-linux
 
-// For Window
-npm run package-win
+// Window
+$ npm run package-win
 
-// For MacOS
-npm run package-mac
+// MacOS
+$ npm run package-mac
 ```
 
 ### Testing
