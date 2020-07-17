@@ -45,7 +45,7 @@ const template = [
                 label: 'Search', 
                 accelerator: process.platform === 'darwin' ? 'Command+F' : 'Ctrl+F',
                 click(item, focusedWindow) {
-                    focusedWindow.webContents.executeJavaScript('searchBar.checked = !searchBar.checked')
+                    focusedWindow.webContents.executeJavaScript('setSearchBar()')
                 }
             },
             {

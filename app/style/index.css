@@ -4,11 +4,11 @@
 }
 
 :root {
-    --bg-color: #121212;
+    --bg-color: white;
     --primary-color: #1C39BB;
-    --font-color: white;
-    --card-bg-color: #1e1e1e;
-    --hover-color:  #252525;
+    --font-color: #424242;
+    --hover-color: #e9f3f8;
+    --card-bg-color: white;
 }
 
 [data-theme="dark"] {

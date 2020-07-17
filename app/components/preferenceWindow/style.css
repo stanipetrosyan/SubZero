@@ -16,12 +16,9 @@
 }
 
 .primary-dark {
-    background-color: #1C39BB;
+    background-color: #E91E63;
 }
 
-.secondary-dark {
-    background-color: teal;
-}
 
 .font-dark {
     background-color: white;
@@ -33,10 +30,6 @@
 
 .primary-light {
     background-color: #1C39BB;
-}
-
-.secondary-light {
-    background-color: teal;
 }
 
 .font-light {

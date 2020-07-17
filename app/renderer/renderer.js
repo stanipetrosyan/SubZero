@@ -2,7 +2,8 @@
 
 const groupList = document.getElementById('group-list');
 const projectList = document.getElementById('project-list');
-const searchBar = document.getElementById('checkbox');
+const activeSearchBar = document.getElementById('checkbox');
+const searchBar = document.getElementById('search-bar')
 const menu = document.getElementById('menu');
 const emptyProjectsInfo = document.getElementById('projects-info');
 
@@ -124,15 +125,22 @@ function projectsIsEmpty(data) {
     return true
 }
 
-document.getElementById('search-bar').addEventListener('input', _ => {
-    let textSearched = document.getElementById('search-bar').value.toUpperCase();
-    projectList.childNodes.forEach(element => {
-        if (!element.getAttribute('name').toUpperCase().includes(textSearched)) {
-            element.style.display = 'none'
-        } else {
-            element.style.display = 'block'
-        }
-    })
+function setSearchBar() {
+    activeSearchBar.checked = !activeSearchBar.checked;
+    (activeSearchBar.checked == true) ? searchBar.removeAttribute('disabled') : searchBar.setAttribute('disabled', 'disabled')
+}
+
+searchBar.addEventListener('input', _ => {
+    if (activeSearchBar.checked) {
+        let textSearched = document.getElementById('search-bar').value.toUpperCase();
+        projectList.childNodes.forEach(element => {
+            if (!element.getAttribute('name').toUpperCase().includes(textSearched)) {
+                element.style.display = 'none'
+            } else {
+                element.style.display = 'block'
+            }
+        })
+    }  
 })
 
 document.getElementById('group-all').addEventListener('click', _=> {
