@@ -2,22 +2,12 @@
 
 const cmd = require('node-cmd');
 
-// For first purpose VSCODE & Atom are enough
-const editors = ["code", "atom"]; 
-
 module.exports = {
-    async findEditorsOnPC() {
-        let found = [];
-        for (const item of editors) {
-            cmd.get(item + " --version", (err, data, stderr) => {
-                if (!err) {
-                    found.push(true);
-                } else {
-                    found.push(false);
-                }
-            })
-        }   
-        return found;
+    findEditor(editor) {
+        return new Promise((resolve, reject) => {
+            cmd.get(editor + " --version", (err, data, stderr) => {
+                resolve(!err);
+            })  
+        })        
     }
-    
 }
