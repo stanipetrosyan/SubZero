@@ -4,14 +4,7 @@ const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-const options = {
-    configName: 'data-user',
-    defaults: {
-        groups: [],
-        theme: { name: "Default"},
-        user_setup: {}
-    }
-}
+const options = require('./options.json')
 
 class Store {
     constructor() {
@@ -30,6 +23,10 @@ class Store {
         try {
             fs.writeFileSync(this.path, JSON.stringify(this.data));
         } catch (error) {}
+    }
+
+    delete() {
+        fs.unlinkSync(this.path);
     }
 }
 
