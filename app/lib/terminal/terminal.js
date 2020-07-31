@@ -13,7 +13,7 @@ module.exports = {
         path = normalizePathWithSpace(path);
 
         switch(editor){
-            case "vscode" : cmd.run('code ' + path);
+            case "code" : cmd.run('code ' + path);
                 break;
                 
             case "atom" : cmd.run('atom.cmd ' + path);

@@ -13,8 +13,6 @@ const UserSetupInterface = require('./lib/userSetupInterface')
 const store = new GroupInterface();
 const userSetup = new UserSetupInterface();
 
-console.log(store);
-
 const project_path = path.join(__dirname, '../app/components/projectWindow/index.html')
 const group_path = path.join(__dirname, '../app/components/groupWindow/index.html')
 const index_path = path.join(__dirname, '../app/renderer/index.html');
@@ -32,7 +30,6 @@ let mainWindow = null;
 let tmp_project = null;
 let tmp_group = null;
 
-//userSetup.delete();
 userSetup.setEditors();
 
 function main() {

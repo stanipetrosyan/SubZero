@@ -1,10 +1,6 @@
 'use strict'
 
 const groupList = document.getElementById('group-list');
-let editors = document.getElementsByTagName('img');
-
-console.log(window.request.setup());
-
 setTheme(window.request.theme());
 
 let data = window.request.data();
@@ -16,6 +12,9 @@ let groupSelected = null;
 projectToUpdate = window.request.project();
 
 setGroupListSelection();
+createEditors();
+
+let editors = document.getElementsByTagName('img');
 
 if(projectToUpdate) {
     document.getElementById('add').innerText = 'UPDATE'
@@ -88,17 +87,24 @@ document.getElementById('cancel').addEventListener('click', () => {
     window.modals.close();
 })
 
-editors[0].addEventListener('click', () => {
-    editorSelected = 'vscode';
-    editors[0].style.opacity = '1';
-    editors = setOpacity(editors, 'vscode');
-})
+function createEditors() {
+    let userEditors = window.request.setup()['editors'];
+    for (const item of userEditors) {
+        if (item['exist']) {
+            let editor = document.createElement('img');
+            editor.setAttribute('src', `../../assets/icons/${item['name']}_icon.png`);
+            editor.setAttribute('id', item['name']);
+            editor.className = 'icon editor-icon';
 
-editors[1].addEventListener('click', () => {
-    editorSelected = 'atom';
-    editors[1].style.opacity = '1';
-    editors = setOpacity(editors, 'atom');
-})
+            editor.addEventListener('click', _ => { 
+                editorSelected = item['name'];
+                editor.style.opacity = '1';
+                editors = setOpacity(editors, item['name']);
+            })
+            document.getElementById('editors').appendChild(editor);
+        }
+    }
+}
 
  
 function setOpacity(array, id){
