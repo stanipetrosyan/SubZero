@@ -7,9 +7,13 @@ const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('./config')
 
-const groupInterface = require('./lib/groupStoreInterface');
+const GroupInterface = require('./lib/groupStoreInterface'); 
+const UserSetupInterface = require('./lib/userSetupInterface')
 
-const store = new groupInterface();
+const store = new GroupInterface();
+const userSetup = new UserSetupInterface();
+
+console.log(store);
 
 const project_path = path.join(__dirname, '../app/components/projectWindow/index.html')
 const group_path = path.join(__dirname, '../app/components/groupWindow/index.html')
@@ -22,10 +26,14 @@ const webPreferences = {
     contextIsolation: true,
 }
 
+
 let modal = null;
 let mainWindow = null;
 let tmp_project = null;
 let tmp_group = null;
+
+//userSetup.delete();
+userSetup.setEditors();
 
 function main() {
     mainWindow = Window({
@@ -131,6 +139,10 @@ ipcMain.on('project-request', (event, arg) => {
 
 ipcMain.on('data-request', (event, arg) => {
     event.returnValue = store.get('groups');
+})
+
+ipcMain.on('setup-request', (event, arg) => {
+    event.returnValue = userSetup.get('user_setup');
 })
 
 ipcMain.on('theme-request', (event, arg) => {

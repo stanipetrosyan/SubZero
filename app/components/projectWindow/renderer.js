@@ -3,6 +3,8 @@
 const groupList = document.getElementById('group-list');
 let editors = document.getElementsByTagName('img');
 
+console.log(window.request.setup());
+
 setTheme(window.request.theme());
 
 let data = window.request.data();

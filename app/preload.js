@@ -28,7 +28,8 @@ contextBridge.exposeInMainWorld('request', {
     group: () => { return ipcRenderer.sendSync('group-request') },
     project: () => { return ipcRenderer.sendSync('project-request') },
     theme: () => { return ipcRenderer.sendSync('theme-request') },
-    data: () => { return ipcRenderer.sendSync('data-request') }
+    data: () => { return ipcRenderer.sendSync('data-request') },
+    setup: () => { return ipcRenderer.sendSync('setup-request') }
 })
 
 contextBridge.exposeInMainWorld('modals', {
