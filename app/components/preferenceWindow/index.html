@@ -5,25 +5,41 @@
         <link rel="stylesheet" type="text/css" href="../../style/index.css" />
     </head>
     <body>
-        <div class="card light" id="light-theme">
-            <div class="content">
-                <div class="color-theme bg-light"></div>
-                <div class="color-theme font-light"></div>
-                <div class="color-theme primary-light"></div>
-                <p><strong>SubZero theme</strong></p>
-            </div>
+        <div class="tabs-label"> 
+            <button class="tablinks" onclick="changeTab(event, 'Settings')" id="defaultTab">Settings</button>
+			<button class="tablinks" onclick="changeTab(event, 'Themes')">Themes</button>
+			<button class="tablinks" onclick="changeTab(event, 'Editors')">Editors</button>
         </div>
-        <div class="card dark" id="dark-theme">
-            <div class="content">
-                <div class="color-theme bg-dark"></div>
-                <div class="color-theme font-dark"></div>
-                <div class="color-theme primary-dark"></div>
-                <p><strong>Dark theme</strong></p>
+        <div class="tab">
+            <div id="Settings" class="tabcontent">
+                <h3>Settings</h3>
+                <p>Settings page preference</p>
             </div>
-            
-        </div> 
+            <div id="Themes" class="tabcontent">
+                <div class="card light" id="light-theme">
+                    <div class="content">
+                        <div class="color-theme bg-light"></div>
+                        <div class="color-theme font-light"></div>
+                        <div class="color-theme primary-light"></div>
+                        <p><strong>SubZero theme</strong></p>
+                    </div>
+                </div>
+                <div class="card dark" id="dark-theme">
+                    <div class="content">
+                        <div class="color-theme bg-dark"></div>
+                        <div class="color-theme font-dark"></div>
+                        <div class="color-theme primary-dark"></div>
+                        <p><strong>Dark theme</strong></p>
+                    </div>
+                    
+                </div> 
+            </div>
+            <div id="Editors" class="tabcontent">
+                <h3>Editors</h3>
+                <p>Editors page preference</p>
+            </div> 
+        </div>
         <button class="button-cancel" id="cancel">CANCEL</button>
-        
     </body>
     <script src="../../renderer/theme-setup.js"></script>
     <script src="./renderer.js"></script>

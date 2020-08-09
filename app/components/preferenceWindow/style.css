@@ -1,3 +1,17 @@
+body {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
+
+.tabs-label {
+    grid-column: 1;
+    border-right: 1px solid var(--primary-color);
+}
+
+.tab {
+    grid-column: 2;
+}
+
 .content {
     padding: 20px 20px;
     text-align: center;
@@ -36,8 +50,17 @@
     background-color: #424242;
 }
 
-button {
+button.button-cancel {
     position: absolute;
     left: 80%;
     top: 90%;
+}
+
+.tabcontent {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
