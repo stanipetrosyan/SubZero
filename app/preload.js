@@ -1,9 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 const path = require('path');
 
-const project_path = path.join(__dirname, '../app/components/projectWindow/index.html')
-const group_path = path.join(__dirname, '../app/components/groupWindow/index.html')
-const theme_path = path.join(__dirname, '../app/components/preferenceWindow/index.html')
+const project_path = path.join(__dirname, '../app/pages/projectWindow/index.html')
+const group_path = path.join(__dirname, '../app/pages/groupWindow/index.html')
+const theme_path = path.join(__dirname, '../app/pages/preferenceWindow/index.html')
 
 contextBridge.exposeInMainWorld('groups', {
     add: (data) => ipcRenderer.send('add-group', data),

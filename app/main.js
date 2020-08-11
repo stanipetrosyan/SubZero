@@ -13,8 +13,8 @@ const UserSetupInterface = require('./lib/userSetupInterface')
 const store = new GroupInterface();
 const userSetup = new UserSetupInterface();
 
-const project_path = path.join(__dirname, '../app/components/projectWindow/index.html')
-const group_path = path.join(__dirname, '../app/components/groupWindow/index.html')
+const project_path = path.join(__dirname, '../app/pages/projectWindow/index.html')
+const group_path = path.join(__dirname, '../app/pages/groupWindow/index.html')
 const index_path = path.join(__dirname, '../app/renderer/index.html');
 
 const webPreferences = {
