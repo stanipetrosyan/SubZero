@@ -12,6 +12,14 @@
                 {
                     "name": "atom",
                     "exist": "false"
+                },
+                {
+                    "name": "codium", 
+                    "exist": "false"
+                },
+                {
+                    "name": "brackets",
+                    "exist": "false"
                 }
             ]
         }

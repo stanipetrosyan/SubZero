@@ -19,7 +19,7 @@ function changeTab(event, tabName) {
        item.style.display = "none"
     }
   
-    let tablinks = document.getElementsByClassName("tablinks");
+    let tablinks = document.getElementsByClassName("tab-links");
     for (let item of tablinks) {
        item.className = item.className.replace(" active", "");
     }

@@ -3,13 +3,22 @@ body {
     grid-template-columns: 150px 1fr;
 }
 
-.tabs-label {
+button.tab-links {
+    display: block;
+    width: 130px;
+    height: 70px;
+    margin-bottom: 20px;
+    outline: none;
+}       
+
+.tabs-labels {
     grid-column: 1;
     border-right: 1px solid var(--primary-color);
 }
 
 .tab {
     grid-column: 2;
+    margin-left: 10px;
 }
 
 .content {
