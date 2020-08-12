@@ -29,5 +29,19 @@
         "defaultId": 4,
         "title": "Push",
         "message": "Done"
-    }
+    },
+    "editors": [
+        {
+            "name": "code"
+        },
+        {
+            "name": "atom"
+        },
+        {
+            "name": "codium"
+        },
+        {
+            "name": "brackets"
+        }
+    ]
 }

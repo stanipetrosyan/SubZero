@@ -89,6 +89,7 @@ document.getElementById('cancel').addEventListener('click', () => {
 
 function createEditors() {
     let userEditors = window.request.setup()['editors'];
+    console.log(userEditors)
     for (const item of userEditors) {
         if (item['exist']) {
             let editor = document.createElement('img');

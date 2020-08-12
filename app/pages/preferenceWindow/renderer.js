@@ -1,4 +1,5 @@
 setTheme(window.request.theme());
+console.log(window.request.data());
 document.getElementById("defaultTab").click();
 
 document.getElementById('light-theme').addEventListener('click', _ =>{

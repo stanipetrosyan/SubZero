@@ -3,16 +3,20 @@
 const Store = require('./store');
 const key = 'user_setup';
 const { findEditor } = require('./editor-checker');
+const editors = require('../config')('editors')
 
 class UserSetupInterface extends Store {
     setEditors() {
         let setup = this.get(key);
-        let editors = setup['editors'];
-
-        for (const item in editors) {
-            editors[item]['exist'] = findEditor(editors[item]['name']);
-            this.set(key, setup);
+        let array = [];
+        for (const item of editors) {
+            array.push({
+                name: item['name'],
+                exist: findEditor(item['name'])
+            })
         }
+        setup['editors'] = array;
+        this.set(key, setup);
     }
         
 }
