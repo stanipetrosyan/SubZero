@@ -15,7 +15,8 @@ class Store {
     }
     
     get(key) {
-        return JSON.parse(fs.readFileSync(this.path))[key];
+        return this.data[key]
+        //return JSON.parse(fs.readFileSync(this.path))[key];
     }
     
     set(key, val) {

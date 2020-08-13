@@ -7,11 +7,13 @@ const Window = require('./lib/window');
 const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('./config')
 
-const GroupInterface = require('./lib/groupStoreInterface'); 
-const UserSetupInterface = require('./lib/userSetupInterface')
+const Store = require('./models/store')
+const GroupInterface = require('./models/groupStoreInterface'); 
+const UserSetupInterface = require('./models/userSetupInterface')
 
-const store = new GroupInterface();
-const userSetup = new UserSetupInterface();
+const store = new Store()
+const groups = new GroupInterface(store);
+const userSetup = new UserSetupInterface(store);
 
 const project_path = path.join(__dirname, '../app/pages/projectWindow/index.html')
 const group_path = path.join(__dirname, '../app/pages/groupWindow/index.html')
@@ -23,7 +25,6 @@ const webPreferences = {
     enableRemoteModule: false,
     contextIsolation: true,
 }
-
 
 let modal = null;
 let mainWindow = null;
@@ -66,7 +67,7 @@ function closeModal() {
     GROUPS EVENTS
 */
 ipcMain.on('add-group', (event, arg) => {
-    if(store.addGroup(arg) == false) {
+    if(groups.addGroup(arg) == false) {
         dialog.showMessageBox(modal, config('equals'));
     } else {
         closeModal();
@@ -75,16 +76,16 @@ ipcMain.on('add-group', (event, arg) => {
 
 ipcMain.on('update-group', (event, arg) => {
     openModal(group_path); 
-    tmp_group = store.getGroupByName(arg);
+    tmp_group = groups.getGroupByName(arg);
 })
 
 ipcMain.on('updated-group', (event, arg) => {
-    store.updateGroup(tmp_group, arg);
+    groups.updateGroup(tmp_group, arg);
     closeModal();
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let group = store.getGroupByName(arg);
+    let group = groups.getGroupByName(arg);
     let response = dialog.showMessageBoxSync(mainWindow, config('question'));
     if(response === 0) {
         store.removeGroup(group);
@@ -95,31 +96,31 @@ ipcMain.on('delete-group', (event, arg) => {
     PROJECTS EVENTS
 */
 ipcMain.on('add-project', (event, arg) => {
-    store.addProject(arg);
+    groups.addProject(arg);
     closeModal();
 })
 
 ipcMain.on('update-project', (event, arg) => {
     openModal(project_path); 
-    tmp_project = store.getProjectByName(arg);
+    tmp_project = groups.getProjectByName(arg);
 })
 
 ipcMain.on('updated-project', (event, arg) => {
-    store.updateProject(tmp_project, arg);
+    groups.updateProject(tmp_project, arg);
     closeModal();
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let project = store.getProjectByName(arg);
+    let project = groups.getProjectByName(arg);
     let response = dialog.showMessageBoxSync(mainWindow, config('question'));
     if(response === 0) {
-        store.removeProject(project);
+        groups.removeProject(project);
     }
     closeModal();
 })
 
 ipcMain.on('open-project', (event, arg) => {
-    let project = store.getProjectByName(arg);
+    let project = groups.getProjectByName(arg);
     openProjectUsingEditor(project['path'], project['editor']);
 })
 
@@ -139,7 +140,7 @@ ipcMain.on('data-request', (event, arg) => {
 })
 
 ipcMain.on('setup-request', (event, arg) => {
-    event.returnValue = userSetup.get('user_setup');
+    event.returnValue = store.get('user_setup');
 })
 
 ipcMain.on('theme-request', (event, arg) => {

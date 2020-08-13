@@ -1,13 +1,15 @@
 'use strict'
 
-const Store = require('./store');
 const key = 'user_setup';
-const { findEditor } = require('./editor-checker');
+const { findEditor } = require('../lib/editor-checker');
 const editors = require('../config')('editors')
 
-class UserSetupInterface extends Store {
+class UserSetupInterface {
+    constructor(store) {
+        this.store = store
+    }
     setEditors() {
-        let setup = this.get(key);
+        let setup = this.store.get(key);
         let array = [];
         for (const item of editors) {
             array.push({
@@ -16,7 +18,7 @@ class UserSetupInterface extends Store {
             })
         }
         setup['editors'] = array;
-        this.set(key, setup);
+        this.store.set(key, setup);
     }
         
 }
