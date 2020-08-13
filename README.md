@@ -6,18 +6,25 @@
 </p>
 
 
-### Description
+## Description
 The easiest way to manage your local project in one place.
 
 ![](resource/SubZero.png)
 
 
-## Features
+### Features
 
 * All your projects in one place.
 * Easier management and better division thanks to the creation of groups
-* Open your project directly from SubZero on your favorite IDE (at v 0.0.1 supports VSC and ATOM)
+* Open your project directly from SubZero on your favorite code editor
 
+### Editors Support 
+- [x] Visual Studio Code
+- [x] Atom 
+- [x] Codium
+- [x] Brackets
+- [ ] Sublime Text
+- [ ] UltraEdit
 
 ## Contributing
 

@@ -4,24 +4,7 @@
         "groups": [],
         "theme": { "name": "Default"},
         "user_setup": {
-            "editors": [
-                {
-                    "name": "code",
-                    "exist": "false"
-                },
-                {
-                    "name": "atom",
-                    "exist": "false"
-                },
-                {
-                    "name": "codium", 
-                    "exist": "false"
-                },
-                {
-                    "name": "brackets",
-                    "exist": "false"
-                }
-            ]
+            "editors": []
         }
     }
 }
