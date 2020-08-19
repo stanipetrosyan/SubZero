@@ -1,8 +1,4 @@
 class GroupDOM extends HTMLElement {
-    constructor() {
-        super();
-    }
-
     static get observedAttributes() {
         return ['name', 'color']
     }

@@ -1,8 +1,4 @@
 class ProjectDOM extends HTMLElement {
-    constructor() {
-        super();
-    }
-
     static get observedAttributes() {
         return ['name']
     }
