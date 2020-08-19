@@ -8,7 +8,7 @@ const { openProjectUsingEditor } = require('./lib/terminal');
 const config = require('./config')
 
 const Store = require('./models/store')
-const GroupInterface = require('./models/groupStoreInterface'); 
+const GroupInterface = require('./models/groupStoreInterface');
 const UserSetupInterface = require('./models/userSetupInterface')
 
 const store = new Store()
@@ -23,7 +23,7 @@ const webPreferences = {
     preload: path.join(__dirname, 'preload.js'),
     nodeIntegration: false,
     enableRemoteModule: false,
-    contextIsolation: true,
+    contextIsolation: true
 }
 
 let modal = null;
@@ -37,12 +37,12 @@ function main() {
     mainWindow = Window({
         file: index_path,
         webPreferences
-    }) 
-    require('./renderer/menu');     
+    })
+    require('./renderer/menu');
 }
 
 function openModal(arg) {
-    if(!modal){
+    if (!modal) {
         modal = Window({
             file: arg,
             width: 500,
@@ -55,7 +55,7 @@ function openModal(arg) {
 }
 
 function closeModal() {
-    if(modal) {
+    if (modal) {
         modal.close();
         modal = null;
         tmp_project = null;
@@ -63,19 +63,19 @@ function closeModal() {
     }
 }
 
-/* 
+/*
     GROUPS EVENTS
 */
 ipcMain.on('add-group', (event, arg) => {
-    if(groups.addGroup(arg) == false) {
+    if (groups.addGroup(arg) == false) {
         dialog.showMessageBox(modal, config('equals'));
     } else {
         closeModal();
-    }   
+    }
 })
 
 ipcMain.on('update-group', (event, arg) => {
-    openModal(group_path); 
+    openModal(group_path);
     tmp_group = groups.getGroupByName(arg);
 })
 
@@ -85,14 +85,14 @@ ipcMain.on('updated-group', (event, arg) => {
 })
 
 ipcMain.on('delete-group', (event, arg) => {
-    let group = groups.getGroupByName(arg);
-    let response = dialog.showMessageBoxSync(mainWindow, config('question'));
-    if(response === 0) {
+    const group = groups.getGroupByName(arg);
+    const response = dialog.showMessageBoxSync(mainWindow, config('question'));
+    if (response === 0) {
         store.removeGroup(group);
     }
 })
 
-/* 
+/*
     PROJECTS EVENTS
 */
 ipcMain.on('add-project', (event, arg) => {
@@ -101,7 +101,7 @@ ipcMain.on('add-project', (event, arg) => {
 })
 
 ipcMain.on('update-project', (event, arg) => {
-    openModal(project_path); 
+    openModal(project_path);
     tmp_project = groups.getProjectByName(arg);
 })
 
@@ -111,20 +111,20 @@ ipcMain.on('updated-project', (event, arg) => {
 })
 
 ipcMain.on('delete-project', (event, arg) => {
-    let project = groups.getProjectByName(arg);
-    let response = dialog.showMessageBoxSync(mainWindow, config('question'));
-    if(response === 0) {
+    const project = groups.getProjectByName(arg);
+    const response = dialog.showMessageBoxSync(mainWindow, config('question'));
+    if (response === 0) {
         groups.removeProject(project);
     }
     closeModal();
 })
 
 ipcMain.on('open-project', (event, arg) => {
-    let project = groups.getProjectByName(arg);
+    const project = groups.getProjectByName(arg);
     openProjectUsingEditor(project['path'], project['editor']);
 })
 
-/* 
+/*
     REQUEST DATA
 */
 ipcMain.on('group-request', (event, arg) => {
@@ -147,7 +147,7 @@ ipcMain.on('theme-request', (event, arg) => {
     event.returnValue = store.get('theme');
 })
 
-/* 
+/*
     MODAL & DIALOG EVENTS
 */
 ipcMain.on('open-modal', (event, arg) => {
@@ -163,7 +163,7 @@ ipcMain.on('error-message', (event, arg) => {
 })
 
 ipcMain.on('open-folder-dialog', (event, arg) => {
-    event.returnValue = dialog.showOpenDialogSync({ properties: ["openDirectory"]});
+    event.returnValue = dialog.showOpenDialogSync({ properties: ['openDirectory'] });
 })
 
 ipcMain.on('update-theme', (event, arg) => {
@@ -178,13 +178,13 @@ app.on('window-all-closed', () => {
 })
 
 app.on('window-all-closed', () => {
-    if(process.platform !== 'darwin'){
+    if (process.platform !== 'darwin') {
         app.quit();
     }
 })
 
 app.on('activate', () => {
-    if(mainWindow === null){
+    if (mainWindow === null) {
         main();
     }
 })

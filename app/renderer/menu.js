@@ -8,17 +8,17 @@ const template = [
         label: 'File',
         submenu: [
             {
-                label: 'New..', 
+                label: 'New..',
                 submenu: [
                     {
                         label: 'Project',
                         accelerator: process.platform === 'darwin' ? 'Command+P' : 'Ctrl+P',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-project')
-                        },
+                        }
                     },
                     {
-                        label: 'Group', 
+                        label: 'Group',
                         accelerator: process.platform === 'darwin' ? 'Command+G' : 'Ctrl+G',
                         click(item, focusedWindow) {
                             focusedWindow.webContents.send('open-group')
@@ -36,13 +36,13 @@ const template = [
         ]
     },
     {
-        label: 'Edit',
+        label: 'Edit'
     },
     {
         label: 'View',
         submenu: [
-            {  
-                label: 'Search', 
+            {
+                label: 'Search',
                 accelerator: process.platform === 'darwin' ? 'Command+F' : 'Ctrl+F',
                 click(item, focusedWindow) {
                     focusedWindow.webContents.executeJavaScript('setSearchBar()')
@@ -98,10 +98,10 @@ const template = [
         submenu: [
             {
                 label: 'Learn More',
-                click () { shell.openExternal('http://electron.atom.io') }
-            }, 
+                click() { shell.openExternal('http://electron.atom.io') }
+            },
             {
-                label: 'GitHub', 
+                label: 'GitHub',
                 click() { shell.openExternal('http://github.com/StaniPetrosyan/SubZero') }
             },
             {

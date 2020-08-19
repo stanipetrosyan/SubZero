@@ -2,13 +2,12 @@ const assert = require('assert')
 const cmd = require('node-cmd');
 const platform = process.platform;
 
-
 // TODO: Add windows and MacOS X testing
 
-function openTerminalInsidePath(path){
-    switch(platform){
-        case 'linux': cmd.run('gnome-terminal -x bash -c "cd ' + path + '; exec bash"')
-            break;
+function openTerminalInsidePath(path) {
+    switch (platform) {
+    case 'linux': cmd.run('gnome-terminal -x bash -c "cd ' + path + '; exec bash"')
+        break;
     }
 }
 
@@ -20,7 +19,7 @@ describe('Terminal testing', () => {
         })
     })
 
-    it ('should open VSCode', () => {
+    it('should open VSCode', () => {
         cmd.run('code ' + __dirname)
         cmd.get('ps -C code', (err, data, stderr) => {
             assert.notEqual(data, null)

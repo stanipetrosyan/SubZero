@@ -3,8 +3,8 @@
 const groupList = document.getElementById('group-list');
 setTheme(window.request.theme());
 
-let data = window.request.data();
-let project_folder = null;
+const data = window.request.data();
+let projectFolder = null;
 let projectToUpdate = null;
 let editorSelected = null;
 let groupSelected = null;
@@ -16,7 +16,7 @@ createEditors();
 
 let editors = document.getElementsByTagName('img');
 
-if(projectToUpdate) {
+if (projectToUpdate) {
     document.getElementById('add').innerText = 'UPDATE'
     setProject(projectToUpdate);
 } else {
@@ -24,8 +24,8 @@ if(projectToUpdate) {
 }
 
 function setGroupListSelection() {
-    for (let group of data) {
-        let container = document.createElement('sub-group-container');
+    for (const group of data) {
+        const container = document.createElement('sub-group-container');
         container.setAttribute('color', group['color']);
         container.setAttribute('name', group['name']);
         container.addEventListener('click', () => {
@@ -45,16 +45,16 @@ function setProject(project) {
     document.getElementById(project['editor']).style.opacity = 1;
     groupSelected = document.getElementById(project['group']).id;
     editorSelected = document.getElementById(project['editor']).id;
-    project_folder = project['path'][0];
+    projectFolder = project['path'][0];
 }
 
 document.getElementById('open').addEventListener('click', () => {
-    let directory = window.modals.folder();
+    const directory = window.modals.folder();
     document.getElementById('project-path').innerText = directory[0];
-}) 
+})
 
 document.getElementById('add').addEventListener('click', () => {
-    let project = getProjectValues();
+    const project = getProjectValues();
     if (checkInputValues(project)) {
         if (projectToUpdate) {
             window.projects.updated(project);
@@ -65,7 +65,6 @@ document.getElementById('add').addEventListener('click', () => {
         window.notifies.error();
     }
 })
-
 
 function getProjectValues() {
     return {
@@ -88,15 +87,15 @@ document.getElementById('cancel').addEventListener('click', () => {
 })
 
 function createEditors() {
-    let userEditors = window.request.setup()['editors'];
+    const userEditors = window.request.setup()['editors'];
     for (const item of userEditors) {
         if (item['exist']) {
-            let editor = document.createElement('img');
+            const editor = document.createElement('img');
             editor.setAttribute('src', `../../assets/icons/${item['name']}_icon.png`);
             editor.setAttribute('id', item['name']);
             editor.className = 'icon editor-icon';
 
-            editor.addEventListener('click', _ => { 
+            editor.addEventListener('click', _ => {
                 editorSelected = item['name'];
                 editor.style.opacity = '1';
                 editors = setOpacity(editors, item['name']);
@@ -106,11 +105,9 @@ function createEditors() {
     }
 }
 
- 
-function setOpacity(array, id){
-    for(let element of array){
-        if (element.getAttribute('id') != id)
-            element.style.opacity = 0.4
+function setOpacity(array, id) {
+    for (const element of array) {
+        if (element.getAttribute('id') != id) { element.style.opacity = 0.4 }
     }
     return array
 }

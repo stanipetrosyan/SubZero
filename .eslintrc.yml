@@ -6,4 +6,18 @@ extends:
   - standard
 parserOptions:
   ecmaVersion: 11
-rules: {}
+rules: 
+  no-var: 
+    - error 
+  quotes: 
+    - error
+    - single
+  indent: 
+    - warn
+    - 4
+  dot-notation:
+    - off
+  semi: 
+    - off
+  space-before-function-paren:
+    - off

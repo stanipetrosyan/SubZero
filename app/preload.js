@@ -21,7 +21,7 @@ contextBridge.exposeInMainWorld('projects', {
 })
 
 contextBridge.exposeInMainWorld('user', {
-    updatetheme: (data) => ipcRenderer.send('update-theme', {name: data}),
+    updatetheme: (data) => ipcRenderer.send('update-theme', { name: data })
 })
 
 contextBridge.exposeInMainWorld('request', {
@@ -33,31 +33,29 @@ contextBridge.exposeInMainWorld('request', {
 })
 
 contextBridge.exposeInMainWorld('modals', {
-    group: () => ipcRenderer.send('open-modal',  group_path),
-    project: () => ipcRenderer.send('open-modal',  project_path),
+    group: () => ipcRenderer.send('open-modal', group_path),
+    project: () => ipcRenderer.send('open-modal', project_path),
     theme: () => ipcRenderer.send('open-modal', theme_path),
     folder: () => { return ipcRenderer.sendSync('open-folder-dialog') },
-    close: () => ipcRenderer.send('close-modal'),
+    close: () => ipcRenderer.send('close-modal')
 })
 
 contextBridge.exposeInMainWorld('notifies', {
-    error: () =>  ipcRenderer.send('error-message')
+    error: () => ipcRenderer.send('error-message')
 })
 
 ipcRenderer.on('open-group', () => {
-    send('open-modal',  group_path)
+    send('open-modal', group_path)
 });
 
 ipcRenderer.on('open-project', () => {
-    send('open-modal',  project_path)
+    send('open-modal', project_path)
 });
 
 ipcRenderer.on('open-preferences', () => {
-    send('open-modal',  theme_path)
+    send('open-modal', theme_path)
 });
 
-
 function send(channel, message) {
-  ipcRenderer.send(channel, message)
+    ipcRenderer.send(channel, message)
 }
-

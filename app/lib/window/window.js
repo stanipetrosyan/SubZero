@@ -8,13 +8,13 @@ const defaultProps = {
     minWidth: 600,
     minHeight: 600,
     show: false,
-    title: "SubZero"
+    title: 'SubZero'
 }
 
-module.exports = function Window({file, ...settings}) {
-    let window = new BrowserWindow({...defaultProps, ...settings})
+module.exports = function Window({ file, ...settings }) {
+    const window = new BrowserWindow({ ...defaultProps, ...settings })
     window.loadFile(file);
-    window.once('ready-to-show', () =>{
+    window.once('ready-to-show', () => {
         window.show()
     })
     return window;

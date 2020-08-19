@@ -8,9 +8,10 @@ class UserSetupInterface {
     constructor(store) {
         this.store = store
     }
+
     setEditors() {
-        let setup = this.store.get(key);
-        let array = [];
+        const setup = this.store.get(key);
+        const array = [];
         for (const item of editors) {
             array.push({
                 name: item['name'],
@@ -20,6 +21,5 @@ class UserSetupInterface {
         setup['editors'] = array;
         this.store.set(key, setup);
     }
-        
 }
 module.exports = UserSetupInterface;

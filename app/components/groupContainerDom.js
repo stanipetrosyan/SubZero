@@ -2,27 +2,27 @@ class GroupContainerDOM extends HTMLElement {
     constructor() {
         super();
     }
-  
+
     static get observedAttributes() {
         return ['name', 'color']
     }
-  
+
     get name() {
         return this.getAttribute('name')
     }
-  
+
     get color() {
         return this.getAttribute('color')
     }
-  
+
     set name(name) {
         this.setAttribute('name', name)
     }
-  
+
     set color(color) {
         this.setAttribute('color', color)
     }
-  
+
     connectedCallback() {
         this.style.display = 'inline-block';
         this.style.lineHeight = '45px';
@@ -43,6 +43,5 @@ class GroupContainerDOM extends HTMLElement {
         this.setAttribute('id', this.name);
     }
 }
-  
-  
+
 customElements.define('sub-group-container', GroupContainerDOM);

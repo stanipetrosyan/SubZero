@@ -20,9 +20,8 @@ describe('Application launch', function () {
             return app.stop();
         }
     })
-    
 
-    it ('should show main window', async () => {
+    it('should show main window', async () => {
         const count = await app.client.getWindowCount();
         return assert.equal(count, 1)
     })
@@ -31,9 +30,9 @@ describe('Application launch', function () {
         const title = await app.client.waitUntilWindowLoaded().getTitle();
         return assert.equal(title, 'SubZero');
     });
-    
+
     it ('should not have the developer tools open', async () => {
         const devToolsAreOpen = await app.client.waitUntilWindowLoaded().browserWindow.isDevToolOpened();
         return assert.equal(devToolsAreOpen, false)
     }) */
-}) 
+})
