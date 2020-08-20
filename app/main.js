@@ -121,7 +121,7 @@ ipcMain.on('delete-project', (event, arg) => {
 
 ipcMain.on('open-project', (event, arg) => {
     const project = groups.getProjectByName(arg);
-    openProjectUsingEditor(project['path'], project['editor']);
+    openProjectUsingEditor(project['path'], project['editor'], userSetup.getSettingValue('openTerminal'));
 })
 
 /*
@@ -140,7 +140,7 @@ ipcMain.on('data-request', (event, arg) => {
 })
 
 ipcMain.on('setup-request', (event, arg) => {
-    event.returnValue = store.get('user_setup');
+    event.returnValue = store.get('userSetup');
 })
 
 ipcMain.on('theme-request', (event, arg) => {

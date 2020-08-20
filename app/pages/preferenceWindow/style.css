@@ -1,6 +1,7 @@
 body {
     display: grid;
     grid-template-columns: 150px 1fr;
+    color: var(--font-color)
 }
 
 button.tab-links {

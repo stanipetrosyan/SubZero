@@ -3,8 +3,13 @@
     "defaults": {
         "groups": [],
         "theme": { "name": "Default"},
-        "user_setup": {
-            "editors": []
+        "userSetup": {
+            "editors": [],
+            "settings": [
+                {
+                    "openTerminal": "false"
+                }
+            ]
         }
     }
 }

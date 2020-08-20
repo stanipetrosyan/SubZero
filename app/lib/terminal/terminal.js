@@ -9,7 +9,7 @@ module.exports = {
      * @param {string} path project['path']
      * @param {string} editor project['editor']
      */
-    openProjectUsingEditor(path, editor) {
+    openProjectUsingEditor(path, editor, terminalSetting) {
         path = normalizePathWithSpace(path);
 
         switch (editor) {
@@ -19,7 +19,7 @@ module.exports = {
         case 'atom' : cmd.run('atom.cmd ' + path);
             break;
         }
-        openTerminalInsidePath(path);
+        if (terminalSetting) { openTerminalInsidePath(path) }
     }
 }
 
