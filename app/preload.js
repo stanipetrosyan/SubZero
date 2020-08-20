@@ -1,9 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 const path = require('path');
 
-const project_path = path.join(__dirname, '../app/pages/projectWindow/index.html')
-const group_path = path.join(__dirname, '../app/pages/groupWindow/index.html')
-const theme_path = path.join(__dirname, '../app/pages/preferenceWindow/index.html')
+const projectPath = path.join(__dirname, '../app/pages/projectWindow/index.html')
+const groupPath = path.join(__dirname, '../app/pages/groupWindow/index.html')
+const themePath = path.join(__dirname, '../app/pages/preferenceWindow/index.html')
 
 contextBridge.exposeInMainWorld('groups', {
     add: (data) => ipcRenderer.send('add-group', data),
@@ -33,9 +33,9 @@ contextBridge.exposeInMainWorld('request', {
 })
 
 contextBridge.exposeInMainWorld('modals', {
-    group: () => ipcRenderer.send('open-modal', group_path),
-    project: () => ipcRenderer.send('open-modal', project_path),
-    theme: () => ipcRenderer.send('open-modal', theme_path),
+    group: () => ipcRenderer.send('open-modal', groupPath),
+    project: () => ipcRenderer.send('open-modal', projectPath),
+    theme: () => ipcRenderer.send('open-modal', themePath),
     folder: () => { return ipcRenderer.sendSync('open-folder-dialog') },
     close: () => ipcRenderer.send('close-modal')
 })
@@ -45,15 +45,15 @@ contextBridge.exposeInMainWorld('notifies', {
 })
 
 ipcRenderer.on('open-group', () => {
-    send('open-modal', group_path)
+    send('open-modal', groupPath)
 });
 
 ipcRenderer.on('open-project', () => {
-    send('open-modal', project_path)
+    send('open-modal', projectPath)
 });
 
 ipcRenderer.on('open-preferences', () => {
-    send('open-modal', theme_path)
+    send('open-modal', themePath)
 });
 
 function send(channel, message) {

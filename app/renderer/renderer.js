@@ -126,7 +126,7 @@ function projectsIsEmpty(data) {
 
 function setSearchBar() {
     activeSearchBar.checked = !activeSearchBar.checked;
-    (activeSearchBar.checked == true) ? searchBar.removeAttribute('disabled') : searchBar.setAttribute('disabled', 'disabled')
+    (activeSearchBar.checked === true) ? searchBar.removeAttribute('disabled') : searchBar.setAttribute('disabled', 'disabled')
 }
 
 searchBar.addEventListener('input', _ => {

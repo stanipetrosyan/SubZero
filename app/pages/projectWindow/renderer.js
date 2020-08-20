@@ -107,7 +107,7 @@ function createEditors() {
 
 function setOpacity(array, id) {
     for (const element of array) {
-        if (element.getAttribute('id') != id) { element.style.opacity = 0.4 }
+        if (element.getAttribute('id') !== id) { element.style.opacity = 0.4 }
     }
     return array
 }

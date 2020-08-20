@@ -21,3 +21,11 @@ rules:
     - off
   space-before-function-paren:
     - off
+  no-undef:
+    - off
+  no-unused-vars:
+    - off
+  handle-callback-err:
+    - off
+  no-path-concat:
+    - off

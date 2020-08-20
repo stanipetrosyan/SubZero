@@ -76,7 +76,7 @@ class GroupsStoreInterface {
         const groups = this.store.get(key);
         for (const group of groups) {
             for (const project of group['projects']) {
-                if (project['name'] == name) {
+                if (project['name'] === name) {
                     return project;
                 }
             }
@@ -86,7 +86,7 @@ class GroupsStoreInterface {
 }
 
 function findGroupByName(data, groupName) {
-    return data.findIndex(elem => elem['name'] == groupName);
+    return data.findIndex(elem => elem['name'] === groupName);
 }
 
 function removeGroupByName(data, groupName) {

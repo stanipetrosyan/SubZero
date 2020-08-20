@@ -15,9 +15,9 @@ const store = new Store()
 const groups = new GroupInterface(store);
 const userSetup = new UserSetupInterface(store);
 
-const project_path = path.join(__dirname, '../app/pages/projectWindow/index.html')
-const group_path = path.join(__dirname, '../app/pages/groupWindow/index.html')
-const index_path = path.join(__dirname, '../app/renderer/index.html');
+const projectPath = path.join(__dirname, '../app/pages/projectWindow/index.html')
+const groupPath = path.join(__dirname, '../app/pages/groupWindow/index.html')
+const indexPath = path.join(__dirname, '../app/renderer/index.html');
 
 const webPreferences = {
     preload: path.join(__dirname, 'preload.js'),
@@ -28,14 +28,14 @@ const webPreferences = {
 
 let modal = null;
 let mainWindow = null;
-let tmp_project = null;
-let tmp_group = null;
+let selectedProject = null;
+let selectedGroup = null;
 
 userSetup.setEditors();
 
 function main() {
     mainWindow = Window({
-        file: index_path,
+        file: indexPath,
         webPreferences
     })
     require('./renderer/menu');
@@ -58,8 +58,8 @@ function closeModal() {
     if (modal) {
         modal.close();
         modal = null;
-        tmp_project = null;
-        tmp_group = null;
+        selectedProject = null;
+        selectedGroup = null;
     }
 }
 
@@ -67,7 +67,7 @@ function closeModal() {
     GROUPS EVENTS
 */
 ipcMain.on('add-group', (event, arg) => {
-    if (groups.addGroup(arg) == false) {
+    if (groups.addGroup(arg) === false) {
         dialog.showMessageBox(modal, config('equals'));
     } else {
         closeModal();
@@ -75,12 +75,12 @@ ipcMain.on('add-group', (event, arg) => {
 })
 
 ipcMain.on('update-group', (event, arg) => {
-    openModal(group_path);
-    tmp_group = groups.getGroupByName(arg);
+    openModal(groupPath);
+    selectedGroup = groups.getGroupByName(arg);
 })
 
 ipcMain.on('updated-group', (event, arg) => {
-    groups.updateGroup(tmp_group, arg);
+    groups.updateGroup(selectedGroup, arg);
     closeModal();
 })
 
@@ -101,12 +101,12 @@ ipcMain.on('add-project', (event, arg) => {
 })
 
 ipcMain.on('update-project', (event, arg) => {
-    openModal(project_path);
-    tmp_project = groups.getProjectByName(arg);
+    openModal(projectPath);
+    selectedProject = groups.getProjectByName(arg);
 })
 
 ipcMain.on('updated-project', (event, arg) => {
-    groups.updateProject(tmp_project, arg);
+    groups.updateProject(selectedProject, arg);
     closeModal();
 })
 
@@ -128,11 +128,11 @@ ipcMain.on('open-project', (event, arg) => {
     REQUEST DATA
 */
 ipcMain.on('group-request', (event, arg) => {
-    event.returnValue = tmp_group;
+    event.returnValue = selectedGroup;
 })
 
 ipcMain.on('project-request', (event, arg) => {
-    event.returnValue = tmp_project;
+    event.returnValue = selectedProject;
 })
 
 ipcMain.on('data-request', (event, arg) => {
