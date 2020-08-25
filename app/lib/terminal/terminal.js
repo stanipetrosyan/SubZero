@@ -11,14 +11,10 @@ module.exports = {
      */
     openProjectUsingEditor(path, editor, terminalSetting) {
         path = normalizePathWithSpace(path);
+        const comand = [editor, ' ', path].join('')
 
-        switch (editor) {
-        case 'code' : cmd.run('code ' + path);
-            break;
-
-        case 'atom' : cmd.run('atom.cmd ' + path);
-            break;
-        }
+        cmd.run(comand)
+        
         if (terminalSetting) { openTerminalInsidePath(path) }
     }
 }
