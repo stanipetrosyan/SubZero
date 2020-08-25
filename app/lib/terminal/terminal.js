@@ -14,7 +14,6 @@ module.exports = {
         const comand = [editor, ' ', path].join('')
 
         cmd.run(comand)
-        
         if (terminalSetting) { openTerminalInsidePath(path) }
     }
 }
