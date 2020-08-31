@@ -5,17 +5,17 @@ const platform = process.platform;
 
 module.exports = {
 
-    /**
+  /**
      * @param {string} path project['path']
      * @param {string} editor project['editor']
      */
-    openProjectUsingEditor(path, editor, terminalSetting) {
-        path = normalizePathWithSpace(path);
-        const comand = [editor, ' ', path].join('')
+  openProjectUsingEditor(path, editor, terminalSetting) {
+    path = normalizePathWithSpace(path);
+    const comand = [editor, ' ', path].join('')
 
-        cmd.run(comand)
-        if (terminalSetting) { openTerminalInsidePath(path) }
-    }
+    cmd.run(comand)
+    if (terminalSetting) { openTerminalInsidePath(path) }
+  }
 }
 
 /**
@@ -24,19 +24,19 @@ module.exports = {
  * @returns {string}
  */
 function normalizePathWithSpace(path) {
-    return (String(path).replace(/\s/g, '\\ '));
+  return (String(path).replace(/\s/g, '\\ '));
 }
 
 /**
  * @param {string} path
  */
 function openTerminalInsidePath(path) {
-    switch (platform) {
+  switch (platform) {
     case 'linux': cmd.run('gnome-terminal -x bash -c "cd ' + path + '; exec bash"')
-        break;
+      break;
     case 'darwin': cmd.run('open -a Terminal ' + path)
-        break;
+      break;
     case 'win32': cmd.run('cd' + path + ' && start cmd')
-        break;
-    }
+      break;
+  }
 }

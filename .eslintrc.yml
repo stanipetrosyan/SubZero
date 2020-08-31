@@ -9,12 +9,6 @@ parserOptions:
 rules: 
   no-var: 
     - error 
-  quotes: 
-    - error
-    - single
-  indent: 
-    - warn
-    - 4
   dot-notation:
     - off
   semi: 
@@ -24,8 +18,6 @@ rules:
   no-undef:
     - off
   no-unused-vars:
-    - off
-  handle-callback-err:
     - off
   no-path-concat:
     - off

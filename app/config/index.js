@@ -1,5 +1,5 @@
 const config = require('./config.json');
 
 module.exports = function (module) {
-    return config[module];
+  return config[module];
 }

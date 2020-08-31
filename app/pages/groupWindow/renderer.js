@@ -15,67 +15,67 @@ setTheme(window.request.theme());
 groupToUpdate = window.request.group();
 
 if (groupToUpdate) {
-    setGroupValues();
-    addBtn.innerHTML = 'UPDATE';
+  setGroupValues();
+  addBtn.innerHTML = 'UPDATE';
 } else {
-    addBtn.innerHTML = 'ADD';
+  addBtn.innerHTML = 'ADD';
 }
 
 createColorPicker();
 
 select.addEventListener('click', () => {
-    if (active) {
-        select.className = select.className.substring(0, select.className.length - 10);
-    } else {
-        select.className += ' cs-active';
-    }
-    active = !active;
+  if (active) {
+    select.className = select.className.substring(0, select.className.length - 10);
+  } else {
+    select.className += ' cs-active';
+  }
+  active = !active;
 })
 
 document.getElementById('add-update').addEventListener('click', () => {
-    const group = getGroupValues();
-    if (checkInputValues(group)) {
-        if (groupToUpdate) {
-            group['projects'] = groupToUpdate['projects'];
-            window.groups.updated(group)
-        } else { window.groups.add(group) }
-    } else {
-        window.notifies.error();
-    }
+  const group = getGroupValues();
+  if (checkInputValues(group)) {
+    if (groupToUpdate) {
+      group['projects'] = groupToUpdate['projects'];
+      window.groups.updated(group)
+    } else { window.groups.add(group) }
+  } else {
+    window.notifies.error();
+  }
 })
 
 function getGroupValues() {
-    return {
-        name: document.getElementById('group-name').value,
-        color: selected,
-        projects: []
-    }
+  return {
+    name: document.getElementById('group-name').value,
+    color: selected,
+    projects: []
+  }
 }
 
 function setGroupValues() {
-    document.getElementById('group-name').value = groupToUpdate['name'];
-    showerColorSelected.style.backgroundColor = groupToUpdate['color'];
-    selected = groupToUpdate['color'];
+  document.getElementById('group-name').value = groupToUpdate['name'];
+  showerColorSelected.style.backgroundColor = groupToUpdate['color'];
+  selected = groupToUpdate['color'];
 }
 
 function checkInputValues(group) {
-    return (group['name'] && group['color']);
+  return (group['name'] && group['color']);
 }
 
 document.getElementById('cancel').addEventListener('click', () => {
-    window.modals.close();
+  window.modals.close();
 })
 
 function createColorPicker() {
-    colors.forEach(color => {
-        const colorPickerElement = document.createElement('li');
-        colorPickerElement.setAttribute('class', 'color-' + color)
-        colorPickerElement.setAttribute('data-option', '');
-        colorPickerElement.setAttribute('data-value', '#' + color);
-        colorPickerElement.addEventListener('click', () => {
-            selected = colorPickerElement.getAttribute('data-value');
-            showerColorSelected.style.backgroundColor = selected;
-        })
-        ulElement.appendChild(colorPickerElement);
+  colors.forEach(color => {
+    const colorPickerElement = document.createElement('li');
+    colorPickerElement.setAttribute('class', 'color-' + color)
+    colorPickerElement.setAttribute('data-option', '');
+    colorPickerElement.setAttribute('data-value', '#' + color);
+    colorPickerElement.addEventListener('click', () => {
+      selected = colorPickerElement.getAttribute('data-value');
+      showerColorSelected.style.backgroundColor = selected;
     })
+    ulElement.appendChild(colorPickerElement);
+  })
 }
