@@ -13,10 +13,13 @@
         <div class="tab">
             <div id="Settings" class="tabcontent">
                 <h3>Settings</h3>
-                <p>Settings page preference</p>
+                <div>
+                    <input type="checkbox" id="terminal" name="terminal">
+                    <label for="terminal">Open terminal inside path when open the project</label><br>
+                </div>
             </div>
             <div id="Themes" class="tabcontent">
-                <div class="card light" id="light-theme">
+                <div class="card light" onclick="changeTheme('light')">
                     <div class="content">
                         <div class="color-theme bg-light"></div>
                         <div class="color-theme font-light"></div>
@@ -24,14 +27,13 @@
                         <p><strong>SubZero theme</strong></p>
                     </div>
                 </div>
-                <div class="card dark" id="dark-theme">
+                <div class="card dark" onclick="changeTheme('default')">
                     <div class="content">
                         <div class="color-theme bg-dark"></div>
                         <div class="color-theme font-dark"></div>
                         <div class="color-theme primary-dark"></div>
                         <p><strong>Dark theme</strong></p>
                     </div>
-                    
                 </div> 
             </div>
             <div id="Editors" class="tabcontent">
@@ -39,6 +41,7 @@
                 <p>Editors page preference</p>
             </div> 
         </div>
+        <button class="button button-subzero" id="save">Save</button>
         <button class="button-cancel" id="cancel">CANCEL</button>
     </body>
     <script src="../../renderer/theme-setup.js"></script>

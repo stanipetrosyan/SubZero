@@ -31,7 +31,10 @@ let mainWindow = null;
 let selectedProject = null;
 let selectedGroup = null;
 
+console.log(store)
+
 userSetup.setEditors();
+//store.delete()
 
 function main() {
   mainWindow = Window({
@@ -145,6 +148,13 @@ ipcMain.on('setup-request', (event, arg) => {
 
 ipcMain.on('theme-request', (event, arg) => {
   event.returnValue = store.get('theme');
+})
+
+/*
+    USER SETUP EVENTS
+*/
+ipcMain.on('update-settings', (event, arg) => {
+  store.set('userSetup', arg)
 })
 
 /*

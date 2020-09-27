@@ -5,11 +5,9 @@
         "theme": { "name": "Default"},
         "userSetup": {
             "editors": [],
-            "settings": [
-                {
-                    "openTerminal": "false"
-                }
-            ]
+            "settings": {
+                "openTerminal": "false"
+            }
         }
     }
 }

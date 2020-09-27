@@ -21,7 +21,8 @@ contextBridge.exposeInMainWorld('projects', {
 })
 
 contextBridge.exposeInMainWorld('user', {
-  updatetheme: (data) => ipcRenderer.send('update-theme', { name: data })
+  updatetheme: (data) => ipcRenderer.send('update-theme', { name: data }),
+  updatesettings: (data) => ipcRenderer.send('update-settings', data)
 })
 
 contextBridge.exposeInMainWorld('request', {

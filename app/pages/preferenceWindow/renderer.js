@@ -1,17 +1,23 @@
+let userData = window.request.setup();
+
 setTheme(window.request.theme());
 document.getElementById('defaultTab').click();
 
-document.getElementById('light-theme').addEventListener('click', _ => {
-  window.user.updatetheme('light')
-})
-
-document.getElementById('dark-theme').addEventListener('click', _ => {
-  window.user.updatetheme('default')
-})
+setSettings()
 
 document.getElementById('cancel').addEventListener('click', _ => {
   window.modals.close();
 })
+
+document.getElementById('save').addEventListener('click', _ => {
+  let updatedUserData = userData
+  updatedUserData['settings']['openTerminal'] = document.getElementById('terminal').checked 
+  window.user.updatesettings(updatedUserData)
+})
+
+function changeTheme(themeName) {
+  window.user.updatetheme(themeName)
+}
 
 function changeTab(event, tabName) {
   const tabcontent = document.getElementsByClassName('tabcontent');
@@ -26,4 +32,8 @@ function changeTab(event, tabName) {
 
   document.getElementById(tabName).style.display = 'block';
   event.currentTarget.className += ' active';
+}
+
+function setSettings() {
+  document.getElementById('terminal').checked = userData['settings']['openTerminal']
 }
