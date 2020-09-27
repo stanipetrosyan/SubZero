@@ -1,0 +1,76 @@
+body {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    color: var(--font-color)
+}
+
+button.tab-links {
+    display: block;
+    width: 130px;
+    height: 70px;
+    margin-bottom: 20px;
+    outline: none;
+}       
+
+.tabs-labels {
+    grid-column: 1;
+    border-right: 1px solid var(--primary-color);
+}
+
+.tab {
+    grid-column: 2;
+    margin-left: 10px;
+}
+
+.content {
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.color-theme {
+    border: 1px solid gray;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.bg-dark {
+    background-color: #121212;
+}
+
+.primary-dark {
+    background-color: #E91E63;
+}
+
+
+.font-dark {
+    background-color: white;
+}
+
+.bg-light {
+    background-color: white;
+}
+
+.primary-light {
+    background-color: #1C39BB;
+}
+
+.font-light {
+    background-color: #424242;
+}
+
+button.button-cancel {
+    position: absolute;
+    left: 80%;
+    top: 90%;
+}
+
+.tabcontent {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

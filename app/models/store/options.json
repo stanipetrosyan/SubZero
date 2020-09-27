@@ -1,0 +1,13 @@
+{
+    "configName": "data-user",
+    "defaults": {
+        "groups": [],
+        "theme": { "name": "Default"},
+        "userSetup": {
+            "editors": [],
+            "settings": {
+                "openTerminal": "false"
+            }
+        }
+    }
+}

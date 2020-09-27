@@ -1,27 +1,52 @@
 # SubZero
 
-![img](resource/subzero.png)
+<p align="center">
+<img src="resource/LogoSubZero.png" alt="SubZero"
+	title="SubZero" width="200" height="200"/>
+</p>
 
+
+## Description
+The easiest way to manage your local project in one place.
+
+![](resource/SubZero.png)
+
+
+### Features
+
+* All your projects in one place.
+* Easier management and better division thanks to the creation of groups
+* Open your project directly from SubZero on your favorite code editor
+
+### Editors Support 
+- [x] Visual Studio Code
+- [x] Atom 
+- [x] Codium
+- [x] Brackets
+- [ ] Sublime Text
+- [ ] UltraEdit
+
+## Contributing
 
 ### Start
 
 ```java
-npm install
-
-npm start
+$ git clone https://github.com/StaniPetrosyan/SubZero.git
+$ npm install
+$ npm start
 ```
 
 ### Build project
   
 ```java
-// For Linux
-npm run package-linux
+// Linux
+$ npm run package-linux
 
-// For Window
-npm run package-win
+// Window
+$ npm run package-win
 
-// For MacOS
-npm run package-mac
+// MacOS
+$ npm run package-mac
 ```
 
 ### Testing

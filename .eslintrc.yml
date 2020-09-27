@@ -1,0 +1,23 @@
+env:
+  browser: true
+  commonjs: true
+  es2020: true
+extends:
+  - standard
+parserOptions:
+  ecmaVersion: 12
+rules: 
+  no-var: 
+    - error 
+  dot-notation:
+    - off
+  semi: 
+    - off
+  space-before-function-paren:
+    - off
+  no-undef:
+    - off
+  no-unused-vars:
+    - off
+  no-path-concat:
+    - off
