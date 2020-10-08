@@ -1,4 +1,4 @@
-let userData = window.request.setup();
+const userData = window.request.setup();
 
 setTheme(window.request.theme());
 document.getElementById('defaultTab').click();
@@ -10,8 +10,8 @@ document.getElementById('cancel').addEventListener('click', _ => {
 })
 
 document.getElementById('save').addEventListener('click', _ => {
-  let updatedUserData = userData
-  updatedUserData['settings']['openTerminal'] = document.getElementById('terminal').checked 
+  const updatedUserData = userData
+  updatedUserData['settings']['openTerminal'] = document.getElementById('terminal').checked
   window.user.updatesettings(updatedUserData)
 })
 
