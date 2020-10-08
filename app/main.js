@@ -31,10 +31,7 @@ let mainWindow = null;
 let selectedProject = null;
 let selectedGroup = null;
 
-console.log(store)
-
 userSetup.setEditors();
-//store.delete()
 
 function main() {
   mainWindow = Window({
