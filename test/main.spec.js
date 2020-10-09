@@ -1,5 +1,5 @@
 const Application = require('spectron').Application
-const assert = require('assert')
+const assert = require('chai').assert
 const electronPath = require('electron')
 const path = require('path')
 
