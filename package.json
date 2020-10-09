@@ -35,6 +35,7 @@
     "spectron": "^12.0.0"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "minimist": "^1.2.5",
     "node-cmd": "^3.0.0",
     "simple-git": "^1.132.0"
