@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert')
+const assert = require('chai').assert
 const checker = require('../app/lib/editor-checker');
 
 // Obv this test pass only if you have VSCode or Atom installed (in case check your global variable)
