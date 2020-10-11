@@ -24,6 +24,9 @@ The easiest way to manage your local project in one place.
 - [x] Codium
 - [x] Brackets
 
+### Platform Support
+- [x] Linux
+
 ## Contributing
 
 ### Start
