@@ -34,6 +34,13 @@ $ npm install
 $ npm start
 ```
 
+### Lint
+
+Before sending PR, invoke lint fix.
+```
+$ npm run lint
+```
+
 ### Build project
   
 ```java

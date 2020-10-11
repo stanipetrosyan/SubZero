@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron app/main.js",
     "test": "mocha",
+    "lint": "npx eslint --fix .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . SubZero --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"SubZero\"",
     "package-linux": "electron-packager . SubZero --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
@@ -32,10 +33,10 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^7.1.2",
-    "spectron": "^12.0.0"
+    "spectron": "^12.0.0",
+    "chai": "^4.2.0"
   },
   "dependencies": {
-    "chai": "^4.2.0",
     "minimist": "^1.2.5",
     "node-cmd": "^3.0.0",
     "simple-git": "^1.132.0"
