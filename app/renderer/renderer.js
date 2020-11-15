@@ -5,6 +5,7 @@ const projectList = document.getElementById('project-list');
 const activeSearchBar = document.getElementById('checkbox');
 const searchBar = document.getElementById('search-bar');
 const emptyProjectsInfo = document.getElementById('projects-info');
+const collapseButton = document.getElementById('collapse');
 
 let data = null;
 refresh();
@@ -170,3 +171,10 @@ window.addEventListener('click', (event) => {
     }
   }
 });
+
+collapseButton.addEventListener('click', _ => {
+  let sidenav = document.getElementById("sidenav")
+  let moveSize = (sidenav.style.width === "0px") ? '160px' : '0px'
+  sidenav.style.width = moveSize;
+  collapseButton.style.marginLeft = moveSize;
+})

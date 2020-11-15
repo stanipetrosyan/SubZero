@@ -55,6 +55,7 @@ body, html {
     overflow-x: hidden;
     padding-top: 10px;
     overflow-y: scroll;
+    transition: 0.5s;
 }
 
 .content {
@@ -99,6 +100,18 @@ button:hover {
 
 .button-cancel:hover{
     background-color: #ff0000;
+}
+/*
+    SIDENAV
+*/
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+#collapse {
+    margin-left: 160px;
 }
 
 /*

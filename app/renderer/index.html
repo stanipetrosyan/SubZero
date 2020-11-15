@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="../style/index.css">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
-    
-    <head>
-    </head>
-    <body>
-        <div class="sidenav">
+<link rel="stylesheet" type="text/css" href="../style/index.css">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+
+<head>
+</head>
+
+<body>
+    <div>
+        <div id="sidenav" class="sidenav">
             <sub-group id="group-all" name="All" color="#1C39BB"></sub-group>
             <div>
                 <div id="group-list">
                 </div>
-            </div>  
+            </div>
         </div>
-       
-        <div class="wrapper">
-            <div class="none-project-info" id="projects-info">
-                <p>Add new project:<strong> CTRL + P</strong></p>
-                <p>Add new group:<strong> CTRL + G</strong></p>
+        <button id="collapse">collapse</button>
+    </div>
+    <div class="wrapper">
+        <div class="none-project-info" id="projects-info">
+            <p>Add new project:<strong> CTRL + P</strong></p>
+            <p>Add new group:<strong> CTRL + G</strong></p>
+        </div>
+        <div class="wrapper-top">
+            <div class="curtain">
+                <div class="curtain_wrapper">
+                    <input type="checkbox" id="checkbox" disabled>
+                    <div class="curtain_panel curtain_panel_top">
+                        <input class="search-bar" placeholder="Search..." id="search-bar" type="text" autofocus>
+                    </div>
+                </div>
             </div>
-            <div class="wrapper-top">
-                <div class="curtain">
-                    <div class="curtain_wrapper">
-                        <input type="checkbox" id="checkbox" disabled>
-                        <div class="curtain_panel curtain_panel_top">
-                            <input class="search-bar" placeholder="Search..." id="search-bar" type="text" autofocus>
-                        </div>
-                    </div> 
-                  </div>
-            </div>
-            <div class="content" id="project-list"></div>
-        </div>       
-    </body>
-    <script src="../components/projectDom.js"></script>
-    <script src="../components/groupDom.js"></script>
-    <script src="./theme-setup.js"></script>
-    <script src="./renderer.js"></script>   
+        </div>
+        <div class="content" id="project-list"></div>
+    </div>
+</body>
+<script src="../components/projectDom.js"></script>
+<script src="../components/groupDom.js"></script>
+<script src="./theme-setup.js"></script>
+<script src="./renderer.js"></script>
+
 </html>
