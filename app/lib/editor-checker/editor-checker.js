@@ -1,14 +1,10 @@
 'use strict'
 
-const { execSync } = require('child_process');
+const cmd = require('node-cmd')
 
 module.exports = {
   findEditor(editor) {
-    try {
-      execSync(editor + ' -v');
-      return true;
-    } catch (error) {
-      return false;
-    }
+    let command = cmd.runSync(editor + ' -v')
+    return command.err === null
   }
 }
