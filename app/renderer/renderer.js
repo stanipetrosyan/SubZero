@@ -173,8 +173,8 @@ window.addEventListener('click', (event) => {
 });
 
 collapseButton.addEventListener('click', _ => {
-  let sidenav = document.getElementById("sidenav")
-  let moveSize = (sidenav.style.width === "0px") ? '160px' : '0px'
+  const sidenav = document.getElementById('sidenav')
+  const moveSize = (sidenav.style.width === '0px') ? '160px' : '0px'
   sidenav.style.width = moveSize;
   collapseButton.style.marginLeft = moveSize;
 })
