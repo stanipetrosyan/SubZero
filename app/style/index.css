@@ -101,6 +101,7 @@ button:hover {
 .button-cancel:hover{
     background-color: #ff0000;
 }
+
 /*
     SIDENAV
 */
@@ -110,8 +111,17 @@ button:hover {
     .sidenav a {font-size: 18px;}
 }
 
-#collapse {
+button#collapse {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    border-top-right-radius: 110px;
+    border-bottom-right-radius: 110px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.2);
+    outline: none;
     margin-left: 160px;
+    font-size: large;
 }
 
 /*
@@ -161,6 +171,7 @@ input[type=text]:focus {
 .bar:before {
     left:50%;
 }
+
 .bar:after {
     right:50%; 
 }
