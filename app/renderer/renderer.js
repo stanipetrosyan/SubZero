@@ -177,4 +177,5 @@ collapseButton.addEventListener('click', _ => {
   const moveSize = (sidenav.style.width === '0px') ? 160 : 0
   sidenav.style.width = moveSize + 'px'
   collapseButton.style.marginLeft = (moveSize - 10) + 'px'
+  projectList.style.marginLeft = moveSize == 0 ? '-100px' : '5px'
 })
