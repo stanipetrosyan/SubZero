@@ -56,12 +56,15 @@ body, html {
     padding-top: 10px;
     overflow-y: scroll;
     transition: 0.5s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: var(--card-bg-color);
 }
 
 .content {
     grid-row: 1/4;
     grid-column: 2/4;
     margin-left: 5px;
+    transition: margin-left .5s;
 }
 
 .footer {
@@ -111,17 +114,23 @@ button:hover {
     .sidenav a {font-size: 18px;}
 }
 
-button#collapse {
-    background-color: var(--bg-color);
+span#collapse {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
     color: var(--primary-color);
-    border-top-right-radius: 110px;
-    border-bottom-right-radius: 110px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     transition-duration: 0.4s;
     cursor: pointer;
-    box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     outline: none;
-    margin-left: 160px;
-    font-size: large;
+    margin-left: 150px;
+}
+
+span#collapse:hover {
+    width: 30px;
 }
 
 /*
