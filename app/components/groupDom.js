@@ -34,7 +34,7 @@ class GroupDOM extends HTMLElement {
       this.style.backgroundColor = 'var(--hover-color)';
     })
     this.addEventListener('mouseout', _ => {
-      this.style.backgroundColor = 'var(--bg-color)';
+      this.style.backgroundColor = 'var(--sidebar-color)';
     })
 
     const color = document.createElement('span');

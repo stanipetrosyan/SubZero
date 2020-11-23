@@ -18,6 +18,7 @@
     --font-color: white;
     --hover-color: #252525;
     --card-bg-color: #1e1e1e; /* #282c34 */
+    --sidebar-color: #1e1e1e;
 }
 
 [data-theme="light"] {
@@ -26,6 +27,7 @@
     --font-color: #424242;
     --hover-color: #e9f3f8;
     --card-bg-color: white;
+    --sidebar-color: white;
 }
 
 body, html {
@@ -57,7 +59,7 @@ body, html {
     overflow-y: scroll;
     transition: 0.5s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: var(--card-bg-color);
+    background-color: var(--sidebar-color);
 }
 
 .content {
