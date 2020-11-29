@@ -41,15 +41,13 @@ body, html {
 
 .wrapper {
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr 1fr;
-    grid-template-columns: 150px 1fr 1fr;
+    grid-template-rows: 10px 3fr;
+    grid-template-columns: 150px 1fr 200px;
     height: 85vh;
 }
 
 .sidenav {
     height: 100%;
-    width: 160px;
-    position: fixed;
     z-index: 0;
     top: 0;
     left: 0;
@@ -60,6 +58,17 @@ body, html {
     transition: 0.5s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: var(--sidebar-color);
+}
+
+.sidenav-left {
+    position: fixed;
+    width: 160px;
+}
+
+.project-info {
+    grid-column: 4;
+    grid-row: 2;
+    width: 200px;
 }
 
 .content {
