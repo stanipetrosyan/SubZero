@@ -39,6 +39,6 @@
   "dependencies": {
     "minimist": "^1.2.5",
     "node-cmd": "^4.0.0",
-    "simple-git": "^1.132.0"
+    "simple-git": "^3.3.0"
   }
 }
